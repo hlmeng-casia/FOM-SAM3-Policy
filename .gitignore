@@ -1,0 +1,23 @@
+# Local analysis and rendered PDF pages
+work/
+
+# Local paper source workspace; the public site uses root main.pdf
+paper/
+
+# Local AI collaboration instructions
+AGENTS.md
+
+# Keep only browser-compatible videos and their thumbnails
+assets/videos/*.mp4
+!assets/videos/*-web.mp4
+assets/videos/*.jpg
+!assets/videos/*_thumb.jpg
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local logs
+*.log

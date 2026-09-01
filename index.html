@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="FOM-SAM3: persistent fine-grained object memory and focused spatial-appearance encoding for robotic imitation learning."
+    />
+    <meta name="theme-color" content="#f3f8fc" />
+    <title>FOM-SAM3 · Project Page</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="project-data.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="shell nav-row">
+        <a class="brand" href="#top" aria-label="FOM-SAM3 home"><span aria-hidden="true">F³</span><strong data-field="shortName">FOM-SAM3</strong></a>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
+        <nav id="primary-nav" aria-label="Primary navigation" data-nav>
+          <a href="#overview">Introduction</a>
+          <a href="#method">Method</a>
+          <a href="#results">Experiments</a>
+          <a href="#media">Media</a>
+          <a href="#resources">Resources</a>
+          <a href="#citation">BibTeX</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top">
+        <div class="hero-copy">
+          <h1 data-field="title">Memorize and Focus on Fine-Grained Objects for Robotic Imitation Learning in Familiar Scene</h1>
+          <p class="authors" data-authors>Anonymous Authors</p>
+          <p class="institutions" data-institutions>Anonymous Institution</p>
+          <div class="resource-row" aria-label="Project resources">
+            <a data-resource="paper"><span>Paper</span><small>PDF</small></a>
+            <a data-resource="arxiv"><span>arXiv</span><small>Coming soon</small></a>
+            <a data-resource="code"><span>Code</span><small>Coming soon</small></a>
+            <a data-resource="video"><span>Video</span><small>Test demos</small></a>
+          </div>
+        </div>
+
+        <section class="hero-videos" aria-label="Robot demonstrations">
+          <div class="hero-videos-head"><span>Robot demonstrations</span><p>Selected rollouts · Full gallery below</p></div>
+          <div class="hero-video-grid" data-hero-videos></div>
+        </section>
+
+        <section class="hero-abstract" aria-labelledby="abstract-title">
+          <h2 id="abstract-title">Abstract</h2>
+          <div class="abstract-copy" data-abstract></div>
+        </section>
+
+        <section class="introduction-block" id="overview" aria-labelledby="introduction-title">
+          <h2 id="introduction-title">Introduction</h2>
+          <p>Realistic manipulation scenes can contain multiple visually similar objects from the same category. The central challenge is to preserve an existing manipulation skill while enabling the robot to identify and operate a user-specified object among similar candidates.</p>
+          <figure class="paper-figure hero-figure">
+            <img src="assets/images/teaser.webp" alt="Comparison of an RGB policy, a mask-conditioned policy, and FOM-SAM3 with FSAE for selecting the requested can among visually similar cans." />
+            <figcaption><strong>Figure 1. Fine-grained identity conditioning.</strong> <span><i>(a)</i> RGB-only control can confuse visually similar objects. <i>(b)</i> Mask conditioning identifies a region while retaining scene-dependent ambiguity. <i>(c)</i> FO Memory preserves the requested identity, and FSAE converts the target and context into a policy-ready condition.</span></figcaption>
+          </figure>
+        </section>
+      </section>
+
+      <section class="dark-section" id="method">
+        <div class="shell section-pad">
+          <div class="section-head light"><div><h2>Method</h2></div></div>
+
+          <figure class="paper-figure method-figure">
+            <img src="assets/images/method.webp" loading="lazy" alt="FOM-SAM3 and FSAE architecture showing policy inference, offline FO Memory Learning, and the focused spatial-appearance encoder for Diffusion Policy and ACT." />
+            <figcaption><strong>Figure 2. FOM-SAM3 architecture.</strong> <span><i>(a)</i> During policy inference, a stored FO prompt retrieves the requested object and passes localized features to FSAE. <i>(b)</i> Offline FO Memory Learning registers reusable identity tokens while the SAM3 backbone stays frozen. <i>(c)</i> FSAE combines target appearance, masks, boxes, context, and relative geometry into a compact DP vector or ACT visual tokens.</span></figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <section class="results-section shell section-pad" id="results">
+        <div class="section-head"><div><h2>Experiments</h2></div></div>
+
+        <section class="main-experiment" aria-labelledby="main-experiment-title">
+          <div class="main-experiment-head">
+            <div>
+              <h3 id="main-experiment-title">REAL-ROBOT MANIPULATION</h3>
+            </div>
+          </div>
+
+          <figure class="paper-figure evidence-figure">
+            <img src="assets/images/robot-tasks.webp" loading="lazy" alt="Three rows show Pick and Place, Push, and Assemble robot task sequences, followed by trained objects, Similar-FOs, and distractors." />
+            <figcaption><strong>Figure 3. Real-robot tasks and evaluation objects.</strong> <span>The rows show the temporal sequences of Pick &amp; Place, Push, and Assemble. The right column presents the trained FO, visually similar objects, test objects, and task distractors used for each task.</span></figcaption>
+          </figure>
+
+          <div class="table-section robot-section">
+            <div class="subsection-head"><div><h3>REAL-ROBOT MANIPULATION RESULTS</h3></div><span>Successful rollouts / 10</span></div>
+            <div class="table-wrap">
+              <table class="matrix-table">
+                <thead>
+                  <tr><th rowspan="2">Method</th><th colspan="3">ID</th><th colspan="3">OOD-Distractors</th><th colspan="3">OOD-Similar</th></tr>
+                  <tr><th>Pick&amp;Place</th><th>Push</th><th>Assemble</th><th>Pick&amp;Place</th><th>Push</th><th>Assemble</th><th>Pick&amp;Place</th><th>Push</th><th>Assemble</th></tr>
+                </thead>
+                <tbody data-robot-results></tbody>
+              </table>
+            </div>
+            <p class="table-footnote"><strong>FO Memory and FSAE improve robustness under visual interference.</strong> All methods learn the basic skills under ID. Under OOD-Similar, Ours-DP reaches 10/10 on all three tasks, while RGB-DP obtains 1/10, 3/10, and 0/10. Ours-ACT reaches 8/10, 9/10, and 7/10, compared with 0/10, 5/10, and 1/10 for RGB-ACT. Explicit target identity and focused visual conditions reduce wrong-object execution while preserving the learned manipulation skills.</p>
+          </div>
+
+          <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
+        </section>
+
+        <section class="experiment-chapter perception-experiment" aria-labelledby="perception-title">
+          <header class="experiment-chapter-head">
+            <h3 id="perception-title">Fine-Grained FO Perception</h3>
+          </header>
+
+          <div class="perception-overview-grid">
+            <article>
+              <h4>Dataset</h4>
+              <p>FO30 contains <strong>30 physical objects</strong> from four coarse categories. FO30-S contains 600 standard test images and 18,000 image-FO queries; FO30-C contains 400 harder images, 12,000 queries, and more Similar-FO co-occurrence.</p>
+            </article>
+            <article>
+              <h4>Baselines and Metrics</h4>
+              <p>SAM3 Text Prompt, Text-Token Optimization, PTSAM, M2C, and FO Memory Learning share the same frozen-SAM3 protocol. Evaluation reports cgF1, pmF1, IL-MCC, and Joint FPR.</p>
+            </article>
+          </div>
+
+          <div class="subsection-head perception-results-head"><div><h4>FO Perception Results</h4></div><span>Values in %, except IL-MCC</span></div>
+
+          <div class="table-section perception-table-section">
+            <div class="table-wrap">
+              <table>
+              <thead><tr><th>Method</th><th>cgF1 ↑</th><th>pmF1 ↑</th><th>IL-MCC ↑</th><th>Joint FPR ↓</th></tr></thead>
+              <tbody>
+                <tr class="group-row"><th colspan="5">FO30-S · Standard</th></tr>
+                <tr><td>SAM3 Text Prompt</td><td>24.30</td><td>73.57</td><td>0.3304</td><td>18.96</td></tr>
+                <tr><td>Text-Token Optimization</td><td>35.87</td><td>81.49</td><td>0.4403</td><td>17.19</td></tr>
+                <tr><td>PTSAM</td><td>26.30</td><td>73.37</td><td>0.3585</td><td>15.75</td></tr>
+                <tr><td>M2C</td><td>35.82</td><td>81.53</td><td>0.4394</td><td>17.26</td></tr>
+                <tr class="ours-row"><td>FO Memory Learning (Ours)</td><td>62.38</td><td>93.56</td><td>0.6668</td><td>6.85</td></tr>
+                <tr class="group-row"><th colspan="5">FO30-C · Challenge</th></tr>
+                <tr><td>SAM3 Text Prompt</td><td>20.34</td><td>55.89</td><td>0.3641</td><td>14.42</td></tr>
+                <tr><td>Text-Token Optimization</td><td>29.41</td><td>62.76</td><td>0.4687</td><td>13.06</td></tr>
+                <tr><td>PTSAM</td><td>20.82</td><td>56.00</td><td>0.3718</td><td>12.63</td></tr>
+                <tr><td>M2C</td><td>29.77</td><td>62.95</td><td>0.4729</td><td>13.10</td></tr>
+                <tr class="ours-row"><td>FO Memory Learning (Ours)</td><td>55.98</td><td>85.42</td><td>0.6554</td><td>7.60</td></tr>
+              </tbody>
+              </table>
+            </div>
+            <p class="chart-note"><strong>FO perception results.</strong> SAM3 Text Prompt, Text-Token Optimization, PTSAM, M2C, and FO Memory Learning use the same frozen SAM3, test data, thresholds, NMS, and evaluator. FO Memory Learning achieves the strongest result on both FO30 test sets. On FO30-S, cgF1 and pmF1 improve by 26.51 and 12.03 points; on FO30-C, they improve by 26.21 and 22.47 points. Joint FPR decreases to 6.85% on FO30-S and 7.60% on FO30-C. Up arrows indicate higher values are better, and the down arrow indicates lower values are better.</p>
+          </div>
+
+          <section class="experiment-subsection runtime-section" aria-labelledby="runtime-title">
+            <div class="experiment-subsection-head">
+              <h4 id="runtime-title">Prompt-Route Runtime</h4>
+            </div>
+            <div class="runtime-chart" role="img" aria-label="Mean localization latency comparison: SAM3 Text Prompt 48.18 milliseconds and preloaded FO Memory Tokens 43.26 milliseconds">
+              <div class="runtime-chart-head"><span>Mean localization latency (ms)</span><small>Lower is better ↓</small></div>
+              <div class="runtime-chart-row">
+                <strong>SAM3 Text Prompt</strong>
+                <div class="runtime-bar-track"><i style="--runtime-width:100%"></i></div>
+                <output>48.18 <small>± 4.11</small></output>
+              </div>
+              <div class="runtime-chart-row ours">
+                <strong>Preloaded FO Memory Tokens</strong>
+                <div class="runtime-bar-track"><i style="--runtime-width:89.8%"></i></div>
+                <output>43.26 <small>± 5.17</small></output>
+              </div>
+            </div>
+            <p class="runtime-delta"><strong>Preloaded FO Memory Tokens reduce localization latency.</strong> The mean runtime falls from 48.18 ms to 43.26 ms, a 4.92 ms reduction, because the memory route skips online text encoding.</p>
+          </section>
+
+          <section class="experiment-subsection rejection-section" aria-labelledby="rejection-title">
+            <div class="experiment-subsection-head">
+              <h4 id="rejection-title">FO Rejection Evaluation</h4>
+            </div>
+            <div class="table-wrap rejection-table-wrap">
+              <table>
+                <thead><tr><th>Method</th><th>Single Similar-FO</th><th>Multiple Similar-FOs</th></tr></thead>
+                <tbody>
+                  <tr><td>SAM3 Text Prompt</td><td>2/10</td><td>0/10</td></tr>
+                  <tr class="ours-row"><td>FOM-SAM3</td><td>10/10</td><td>8/10</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="chart-note"><strong>FOM-SAM3 preserves fine-grained identity when the target is absent.</strong> It raises rejection from 2/10 to 10/10 with one Similar-FO and from 0/10 to 8/10 with multiple Similar-FOs. FO Memory constrains matching to the registered identity, suppressing semantically similar candidates and preventing execution on the wrong object.</p>
+          </section>
+        </section>
+
+        <div class="supporting-results" aria-label="Supporting experiments">
+          <section class="supporting-experiment" aria-labelledby="ablation-title">
+            <div class="supporting-head">
+              <h3 id="ablation-title">Ablation of Visual Condition Representation</h3>
+            </div>
+            <div class="table-wrap compact-result-table">
+              <table>
+                <thead><tr><th>Visual Condition</th><th>Pick &amp; Place</th><th>Push</th><th>Assemble</th></tr></thead>
+                <tbody>
+                  <tr><td>RGB Feature (ResNet)</td><td>6/10</td><td>3/10</td><td>5/10</td></tr>
+                  <tr><td>Mask-guided RGB (ResNet)</td><td>8/10</td><td>6/10</td><td>5/10</td></tr>
+                  <tr><td>SAM3 Object Feature w/o TCRE</td><td>10/10</td><td>7/10</td><td>8/10</td></tr>
+                  <tr class="ours-row"><td>FSAE (Ours)</td><td>10/10</td><td>8/10</td><td>10/10</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="chart-note result-analysis"><strong>FSAE gives the strongest result across all three tasks.</strong> Object-centric conditions progressively improve robustness over full-image RGB features. Compared with SAM3 object features alone, FSAE retains 10/10 on Pick &amp; Place and improves Push from 7/10 to 8/10 and Assemble from 8/10 to 10/10 by modeling target appearance, manipulation context, and relative geometry.</p>
+          </section>
+
+          <section class="supporting-experiment generalization-experiment" aria-labelledby="generalization-title">
+            <div class="supporting-head">
+              <h3 id="generalization-title">Generalization</h3>
+            </div>
+            <div class="generalization-result-block">
+              <h4>Background Generalization</h4>
+              <div class="table-wrap compact-result-table">
+                <table>
+                  <thead><tr><th>Method</th><th>Seen</th><th>Background</th><th>Clutter</th></tr></thead>
+                  <tbody>
+                    <tr><td>RGB-DP</td><td>8/10</td><td>5/10</td><td>0/10</td></tr>
+                    <tr><td>Mask-DP</td><td>10/10</td><td>10/10</td><td>2/10</td></tr>
+                    <tr class="ours-row"><td>Ours-DP</td><td>10/10</td><td>10/10</td><td>9/10</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="chart-note result-analysis"><strong>FO-specific conditions maintain performance as the scene changes.</strong> Ours-DP preserves 10/10 on the unseen background and reaches 9/10 in clutter, compared with 5/10 and 0/10 for RGB-DP and 10/10 and 2/10 for Mask-DP. The identity-aware representation keeps the policy focused on the target under environmental appearance changes.</p>
+            </div>
+            <div class="generalization-result-block">
+              <h4>New-FO Reuse with Frozen Policy</h4>
+              <div class="table-wrap compact-result-table">
+                <table>
+                  <thead><tr><th>Method</th><th>Pick &amp; Place</th><th>Push</th><th>Assemble</th></tr></thead>
+                  <tbody>
+                    <tr class="ours-row"><td>Ours-DP</td><td>10/10</td><td>10/10</td><td>8/10</td></tr>
+                    <tr class="ours-row"><td>Ours-ACT</td><td>7/10</td><td>8/10</td><td>8/10</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="chart-note result-analysis"><strong>FO Memory extends frozen skills to newly registered Similar-FOs.</strong> Replacing only the retrieved FO Memory Tokens allows both DP and ACT to manipulate unseen target objects without new demonstrations or policy updates, expanding the reachable target set while preserving the learned interaction skills.</p>
+            </div>
+            <p class="visual-evidence-label">Visual evidence</p>
+            <div class="evidence-visuals">
+              <figure class="paper-figure compact-figure"><img src="assets/images/background-generalization.webp" loading="lazy" alt="Seen, unseen background, and cluttered Pick and Place evaluation scenes." /><figcaption><strong>Background robustness.</strong> <span>The same target and frozen policy run across seen, unseen-background, and clutter settings.</span></figcaption></figure>
+              <figure class="paper-figure compact-figure"><img src="assets/images/generalization-objects.webp" loading="lazy" alt="A trained container, three Similar-FO containers, and three novel object instances used for frozen-policy generalization tests." /><figcaption><strong>Identity and instance variation.</strong> <span>Ours-DP succeeds on all tested Similar-FOs and new instances in the reported one-rollout-per-object evaluation.</span></figcaption></figure>
+              <figure class="paper-figure compact-figure"><img src="assets/images/instance-generalization.webp" loading="lazy" alt="Five Pick and Place test objects with varied scale and appearance: a tall can, cup, bottle, container, and toy." /><figcaption><strong>Large appearance shifts.</strong> <span>Ours-DP succeeds on all five tested objects with one frozen-policy rollout per object.</span></figcaption></figure>
+            </div>
+            <div class="result-boundary"><strong>Evaluation scope.</strong><p>New-FO reuse changes the retrieved FO Memory Tokens and evaluates frozen-skill transfer across tested objects with compatible interaction geometry.</p></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="media-section" id="media">
+        <div class="shell section-pad">
+          <div class="section-head"><div><h2>Media</h2></div></div>
+          <div class="media-grid" data-video-gallery></div>
+          <noscript><p class="media-empty">JavaScript is required to load the demonstration videos.</p></noscript>
+          <div class="qualitative-block">
+            <div class="subsection-head"><div><p class="micro-label">Qualitative results · FO30</p><h3>Fine-Grained FO Perception</h3></div></div>
+            <div class="qualitative-grid">
+              <figure class="paper-figure"><img src="assets/images/qualitative-standard.webp" loading="lazy" alt="FO30-S qualitative comparison showing original scenes, SAM3 text-prompt predictions, and FO Memory predictions across fourteen fine-grained object queries." /><figcaption><strong>FO30-S qualitative results.</strong> <span>FO Memory consistently selects the queried identity across varied standard scenes.</span></figcaption></figure>
+              <figure class="paper-figure"><img src="assets/images/qualitative-challenge.webp" loading="lazy" alt="FO30-C qualitative comparison showing original scenes, SAM3 text-prompt predictions, and FO Memory predictions in Similar-FO-dense scenes." /><figcaption><strong>FO30-C qualitative results.</strong> <span>The challenge split places visually similar identities together and highlights fine-grained selection quality.</span></figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="resource-section dark-section" id="resources">
+        <div class="shell section-pad">
+          <div class="section-head light"><div><h2>Resources</h2><p class="section-summary">Latest paper and current project material.</p></div></div>
+          <div class="resource-list">
+            <a data-resource="paper"><span>01</span><strong>Paper PDF</strong><small>Manuscript</small><i>↗</i></a>
+            <a data-resource="code"><span>02</span><strong>Code</strong><small>Implementation</small><i>↗</i></a>
+            <a data-resource="dataset"><span>03</span><strong>FO30 Dataset</strong><small>Benchmark data</small><i>↗</i></a>
+            <a data-resource="video"><span>04</span><strong>Robot Videos</strong><small>Manipulation rollouts</small><i>↗</i></a>
+            <a data-resource="demo"><span>05</span><strong>Interactive Demo</strong><small>Optional future interface</small><i>↗</i></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="citation-section shell section-pad" id="citation">
+        <div class="section-head"><div><h2>BibTeX</h2></div></div>
+        <div class="citation-block">
+          <div><span>BibTeX</span><button type="button" data-copy-citation>Copy citation</button></div>
+          <pre><code data-citation></code></pre>
+        </div>
+        <p class="citation-note">Replace the anonymous metadata after acceptance or public release, then update README and all project links in the same change.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><strong data-field="shortName">FOM-SAM3</strong><p>Persistent fine-grained identity for task-focused robotic imitation learning.</p></div>
+        <div><span>Project page</span><p>FOM-SAM3 · <span data-current-year>2026</span></p></div>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>
