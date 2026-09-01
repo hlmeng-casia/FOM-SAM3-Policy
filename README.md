@@ -2,6 +2,10 @@
 
 Project Page for *Memorize and Focus on Fine-Grained Objects for Robotic Imitation Learning in Familiar Scene*.
 
+## Live website
+
+**[Open the FOM-SAM3 Project Page](https://xlcooper.github.io/FOM-SAM3-Project-Page/)**
+
 ## View the page
 
 - Entry: [`index.html`](index.html)
