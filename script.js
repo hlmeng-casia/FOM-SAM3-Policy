@@ -136,75 +136,54 @@
       { key: "similar", label: "OOD-Similar" }
     ];
     const methods = Array.isArray(data.robotResults) ? data.robotResults : [];
-    const methodGroups = [
-      { names: ["Ours-DP", "RGB-DP"] },
-      { names: ["Ours-ACT", "RGB-ACT"] }
-    ];
-    const tabs = document.createElement("div");
-    tabs.className = "experiment-condition-tabs";
-    tabs.setAttribute("role", "tablist");
-    tabs.setAttribute("aria-label", "Evaluation condition");
+    const methodOrder = ["Ours-DP", "RGB-DP", "Ours-ACT", "RGB-ACT"];
 
-    const panels = conditions.map((condition, conditionIndex) => {
-      const tab = document.createElement("button");
-      tab.type = "button";
-      tab.id = `condition-tab-${conditionIndex}`;
-      tab.setAttribute("role", "tab");
-      tab.setAttribute("aria-controls", `condition-panel-${conditionIndex}`);
-      tab.setAttribute("aria-selected", String(conditionIndex === 0));
-      tab.textContent = condition.label;
-      tabs.appendChild(tab);
-
-      const panel = document.createElement("div");
-      panel.className = "experiment-condition-panel";
-      panel.id = `condition-panel-${conditionIndex}`;
-      panel.setAttribute("role", "tabpanel");
-      panel.setAttribute("aria-labelledby", tab.id);
-      panel.hidden = conditionIndex !== 0;
+    const conditionBlocks = conditions.map((condition, conditionIndex) => {
+      const block = document.createElement("section");
+      block.className = "experiment-condition-block";
+      block.setAttribute("aria-labelledby", `condition-title-${conditionIndex}`);
+      const conditionHead = document.createElement("header");
+      conditionHead.className = "experiment-condition-head";
+      const conditionTitle = document.createElement("h4");
+      conditionTitle.id = `condition-title-${conditionIndex}`;
+      conditionTitle.textContent = condition.label;
+      conditionHead.appendChild(conditionTitle);
+      block.appendChild(conditionHead);
 
       taskNames.forEach((task, taskIndex) => {
         const taskGroup = document.createElement("section");
         taskGroup.className = "experiment-task-group";
         const taskHead = document.createElement("div");
         taskHead.className = "experiment-task-head";
-        taskHead.innerHTML = `<h4>${task}</h4><small>${condition.label}</small>`;
+        taskHead.innerHTML = `<h5>${task}</h5>`;
 
         const scroll = document.createElement("div");
         scroll.className = "experiment-task-scroll";
-        methodGroups.forEach((group) => {
-          const row = document.createElement("div");
-          row.className = "experiment-policy-row";
-          const grid = document.createElement("div");
-          grid.className = `experiment-method-grid${group.names.length === 2 ? " two-items" : ""}`;
-          group.names.forEach((methodName) => {
-            const methodIndex = methods.findIndex((method) => method.method === methodName);
-            if (methodIndex < 0) return;
-            const method = methods[methodIndex];
-            const slotIndex = conditionIndex * taskNames.length * methods.length + taskIndex * methods.length + methodIndex;
-            const item = data.demoVideos[slotIndex % data.demoVideos.length];
-            const card = document.createElement("article");
-            card.className = `experiment-video-card${method.ours ? " ours" : ""}`;
-            const heading = document.createElement("div");
-            heading.className = "experiment-video-head";
-            heading.innerHTML = `<strong>${method.method}</strong><output>${method[condition.key]?.[taskIndex] || "--"}</output>`;
-            const video = createVideoPlayer(item, slotIndex, "experiment-video-player", { preload: "none" });
-            card.append(heading, video);
-            grid.appendChild(card);
-          });
-          row.appendChild(grid);
-          scroll.appendChild(row);
+        const grid = document.createElement("div");
+        grid.className = "experiment-method-grid";
+        methodOrder.forEach((methodName) => {
+          const methodIndex = methods.findIndex((method) => method.method === methodName);
+          if (methodIndex < 0) return;
+          const method = methods[methodIndex];
+          const slotIndex = conditionIndex * taskNames.length * methods.length + taskIndex * methods.length + methodIndex;
+          const item = data.demoVideos[slotIndex % data.demoVideos.length];
+          const card = document.createElement("article");
+          card.className = `experiment-video-card${method.ours ? " ours" : ""}`;
+          const heading = document.createElement("div");
+          heading.className = "experiment-video-head";
+          heading.innerHTML = `<strong>${method.method}</strong><output>${method[condition.key]?.[taskIndex] || "--"}</output>`;
+          const video = createVideoPlayer(item, slotIndex, "experiment-video-player", { preload: "none" });
+          card.append(heading, video);
+          grid.appendChild(card);
         });
+        scroll.appendChild(grid);
         taskGroup.append(taskHead, scroll);
-        panel.appendChild(taskGroup);
+        block.appendChild(taskGroup);
       });
 
-      tab.addEventListener("click", () => {
-        Array.from(tabs.children).forEach((button) => button.setAttribute("aria-selected", String(button === tab)));
-        panels.forEach((item) => (item.hidden = item !== panel));
-      });
-      return panel;
+      return block;
     });
-    mainExperimentVideos.replaceChildren(tabs, ...panels);
+    mainExperimentVideos.replaceChildren(...conditionBlocks);
   }
 
   const videoGallery = document.querySelector("[data-video-gallery]");
