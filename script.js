@@ -77,21 +77,12 @@
 
   const heroVideos = document.querySelector("[data-hero-videos]");
   if (heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
-    const featuredCard = document.createElement("figure");
-    featuredCard.className = "hero-featured-card";
     const featuredVideo = createVideoPlayer(data.demoVideos[0], 0, "hero-featured-player", {
       autoplay: true,
       controls: true,
       loop: true,
       preload: "auto"
     });
-    const featuredCaption = document.createElement("figcaption");
-    const featuredTitle = document.createElement("strong");
-    const featuredStatus = document.createElement("small");
-    featuredTitle.textContent = data.demoVideos[0].title || "Robot demonstration 01";
-    featuredStatus.textContent = "Featured rollout";
-    featuredCaption.append(featuredTitle, featuredStatus);
-    featuredCard.append(featuredVideo, featuredCaption);
 
     const gallery = document.createElement("div");
     gallery.className = "hero-demo-gallery";
@@ -121,7 +112,6 @@
         if (source) source.src = item.src;
         featuredVideo.poster = item.poster || "";
         featuredVideo.setAttribute("aria-label", item.title || `Robot demonstration ${index + 1}`);
-        featuredTitle.textContent = item.title || `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
         slots.forEach((candidate) => candidate.setAttribute("aria-current", String(candidate === slot)));
         featuredVideo.load();
         const playback = featuredVideo.play();
@@ -132,7 +122,7 @@
 
     track.append(...slots);
     gallery.append(galleryHead, track);
-    heroVideos.replaceChildren(featuredCard, gallery);
+    heroVideos.replaceChildren(featuredVideo, gallery);
     const playback = featuredVideo.play();
     if (playback) playback.catch(() => {});
   }

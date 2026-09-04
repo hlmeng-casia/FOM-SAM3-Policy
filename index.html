@@ -22,7 +22,6 @@
         <a class="brand" href="#top" aria-label="FOM-SAM3 home"><span aria-hidden="true">F³</span><strong data-field="shortName">FOM-SAM3</strong></a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
         <nav id="primary-nav" aria-label="Primary navigation" data-nav>
-          <a href="#overview">Introduction</a>
           <a href="#method">Method</a>
           <a href="#results">Experiments</a>
           <a href="#media">Media</a>
@@ -46,23 +45,14 @@
           </div>
         </div>
 
-        <section class="hero-videos" aria-label="Robot demonstrations">
-          <div class="hero-videos-head"><span>Robot demonstrations</span><p>Featured rollout · Demo gallery</p></div>
-          <div class="hero-video-showcase" data-hero-videos></div>
-        </section>
-
         <section class="hero-abstract" aria-labelledby="abstract-title">
           <h2 id="abstract-title">Abstract</h2>
           <div class="abstract-copy" data-abstract></div>
         </section>
 
-        <section class="introduction-block" id="overview" aria-labelledby="introduction-title">
-          <h2 id="introduction-title">Introduction</h2>
-          <p>Realistic manipulation scenes can contain multiple visually similar objects from the same category. The central challenge is to preserve an existing manipulation skill while enabling the robot to identify and operate a user-specified object among similar candidates.</p>
-          <figure class="paper-figure hero-figure">
-            <img src="assets/images/teaser.webp" alt="Comparison of an RGB policy, a mask-conditioned policy, and FOM-SAM3 with FSAE for selecting the requested can among visually similar cans." />
-            <figcaption><strong>Figure 1. Fine-grained identity conditioning.</strong> <span><i>(a)</i> RGB-only control can confuse visually similar objects. <i>(b)</i> Mask conditioning identifies a region while retaining scene-dependent ambiguity. <i>(c)</i> FO Memory preserves the requested identity, and FSAE converts the target and context into a policy-ready condition.</span></figcaption>
-          </figure>
+        <section class="hero-videos" aria-labelledby="demonstrations-title">
+          <h2 id="demonstrations-title">Robot Demonstrations</h2>
+          <div class="hero-video-showcase" data-hero-videos></div>
         </section>
       </section>
 
