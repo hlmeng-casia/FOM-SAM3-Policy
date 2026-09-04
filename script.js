@@ -109,42 +109,72 @@
 
     const gallery = document.createElement("div");
     gallery.className = "hero-demo-gallery";
-    const galleryHead = document.createElement("div");
-    galleryHead.className = "hero-demo-gallery-head";
-    galleryHead.innerHTML = `<strong>Demo gallery</strong><span>${data.demoVideos.length} rollouts</span>`;
+    const viewport = document.createElement("div");
+    viewport.className = "hero-demo-viewport";
     const track = document.createElement("div");
     track.className = "hero-demo-track";
-    track.setAttribute("aria-label", "Select a featured robot demonstration");
+    track.setAttribute("aria-label", "Robot demonstration video carousel");
 
-    const slots = data.demoVideos.map((item, index) => {
-      const slot = document.createElement("button");
-      slot.className = "hero-demo-slot";
-      slot.type = "button";
-      slot.setAttribute("aria-label", `Show ${item.title || `robot demonstration ${index + 1}`}`);
-      slot.setAttribute("aria-current", String(index === 0));
-      const poster = document.createElement("img");
-      poster.src = item.poster || "";
-      poster.alt = "";
-      poster.loading = "lazy";
-      const label = document.createElement("span");
-      label.textContent = item.title || `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
-      slot.append(poster, label);
-      slot.addEventListener("click", () => {
-        const source = featuredVideo.querySelector("source");
-        featuredVideo.pause();
-        if (source) source.src = item.src;
-        featuredVideo.poster = item.poster || "";
-        featuredVideo.setAttribute("aria-label", item.title || `Robot demonstration ${index + 1}`);
-        slots.forEach((candidate) => candidate.setAttribute("aria-current", String(candidate === slot)));
-        featuredVideo.load();
-        const playback = featuredVideo.play();
-        if (playback) playback.catch(() => {});
+    const cards = data.demoVideos.map((item, index) => {
+      const card = document.createElement("figure");
+      card.className = "hero-demo-card";
+      const video = createVideoPlayer(item, index, "hero-demo-player", {
+        controls: true,
+        preload: "metadata"
       });
-      return slot;
+      const caption = document.createElement("figcaption");
+      caption.textContent = item.title || `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
+      card.append(video, caption);
+      return card;
     });
 
-    track.append(...slots);
-    gallery.append(galleryHead, track);
+    const previous = document.createElement("button");
+    previous.className = "hero-demo-arrow previous";
+    previous.type = "button";
+    previous.setAttribute("aria-label", "Previous demonstration");
+    previous.textContent = "‹";
+    const next = document.createElement("button");
+    next.className = "hero-demo-arrow next";
+    next.type = "button";
+    next.setAttribute("aria-label", "Next demonstration");
+    next.textContent = "›";
+
+    const dots = document.createElement("div");
+    dots.className = "hero-demo-dots";
+    dots.setAttribute("aria-label", "Choose a robot demonstration");
+    const dotButtons = cards.map((_card, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Go to demonstration ${index + 1}`);
+      dot.setAttribute("aria-current", String(index === 0));
+      dots.appendChild(dot);
+      return dot;
+    });
+
+    let activeIndex = 0;
+    const showCard = (index) => {
+      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+      track.scrollTo({ left: cards[activeIndex].offsetLeft, behavior: "smooth" });
+      dotButtons.forEach((dot, dotIndex) => dot.setAttribute("aria-current", String(dotIndex === activeIndex)));
+    };
+    previous.addEventListener("click", () => showCard(activeIndex - 1));
+    next.addEventListener("click", () => showCard(activeIndex + 1));
+    dotButtons.forEach((dot, index) => dot.addEventListener("click", () => showCard(index)));
+    let scrollFrame = 0;
+    track.addEventListener("scroll", () => {
+      window.cancelAnimationFrame(scrollFrame);
+      scrollFrame = window.requestAnimationFrame(() => {
+        const closestIndex = cards.reduce((best, card, index) => (
+          Math.abs(card.offsetLeft - track.scrollLeft) < Math.abs(cards[best].offsetLeft - track.scrollLeft) ? index : best
+        ), 0);
+        activeIndex = closestIndex;
+        dotButtons.forEach((dot, index) => dot.setAttribute("aria-current", String(index === activeIndex)));
+      });
+    }, { passive: true });
+
+    track.append(...cards);
+    viewport.append(track, previous, next);
+    gallery.append(viewport, dots);
     heroMainVideo.replaceChildren(featuredVideo);
     heroVideos.replaceChildren(gallery);
     const playback = featuredVideo.play();
