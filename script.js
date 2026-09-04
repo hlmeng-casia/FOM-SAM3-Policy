@@ -76,25 +76,65 @@
   };
 
   const heroVideos = document.querySelector("[data-hero-videos]");
-  if (heroVideos && Array.isArray(data.demoVideos)) {
-    const previews = data.demoVideos.slice(0, 3).map((item, index) => {
-      const card = document.createElement("figure");
-      card.className = "hero-video-card";
-      const caption = document.createElement("figcaption");
-      caption.innerHTML = `<span>Demonstration ${String(index + 1).padStart(2, "0")}</span><small>Robot rollout</small>`;
-      card.append(createVideoPlayer(item, index, "hero-video-player", {
-        autoplay: true,
-        controls: false,
-        loop: true,
-        preload: "auto"
-      }), caption);
-      return card;
+  if (heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
+    const featuredCard = document.createElement("figure");
+    featuredCard.className = "hero-featured-card";
+    const featuredVideo = createVideoPlayer(data.demoVideos[0], 0, "hero-featured-player", {
+      autoplay: true,
+      controls: true,
+      loop: true,
+      preload: "auto"
     });
-    heroVideos.replaceChildren(...previews);
-    heroVideos.querySelectorAll("video").forEach((video) => {
-      const playback = video.play();
-      if (playback) playback.catch(() => {});
+    const featuredCaption = document.createElement("figcaption");
+    const featuredTitle = document.createElement("strong");
+    const featuredStatus = document.createElement("small");
+    featuredTitle.textContent = data.demoVideos[0].title || "Robot demonstration 01";
+    featuredStatus.textContent = "Featured rollout";
+    featuredCaption.append(featuredTitle, featuredStatus);
+    featuredCard.append(featuredVideo, featuredCaption);
+
+    const gallery = document.createElement("div");
+    gallery.className = "hero-demo-gallery";
+    const galleryHead = document.createElement("div");
+    galleryHead.className = "hero-demo-gallery-head";
+    galleryHead.innerHTML = `<strong>Demo gallery</strong><span>${data.demoVideos.length} rollouts</span>`;
+    const track = document.createElement("div");
+    track.className = "hero-demo-track";
+    track.setAttribute("aria-label", "Select a featured robot demonstration");
+
+    const slots = data.demoVideos.map((item, index) => {
+      const slot = document.createElement("button");
+      slot.className = "hero-demo-slot";
+      slot.type = "button";
+      slot.setAttribute("aria-label", `Show ${item.title || `robot demonstration ${index + 1}`}`);
+      slot.setAttribute("aria-current", String(index === 0));
+      const poster = document.createElement("img");
+      poster.src = item.poster || "";
+      poster.alt = "";
+      poster.loading = "lazy";
+      const label = document.createElement("span");
+      label.textContent = item.title || `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
+      slot.append(poster, label);
+      slot.addEventListener("click", () => {
+        const source = featuredVideo.querySelector("source");
+        featuredVideo.pause();
+        if (source) source.src = item.src;
+        featuredVideo.poster = item.poster || "";
+        featuredVideo.setAttribute("aria-label", item.title || `Robot demonstration ${index + 1}`);
+        featuredTitle.textContent = item.title || `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
+        slots.forEach((candidate) => candidate.setAttribute("aria-current", String(candidate === slot)));
+        featuredVideo.load();
+        const playback = featuredVideo.play();
+        if (playback) playback.catch(() => {});
+      });
+      return slot;
     });
+
+    track.append(...slots);
+    gallery.append(galleryHead, track);
+    heroVideos.replaceChildren(featuredCard, gallery);
+    const playback = featuredVideo.play();
+    if (playback) playback.catch(() => {});
   }
 
   const mainExperimentVideos = document.querySelector("[data-main-experiment-videos]");
@@ -198,20 +238,6 @@
       return card;
     });
     videoGallery.replaceChildren(...cards);
-  }
-
-  const robotBody = document.querySelector("[data-robot-results]");
-  if (robotBody && Array.isArray(data.robotResults)) {
-    robotBody.replaceChildren(...data.robotResults.map((row) => {
-      const tr = document.createElement("tr");
-      if (row.ours) tr.className = "ours-row";
-      [row.method, ...row.id, ...row.distractors, ...row.similar].forEach((value) => {
-        const cell = document.createElement("td");
-        cell.textContent = value;
-        tr.appendChild(cell);
-      });
-      return tr;
-    }));
   }
 
   const citation = document.querySelector("[data-citation]");
