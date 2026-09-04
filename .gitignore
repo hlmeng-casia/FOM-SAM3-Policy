@@ -4,6 +4,9 @@ work/
 # Local paper source workspace; the public site uses root main.pdf
 paper/
 
+# Local experiment prompt source
+prompt.xlsx
+
 # Local AI collaboration instructions
 AGENTS.md
 

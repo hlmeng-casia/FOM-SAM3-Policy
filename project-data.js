@@ -49,6 +49,11 @@ window.PROJECT_DATA = {
     { group: "Background generalization", title: "Background shift", videoIndex: 0 },
     { group: "Background generalization", title: "Clutter", videoIndex: 1 },
   ],
+  taskPrompts: {
+    "Pick & Place": "red CocaCola soda can",
+    Push: "white pill box",
+    Assemble: "cup lid with panda handle",
+  },
   robotResults: [
     { method: "RGB-DP", id: ["8/10", "7/10", "5/10"], distractors: ["6/10", "3/10", "5/10"], similar: ["1/10", "3/10", "0/10"] },
     { method: "S²-Diff.", id: ["10/10", "7/10", "4/10"], distractors: ["8/10", "6/10", "5/10"], similar: ["4/10", "6/10", "5/10"] },

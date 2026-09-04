@@ -132,12 +132,10 @@
     previous.className = "hero-demo-arrow previous";
     previous.type = "button";
     previous.setAttribute("aria-label", "Previous demonstration");
-    previous.textContent = "‹";
     const next = document.createElement("button");
     next.className = "hero-demo-arrow next";
     next.type = "button";
     next.setAttribute("aria-label", "Next demonstration");
-    next.textContent = "›";
 
     const dots = document.createElement("div");
     dots.className = "hero-demo-dots";
@@ -152,9 +150,28 @@
     });
 
     let activeIndex = 0;
+    let carouselAnimation = 0;
+    const animateTrackTo = (targetLeft) => {
+      window.cancelAnimationFrame(carouselAnimation);
+      const startLeft = track.scrollLeft;
+      const distance = targetLeft - startLeft;
+      if (Math.abs(distance) < 1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        track.scrollLeft = targetLeft;
+        return;
+      }
+      const startedAt = window.performance.now();
+      const duration = 420;
+      const step = (timestamp) => {
+        const progress = Math.min(1, (timestamp - startedAt) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        track.scrollLeft = startLeft + distance * eased;
+        if (progress < 1) carouselAnimation = window.requestAnimationFrame(step);
+      };
+      carouselAnimation = window.requestAnimationFrame(step);
+    };
     const showCard = (index) => {
       activeIndex = Math.max(0, Math.min(cards.length - 1, index));
-      track.scrollTo({ left: cards[activeIndex].offsetLeft, behavior: "smooth" });
+      animateTrackTo(cards[activeIndex].offsetLeft);
       dotButtons.forEach((dot, dotIndex) => dot.setAttribute("aria-current", String(dotIndex === activeIndex)));
     };
     previous.addEventListener("click", () => showCard(activeIndex - 1));
@@ -186,15 +203,15 @@
     const taskNames = ["Pick & Place", "Push", "Assemble"];
     const conditions = [
       {
-        label: "ID",
+        label: "In-Distribution",
         description: "The seen target and training scene measure the learned manipulation skill."
       },
       {
-        label: "OOD-Distractors",
+        label: "Out-of-Distribution with Distractors",
         description: "A new background and an unrelated object test robustness to ordinary visual interference."
       },
       {
-        label: "OOD-Similar",
+        label: "Out-of-Distribution with Similar-FOs",
         description: "A new background and a same-category Similar-FO test queried-identity selection and task completion."
       }
     ];
@@ -214,13 +231,22 @@
       conditionDescription.textContent = condition.description;
       conditionHead.append(conditionTitle, conditionDescription);
       block.appendChild(conditionHead);
+      const conditionContent = document.createElement("div");
+      conditionContent.className = "experiment-condition-content";
 
       taskNames.forEach((task, taskIndex) => {
         const taskGroup = document.createElement("section");
         taskGroup.className = "experiment-task-group";
         const taskHead = document.createElement("div");
         taskHead.className = "experiment-task-head";
-        taskHead.innerHTML = `<h5>${task}</h5>`;
+        const taskTitle = document.createElement("h5");
+        taskTitle.textContent = task;
+        const promptLine = document.createElement("p");
+        promptLine.className = "experiment-task-prompt";
+        const taskPrompt = data.taskPrompts?.[task];
+        promptLine.textContent = taskPrompt ? `Prompt: “${taskPrompt}”` : "";
+        if (!taskPrompt) promptLine.setAttribute("aria-hidden", "true");
+        taskHead.append(taskTitle, promptLine);
 
         const scroll = document.createElement("div");
         scroll.className = "experiment-task-scroll";
@@ -248,8 +274,10 @@
         });
         scroll.appendChild(grid);
         taskGroup.append(taskHead, scroll);
-        block.appendChild(taskGroup);
+        conditionContent.appendChild(taskGroup);
       });
+
+      block.appendChild(conditionContent);
 
       return block;
     });
