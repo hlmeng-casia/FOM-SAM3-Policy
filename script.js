@@ -133,9 +133,18 @@
   if (mainExperimentVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
     const taskNames = ["Pick & Place", "Push", "Assemble"];
     const conditions = [
-      { key: "id", label: "ID" },
-      { key: "distractors", label: "OOD-Distractors" },
-      { key: "similar", label: "OOD-Similar" }
+      {
+        label: "ID",
+        description: "The seen target is evaluated in the training background and task context without added distractors, measuring whether the policy learned the basic manipulation skill."
+      },
+      {
+        label: "OOD-Distractors",
+        description: "The background changes and an unrelated object from a different coarse category is added, testing robustness to ordinary visual interference."
+      },
+      {
+        label: "OOD-Similar",
+        description: "The background changes and a same-category Similar-FO is placed beside the queried target; success requires selecting the requested identity and completing the task."
+      }
     ];
     const methods = Array.isArray(data.robotResults) ? data.robotResults : [];
     const methodOrder = ["Ours-DP", "RGB-DP", "Ours-ACT", "RGB-ACT"];
@@ -149,7 +158,9 @@
       const conditionTitle = document.createElement("h4");
       conditionTitle.id = `condition-title-${conditionIndex}`;
       conditionTitle.textContent = condition.label;
-      conditionHead.appendChild(conditionTitle);
+      const conditionDescription = document.createElement("p");
+      conditionDescription.textContent = condition.description;
+      conditionHead.append(conditionTitle, conditionDescription);
       block.appendChild(conditionHead);
 
       taskNames.forEach((task, taskIndex) => {
@@ -173,7 +184,7 @@
           card.className = `experiment-video-card${method.ours ? " ours" : ""}`;
           const heading = document.createElement("div");
           heading.className = "experiment-video-head";
-          heading.innerHTML = `<strong>${method.method}</strong><output>${method[condition.key]?.[taskIndex] || "--"}</output>`;
+          heading.innerHTML = `<strong>${method.method}</strong>`;
           const video = createVideoPlayer(item, slotIndex, "experiment-video-player", {
             autoplay: true,
             controls: false,
