@@ -75,6 +75,28 @@
     return video;
   };
 
+  const enableViewportPlayback = (videos) => {
+    if (!videos.length) return;
+    if ("IntersectionObserver" in window) {
+      const playbackObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const playback = entry.target.play();
+            if (playback) playback.catch(() => {});
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, { rootMargin: "120px 0px", threshold: 0.2 });
+      videos.forEach((video) => playbackObserver.observe(video));
+      return;
+    }
+    videos.forEach((video) => {
+      const playback = video.play();
+      if (playback) playback.catch(() => {});
+    });
+  };
+
   const heroMainVideo = document.querySelector("[data-hero-main-video]");
   const heroVideos = document.querySelector("[data-hero-videos]");
   if (heroMainVideo && heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
@@ -135,15 +157,15 @@
     const conditions = [
       {
         label: "ID",
-        description: "The seen target is evaluated in the training background and task context without added distractors, measuring whether the policy learned the basic manipulation skill."
+        description: "The seen target and training scene measure the learned manipulation skill."
       },
       {
         label: "OOD-Distractors",
-        description: "The background changes and an unrelated object from a different coarse category is added, testing robustness to ordinary visual interference."
+        description: "A new background and an unrelated object test robustness to ordinary visual interference."
       },
       {
         label: "OOD-Similar",
-        description: "The background changes and a same-category Similar-FO is placed beside the queried target; success requires selecting the requested identity and completing the task."
+        description: "A new background and a same-category Similar-FO test queried-identity selection and task completion."
       }
     ];
     const methods = Array.isArray(data.robotResults) ? data.robotResults : [];
@@ -202,48 +224,33 @@
       return block;
     });
     mainExperimentVideos.replaceChildren(...conditionBlocks);
-    const experimentPlayers = all(".experiment-video-player");
-    if ("IntersectionObserver" in window) {
-      const playbackObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const playback = entry.target.play();
-            if (playback) playback.catch(() => {});
-          } else {
-            entry.target.pause();
-          }
-        });
-      }, { rootMargin: "120px 0px", threshold: 0.2 });
-      experimentPlayers.forEach((video) => playbackObserver.observe(video));
-    } else {
-      experimentPlayers.forEach((video) => {
-        const playback = video.play();
-        if (playback) playback.catch(() => {});
-      });
-    }
+    enableViewportPlayback(all(".experiment-video-player"));
   }
 
-  const videoGallery = document.querySelector("[data-video-gallery]");
-  if (videoGallery && Array.isArray(data.demoVideos)) {
-    const galleryVideos = Array.from({ length: 18 }, (_, index) => data.demoVideos[index % data.demoVideos.length]);
-    const cards = galleryVideos.map((item, index) => {
+  const generalizationGrid = document.querySelector("[data-generalization-videos]");
+  if (generalizationGrid && Array.isArray(data.generalizationDemos) && Array.isArray(data.demoVideos) && data.demoVideos.length) {
+    const cards = data.generalizationDemos.slice(0, 9).map((demo, index) => {
+      const item = data.demoVideos[demo.videoIndex % data.demoVideos.length];
       const card = document.createElement("article");
-      card.className = "media-card video-card";
-
-      const video = createVideoPlayer(item, index, "media-player");
-
-      const details = document.createElement("div");
-      const status = document.createElement("small");
-      status.textContent = "Robot rollout";
-      const title = document.createElement("h3");
-      title.textContent = `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
-      const description = document.createElement("p");
-      description.textContent = "Robot manipulation rollout.";
-      details.append(status, title, description);
-      card.append(video, details);
+      card.className = "generalization-video-card";
+      const video = createVideoPlayer(
+        { ...item, title: `${demo.group}: ${demo.title}` },
+        index,
+        "generalization-video-player",
+        { autoplay: true, controls: false, loop: true, preload: "metadata" }
+      );
+      const caption = document.createElement("div");
+      caption.className = "generalization-video-caption";
+      const group = document.createElement("small");
+      group.textContent = demo.group;
+      const title = document.createElement("strong");
+      title.textContent = demo.title;
+      caption.append(group, title);
+      card.append(video, caption);
       return card;
     });
-    videoGallery.replaceChildren(...cards);
+    generalizationGrid.replaceChildren(...cards);
+    enableViewportPlayback(all(".generalization-video-player"));
   }
 
   const citation = document.querySelector("[data-citation]");

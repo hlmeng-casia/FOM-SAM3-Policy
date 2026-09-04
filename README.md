@@ -25,4 +25,4 @@ Project Page for *Memorize and Focus on Fine-Grained Objects for Robotic Imitati
 
 ## Page sections
 
-Abstract · Introduction · Method · Experiments · Media · Resources · BibTeX
+Video Presentation · Abstract · Robot Demonstrations · Method · Experiments · Resources · BibTeX
