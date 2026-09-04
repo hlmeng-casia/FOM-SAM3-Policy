@@ -107,7 +107,7 @@
     ];
     const methods = Array.isArray(data.robotResults) ? data.robotResults : [];
     const methodGroups = [
-      { names: ["Ours-DP", "RGB-DP", "S²-Diff."] },
+      { names: ["Ours-DP", "RGB-DP"] },
       { names: ["Ours-ACT", "RGB-ACT"] }
     ];
     const tabs = document.createElement("div");
