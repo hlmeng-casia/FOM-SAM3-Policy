@@ -75,8 +75,9 @@
     return video;
   };
 
+  const heroMainVideo = document.querySelector("[data-hero-main-video]");
   const heroVideos = document.querySelector("[data-hero-videos]");
-  if (heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
+  if (heroMainVideo && heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
     const featuredVideo = createVideoPlayer(data.demoVideos[0], 0, "hero-featured-player", {
       autoplay: true,
       controls: true,
@@ -122,7 +123,8 @@
 
     track.append(...slots);
     gallery.append(galleryHead, track);
-    heroVideos.replaceChildren(featuredVideo, gallery);
+    heroMainVideo.replaceChildren(featuredVideo);
+    heroVideos.replaceChildren(gallery);
     const playback = featuredVideo.play();
     if (playback) playback.catch(() => {});
   }
@@ -172,7 +174,12 @@
           const heading = document.createElement("div");
           heading.className = "experiment-video-head";
           heading.innerHTML = `<strong>${method.method}</strong><output>${method[condition.key]?.[taskIndex] || "--"}</output>`;
-          const video = createVideoPlayer(item, slotIndex, "experiment-video-player", { preload: "none" });
+          const video = createVideoPlayer(item, slotIndex, "experiment-video-player", {
+            autoplay: true,
+            controls: false,
+            loop: true,
+            preload: "metadata"
+          });
           card.append(heading, video);
           grid.appendChild(card);
         });
@@ -184,6 +191,25 @@
       return block;
     });
     mainExperimentVideos.replaceChildren(...conditionBlocks);
+    const experimentPlayers = all(".experiment-video-player");
+    if ("IntersectionObserver" in window) {
+      const playbackObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const playback = entry.target.play();
+            if (playback) playback.catch(() => {});
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, { rootMargin: "120px 0px", threshold: 0.2 });
+      experimentPlayers.forEach((video) => playbackObserver.observe(video));
+    } else {
+      experimentPlayers.forEach((video) => {
+        const playback = video.play();
+        if (playback) playback.catch(() => {});
+      });
+    }
   }
 
   const videoGallery = document.querySelector("[data-video-gallery]");
