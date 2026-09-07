@@ -12,7 +12,7 @@
     <link rel="icon" href="data:," />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260907-openvla-type" />
+    <link rel="stylesheet" href="styles.css?v=20260907-compact-sections" />
     <script src="project-data.js?v=20260907-fo-sam3" defer></script>
     <script src="script.js?v=20260907-fo-sam3" defer></script>
   </head>
@@ -75,11 +75,7 @@
             <img src="assets/images/introduction.png" width="1472" height="658" loading="lazy" alt="Comparison of scene-level visual encoding in vanilla DP and ACT, category-level mask and depth conditioning in S2-Diffusion, and fine-grained object segmentation with FOM-SAM3 and FSAE." />
           </figure>
           <div class="abstract-copy" data-abstract></div>
-        </section>
-
-        <section class="hero-videos" aria-labelledby="demonstrations-title">
-          <h2 id="demonstrations-title">Robot Demonstrations</h2>
-          <div class="hero-video-showcase" data-hero-videos></div>
+          <div class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations" data-hero-videos></div>
         </section>
       </section>
 

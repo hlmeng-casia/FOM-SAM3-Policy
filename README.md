@@ -25,4 +25,4 @@ Project Page for *Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomot
 
 ## Page sections
 
-Video Presentation · Abstract · Robot Demonstrations · Method · Experiments · Resources · BibTeX
+Video Presentation · Abstract (with robot demonstrations) · Method · Experiments · Resources · BibTeX
