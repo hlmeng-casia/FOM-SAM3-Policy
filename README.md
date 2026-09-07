@@ -1,6 +1,6 @@
 # FOM-SAM3 Project Page
 
-Project Page for *Memorize and Focus on Fine-Grained Objects for Robotic Imitation Learning in Familiar Scene*.
+Project Page for *Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning*.
 
 ## Live website
 

@@ -4,7 +4,7 @@
  */
 window.PROJECT_DATA = {
   shortName: "FOM-SAM3",
-  title: "Memorize and Focus on Fine-Grained Objects for Robotic Imitation Learning in Familiar Scene",
+  title: "Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning",
   label: "FOM-SAM3 · Project Page",
   authors: ["Anonymous Authors"],
   institutions: ["Anonymous Institution"],
@@ -62,8 +62,8 @@ window.PROJECT_DATA = {
     { method: "Ours-ACT", id: ["10/10", "9/10", "9/10"], distractors: ["8/10", "10/10", "9/10"], similar: ["8/10", "9/10", "7/10"], ours: true },
   ],
   citation: `@article{anonymous2026fomsam3,
-  title  = {Memorize and Focus on Fine-Grained Objects for
-            Robotic Imitation Learning in Familiar Scene},
+  title  = {Towards Fine-Grained Object Manipulation: SAM3-Guided
+            Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning},
   author = {Anonymous Authors},
   year   = {2026},
   note   = {Project page}
