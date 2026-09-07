@@ -66,8 +66,13 @@
           <div class="section-head light"><div><h2>Method</h2></div></div>
 
           <figure class="paper-figure method-figure">
-            <img src="assets/images/method.webp" loading="lazy" alt="FOM-SAM3 and FSAE architecture showing policy inference, offline FO Memory Learning, and the focused spatial-appearance encoder for Diffusion Policy and ACT." />
-            <figcaption><strong>Figure 2. Overview of FOM-SAM3 and FSAE.</strong> <span><i>(a)</i> An FO Prompt retrieves FO Memory Tokens, frozen SAM3 localizes the target, and FSAE conditions DP or ACT. <i>(b)</i> Offline FO Memory Learning updates only valid prompt tokens while SAM3 remains frozen. <i>(c)</i> FSAE uses ROI extraction, mask gating, task context, and relative geometry to produce a compact DP vector or visual tokens for ACT.</span></figcaption>
+            <img src="assets/images/fo-memory-learning.png" width="2841" height="786" loading="lazy" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
+            <figcaption><strong>Persistent FO Memory Learning for SAM3.</strong> <span>A learnable linear transformation converts concept-level prompt tokens into persistent FO Memory Tokens while SAM3 and the concept-level tokens remain frozen. One-vs-rest learning treats the queried FO as the positive category and the remaining FOs as negatives; target-present and target-absent losses support detection, segmentation, and rejection of confusing objects. The learned tokens are stored in an FO Memory Bank.</span></figcaption>
+          </figure>
+
+          <figure class="paper-figure method-figure">
+            <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" loading="lazy" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
+            <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE).</strong> <span>Retrieved FO Memory Tokens prompt frozen SAM3 to localize the target FOs. Bounding boxes represent their spatial state, while masking, cropping, and resizing SAM3's FPN features extract aligned inside-FO appearance features. FSAE combines appearance keypoints with bounding boxes into a compact visual state for DP, and adds spatial embeddings to pooled appearance embeddings to form visual tokens for ACT.</span></figcaption>
           </figure>
 
         </div>
