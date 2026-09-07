@@ -27,6 +27,14 @@
   src: url("assets/fonts/google-sans-semibold.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Google Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/google-sans-bold.ttf") format("truetype");
+}
+
 :root {
   --font-body: "Noto Sans", sans-serif;
   --font-display: "Google Sans", sans-serif;
@@ -64,21 +72,22 @@ nav { display: flex; gap: 28px; }
 nav a { color: var(--muted); font-size: .78rem; font-weight: 700; }
 nav a:hover, nav a:focus-visible { color: var(--green); }
 .hero { display: flex; padding: 0 0 16px; align-items: center; flex-direction: column; gap: 32px; text-align: center; }
-.hero-copy { display: flex; width: min(1080px,calc(100% - var(--hero-gutter))); min-height: calc(90vh - 70px); min-height: calc(90svh - 70px); padding: clamp(88px,11vh,128px) 0 clamp(48px,7vh,80px); align-items: center; justify-content: flex-start; flex-direction: column; }
+.hero-copy { display: flex; width: min(1080px,calc(100% - var(--hero-gutter))); min-height: calc(100vh - 230px); min-height: calc(100svh - 230px); padding: clamp(112px,14vh,156px) 0 12px; align-items: center; justify-content: flex-start; flex-direction: column; }
 .eyebrow { margin: 0 0 22px; color: var(--green); font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 h1,h2 { font-family: var(--font-body); }
 h2 { font-weight: 600; }
 .hero-title,.authors,.institutions { font-family: var(--font-display); }
 button,input,select,textarea { font-family: var(--font-body); }
 h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 600; letter-spacing: normal; line-height: 1.125; text-wrap: balance; }
-.hero-acronym { display: block; margin-bottom: clamp(18px,2.4vw,28px); color: #16874b; font-size: clamp(3.25rem,6vw,5.75rem); font-weight: 600; letter-spacing: normal; line-height: 1; text-shadow: 0 0 20px rgba(34,197,94,.3),0 0 44px rgba(34,197,94,.18); }
+.hero-title { margin-bottom: 0; }
+.hero-acronym { display: block; margin-bottom: clamp(18px,2.4vw,28px); color: #16874b; font-size: clamp(3.25rem,6vw,5.75rem); font-weight: 700; letter-spacing: normal; line-height: 1; text-shadow: 0 0 20px rgba(34,197,94,.3),0 0 44px rgba(34,197,94,.18); }
 .hero-paper-title { display: block; color: #111; font-size: clamp(1.75rem,3.2vw,3.25rem); text-shadow: none; }
 .hero-title ::selection { background: transparent; color: inherit; }
 .hero-title ::-moz-selection { background: transparent; color: inherit; }
 .summary { max-width: 840px; margin-right: auto; margin-left: auto; color: #405b73; font-family: var(--font-body); font-size: 1.3rem; line-height: 1.58; text-wrap: balance; }
-.authors { margin: 28px 0 0; font-size: .9rem; font-weight: 400; }
+.authors { margin: 20px 0 0; font-size: .9rem; font-weight: 400; }
 .institutions { margin: 2px 0 0; color: var(--muted); font-size: .76rem; }
-.resource-row { display: flex; gap: 6px; margin-top: 30px; justify-content: center; flex-wrap: wrap; }
+.resource-row { display: flex; gap: 6px; margin-top: 22px; justify-content: center; flex-wrap: wrap; }
 .resource-row a { display: inline-flex; min-height: 40px; padding: 7px 18px; border: 0; border-radius: 999px; background: #363636; color: #fff; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; transition: background-color .16s ease; }
 .resource-row span { font-size: 1rem; font-weight: 500; line-height: 1.5; }
 .resource-row .resource-icon { display: block; width: 16px; height: 16px; flex: 0 0 16px; }
@@ -92,6 +101,7 @@ h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 600; lett
 .paper-figure figcaption i { color: var(--green); font-family: inherit; }
 .hero-figure { width: 100%; text-align: left; }
 .hero-presentation { width: 100%; color: var(--white); text-align: left; }
+.hero-presentation .section-pad { padding-top: 24px; }
 .hero-presentation h2 { margin: 0 0 24px; font-size: var(--section-title-size); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; text-align: center; }
 .hero-video-showcase { width: 100%; }
 .hero-featured-player { display: block; width: 100%; aspect-ratio: 16/9; margin: 0 auto; border: 0; border-radius: 6px; background: #071b2d; box-shadow: 0 14px 34px rgba(16,42,67,.14); object-fit: cover; }
