@@ -112,8 +112,8 @@ h1::-moz-selection { background: transparent; color: #176da8; }
 .experiment-task-group { padding: 14px 0; }
 .experiment-task-group + .experiment-task-group { border-top: 1px solid var(--line); }
 .experiment-task-group:last-child { padding-bottom: 0; }
-.experiment-task-head { display: grid; margin-bottom: 7px; gap: 1px; }
-.experiment-task-head h5 { margin: 0; color: var(--ink); font: 700 1.08rem Inter,ui-sans-serif,system-ui,sans-serif; }
+.experiment-task-head { display: flex; margin-bottom: 9px; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; }
+.experiment-task-head h5 { flex-shrink: 0; margin: 0; color: var(--ink); font: 700 1.08rem Inter,ui-sans-serif,system-ui,sans-serif; }
 .experiment-task-prompt { min-height: 1.2em; margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.4; }
 .experiment-task-scroll { overflow-x: auto; padding-bottom: 4px; }
 .experiment-method-grid { display: grid; min-width: 820px; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; }
