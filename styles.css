@@ -103,7 +103,7 @@ h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 600; lett
 .hero-presentation { width: 100%; color: var(--white); text-align: left; }
 .hero-presentation .section-pad { padding-top: 24px; }
 .hero-presentation h2 { margin: 0 0 24px; font-size: var(--section-title-size); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; text-align: center; }
-.hero-video-showcase { width: 100%; margin-top: 28px; padding: 28px 0 22px; background: #f3f4f5; }
+.hero-video-showcase { width: 100%; margin-top: 28px; padding: 28px 0 22px; background: #e7f0f8; }
 .hero-featured-player { display: block; width: 100%; height: auto; aspect-ratio: 16/9; margin: 0 auto; border: 0; border-radius: 10px; background: #000; box-shadow: 0 14px 34px rgba(16,42,67,.14); }
 video::-webkit-media-controls-mute-button { display: none !important; }
 video::-webkit-media-controls-volume-slider { display: none !important; }
