@@ -151,28 +151,58 @@
 
     let activeIndex = 0;
     let carouselAnimation = 0;
+    let isAnimating = false;
+    const maxScrollLeft = () => Math.max(0, track.scrollWidth - track.clientWidth);
+    const cardLeft = (index) => Math.min(cards[index].offsetLeft, maxScrollLeft());
+    const updateDots = () => {
+      dotButtons.forEach((dot, index) => dot.setAttribute("aria-current", String(index === activeIndex)));
+    };
+    const syncActiveCard = () => {
+      if (isAnimating) return;
+      activeIndex = cards.reduce((best, _card, index) => (
+        Math.abs(cardLeft(index) - track.scrollLeft) < Math.abs(cardLeft(best) - track.scrollLeft) ? index : best
+      ), 0);
+      updateDots();
+    };
+    const stopAnimation = () => {
+      window.cancelAnimationFrame(carouselAnimation);
+      carouselAnimation = 0;
+      isAnimating = false;
+      track.classList.remove("is-animating");
+    };
     const animateTrackTo = (targetLeft) => {
       window.cancelAnimationFrame(carouselAnimation);
       const startLeft = track.scrollLeft;
       const distance = targetLeft - startLeft;
-      if (Math.abs(distance) < 1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (Math.abs(distance) < 1) {
+        stopAnimation();
         track.scrollLeft = targetLeft;
+        syncActiveCard();
         return;
       }
+      isAnimating = true;
+      track.classList.add("is-animating");
       const startedAt = window.performance.now();
-      const duration = 420;
+      const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 420;
       const step = (timestamp) => {
         const progress = Math.min(1, (timestamp - startedAt) / duration);
         const eased = 1 - Math.pow(1 - progress, 3);
         track.scrollLeft = startLeft + distance * eased;
-        if (progress < 1) carouselAnimation = window.requestAnimationFrame(step);
+        if (progress < 1) {
+          carouselAnimation = window.requestAnimationFrame(step);
+        } else {
+          stopAnimation();
+          syncActiveCard();
+        }
       };
       carouselAnimation = window.requestAnimationFrame(step);
     };
     const showCard = (index) => {
-      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
-      animateTrackTo(cards[activeIndex].offsetLeft);
-      dotButtons.forEach((dot, dotIndex) => dot.setAttribute("aria-current", String(dotIndex === activeIndex)));
+      const lastStartIndex = cards.findIndex((card) => card.offsetLeft >= maxScrollLeft() - 1);
+      const lastIndex = lastStartIndex < 0 ? cards.length - 1 : lastStartIndex;
+      activeIndex = Math.max(0, Math.min(lastIndex, index));
+      animateTrackTo(cardLeft(activeIndex));
+      updateDots();
     };
     previous.addEventListener("click", () => showCard(activeIndex - 1));
     next.addEventListener("click", () => showCard(activeIndex + 1));
@@ -180,14 +210,19 @@
     let scrollFrame = 0;
     track.addEventListener("scroll", () => {
       window.cancelAnimationFrame(scrollFrame);
-      scrollFrame = window.requestAnimationFrame(() => {
-        const closestIndex = cards.reduce((best, card, index) => (
-          Math.abs(card.offsetLeft - track.scrollLeft) < Math.abs(cards[best].offsetLeft - track.scrollLeft) ? index : best
-        ), 0);
-        activeIndex = closestIndex;
-        dotButtons.forEach((dot, index) => dot.setAttribute("aria-current", String(index === activeIndex)));
-      });
+      scrollFrame = window.requestAnimationFrame(syncActiveCard);
     }, { passive: true });
+    const interruptAnimation = () => {
+      stopAnimation();
+      syncActiveCard();
+    };
+    track.addEventListener("pointerdown", interruptAnimation, { passive: true });
+    track.addEventListener("wheel", interruptAnimation, { passive: true });
+    window.addEventListener("resize", () => {
+      stopAnimation();
+      track.scrollLeft = cardLeft(activeIndex);
+      syncActiveCard();
+    });
 
     track.append(...cards);
     viewport.append(track, previous, next);

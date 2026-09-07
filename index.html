@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260907-bold-hero" />
+    <link rel="stylesheet" href="styles.css?v=20260907-wide-carousel" />
     <script src="project-data.js?v=20260907-fo-sam3" defer></script>
-    <script src="script.js?v=20260907-fo-sam3" defer></script>
+    <script src="script.js?v=20260907-carousel-slide" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -71,11 +71,13 @@
         </section>
 
         <section class="hero-abstract" aria-labelledby="abstract-title">
-          <h2 id="abstract-title">Abstract</h2>
-          <figure class="paper-figure abstract-figure">
-            <img src="assets/images/introduction.png" width="1472" height="658" loading="lazy" alt="Comparison of scene-level visual encoding in vanilla DP and ACT, category-level mask and depth conditioning in S2-Diffusion, and fine-grained object segmentation with FOM-SAM3 and FSAE." />
-          </figure>
-          <div class="abstract-copy" data-abstract></div>
+          <div class="shell content-shell">
+            <h2 id="abstract-title">Abstract</h2>
+            <figure class="paper-figure abstract-figure">
+              <img src="assets/images/introduction.png" width="1472" height="658" loading="lazy" alt="Comparison of scene-level visual encoding in vanilla DP and ACT, category-level mask and depth conditioning in S2-Diffusion, and fine-grained object segmentation with FOM-SAM3 and FSAE." />
+            </figure>
+            <div class="abstract-copy" data-abstract></div>
+          </div>
           <div class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations" data-hero-videos></div>
         </section>
       </section>
