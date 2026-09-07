@@ -13,7 +13,7 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260907-presentation-blue" />
+    <link rel="stylesheet" href="styles.css?v=20260907-viewpoint-analysis" />
     <script src="project-data.js?v=20260907-youtube" defer></script>
     <script src="script.js?v=20260907-prompt-text" defer></script>
   </head>
@@ -28,7 +28,7 @@
           <a href="#abstract-title">Overview</a>
           <a href="#method">Method</a>
           <a href="#results">Experiments</a>
-          <a href="#resources">Resources</a>
+          <a href="#viewpoint-analysis">Analysis</a>
           <a href="#citation">BibTeX</a>
         </nav>
       </div>
@@ -130,17 +130,14 @@
         </section>
       </section>
 
-      <section class="resource-section dark-section" id="resources">
-        <div class="shell content-shell section-pad">
-          <div class="section-head light"><div><h2>Resources</h2><p class="section-summary">Latest paper and current project material.</p></div></div>
-          <div class="resource-list">
-            <a data-resource="paper"><span>01</span><strong>Paper PDF</strong><small>Manuscript</small><i>↗</i></a>
-            <a data-resource="code"><span>02</span><strong>Code</strong><small>Implementation</small><i>↗</i></a>
-            <a data-resource="dataset"><span>03</span><strong>FO30 Dataset</strong><small>Benchmark data</small><i>↗</i></a>
-            <a data-resource="video"><span>04</span><strong>Robot Videos</strong><small>Manipulation rollouts</small><i>↗</i></a>
-            <a data-resource="demo"><span>05</span><strong>Interactive Demo</strong><small>Optional future interface</small><i>↗</i></a>
-          </div>
-        </div>
+      <section class="analysis-section shell content-shell section-pad" id="viewpoint-analysis" aria-labelledby="viewpoint-analysis-title">
+        <div class="section-head"><div><h2 id="viewpoint-analysis-title">Offline Viewpoint-Sensitivity Analysis</h2></div></div>
+        <p class="analysis-copy">A fixed approach trajectory follows five waypoints, P1–P5, from the initial pose toward the target can. The trajectory is repeated with the original can, the original can with OOD distractors, and a replacement can from the same coarse category, yielding 15 pose-aligned wrist-camera frames. After visually verifying the selected target ROIs, 3,113 mask-valid 256-D spatial features are jointly standardized, reduced to 50 dimensions with PCA, and embedded with t-SNE (perplexity 30; random seed 42).</p>
+        <figure class="paper-figure analysis-figure">
+          <img src="assets/images/target-feature-tsne.png" width="3159" height="1998" loading="lazy" alt="Joint t-SNE of target features at waypoints P1 to P5. Original-can and OOD-distractor centroid trajectories nearly overlap; the replacement-can trajectory follows a similar progression, especially from P2 to P5." />
+          <figcaption><strong>Joint t-SNE of box-mask-focused target features (Fig. 8).</strong> <span>Color denotes waypoint from P1 (initial pose) to P5 (near-target pose), and marker shape denotes the scene or instance condition. Each small point is one mask-valid spatial feature; outlined markers are frame centroids, and connecting lines indicate the ordered P1–P5 trajectory. This visualization is qualitative; t-SNE distances have no physical units.</span></figcaption>
+        </figure>
+        <p class="analysis-copy">The Original and Original+OOD centroid trajectories nearly overlap, suggesting that mask gating limits distractor influence once the target ROI is correctly selected. The replacement can follows the same broad progression, especially from P2 to P5, while the ordered centroid migration preserves sensitivity to viewpoint changes. These observations support the intended behavior of the FSAE front end; they do not establish invariance or statistical significance in the original feature space.</p>
       </section>
 
       <section class="citation-section shell content-shell section-pad" id="citation">
