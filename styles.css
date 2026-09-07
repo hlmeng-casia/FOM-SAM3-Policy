@@ -93,12 +93,12 @@ h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 750; lett
 .dark-section { background: var(--green-dark); color: var(--white); }
 .section-head.light .section-summary { color: var(--mint); }
 #method .section-head { margin-bottom: 30px; }
-.method-figure { width: 100%; margin-right: auto; margin-left: auto; color: var(--white); }
+.method-figure { width: 100%; margin-right: auto; margin-left: auto; color: var(--ink); }
 .method-figure + .method-figure { margin-top: 36px; }
 .method-figure img { padding: 0; border: 0; border-radius: 0; background: transparent; filter: none; box-shadow: none; }
-.method-figure figcaption { margin-right: 0; margin-left: 0; color: rgba(255,255,255,.8); }
-.method-figure figcaption strong { color: #fff; }
-.method-figure figcaption i { color: var(--mint); }
+.method-figure figcaption { margin-right: 0; margin-left: 0; color: #405b73; }
+.method-figure figcaption strong { color: var(--ink); }
+.method-figure figcaption i { color: var(--green); }
 .results-section { border-bottom: 1px solid var(--ink); }
 .main-experiment { margin-bottom: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .main-experiment-head { display: block; padding-bottom: 14px; border-bottom: 1px solid var(--ink); text-align: center; }
