@@ -29,6 +29,9 @@ window.PROJECT_DATA = {
     dataset: "",
     demo: "",
   },
+  videoPresentation: {
+    youtubeId: "1QNsdr-Qx_I",
+  },
   demoVideos: [
     { src: "assets/videos/7120667f7ee628d3572718b42e4181d4-web.mp4", poster: "assets/videos/7120667f7ee628d3572718b42e4181d4_thumb.jpg", title: "Robot demonstration 01" },
     { src: "assets/videos/761b332e22c9c3354ad8dd4cb17496bd-web.mp4", poster: "assets/videos/761b332e22c9c3354ad8dd4cb17496bd_thumb.jpg", title: "Robot demonstration 02" },

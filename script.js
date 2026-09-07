@@ -59,12 +59,17 @@
     video.controls = options.controls ?? true;
     video.preload = options.preload || "metadata";
     video.playsInline = true;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.setAttribute("muted", "");
+    video.addEventListener("volumechange", () => {
+      if (!video.muted) video.muted = true;
+      if (video.volume !== 0) video.volume = 0;
+    });
     if (options.autoplay) {
       video.autoplay = true;
-      video.muted = true;
-      video.defaultMuted = true;
       video.loop = options.loop ?? true;
-      video.setAttribute("muted", "");
     }
     if (item.poster) video.poster = item.poster;
     video.setAttribute("aria-label", item.title || `Robot demonstration ${index + 1}`);
@@ -98,15 +103,19 @@
   };
 
   const heroMainVideo = document.querySelector("[data-hero-main-video]");
-  const heroVideos = document.querySelector("[data-hero-videos]");
-  if (heroMainVideo && heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
-    const featuredVideo = createVideoPlayer(data.demoVideos[0], 0, "hero-featured-player", {
-      autoplay: true,
-      controls: true,
-      loop: true,
-      preload: "auto"
-    });
+  if (heroMainVideo && data.videoPresentation?.youtubeId) {
+    const featuredVideo = document.createElement("iframe");
+    featuredVideo.className = "hero-featured-player";
+    featuredVideo.src = `https://www.youtube.com/embed/${encodeURIComponent(data.videoPresentation.youtubeId)}?autoplay=0&controls=0&disablekb=1&mute=1&playsinline=1&rel=0`;
+    featuredVideo.title = "Video Presentation — YouTube";
+    featuredVideo.allow = "encrypted-media; fullscreen; picture-in-picture";
+    featuredVideo.allowFullscreen = true;
+    featuredVideo.referrerPolicy = "strict-origin-when-cross-origin";
+    heroMainVideo.replaceChildren(featuredVideo);
+  }
 
+  const heroVideos = document.querySelector("[data-hero-videos]");
+  if (heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
     const gallery = document.createElement("div");
     gallery.className = "hero-demo-gallery";
     const viewport = document.createElement("div");
@@ -120,11 +129,11 @@
       card.className = "hero-demo-card";
       const video = createVideoPlayer(item, index, "hero-demo-player", {
         controls: true,
+        autoplay: true,
+        loop: true,
         preload: "metadata"
       });
-      const caption = document.createElement("figcaption");
-      caption.textContent = item.title || `Robot demonstration ${String(index + 1).padStart(2, "0")}`;
-      card.append(video, caption);
+      card.append(video);
       return card;
     });
 
@@ -227,10 +236,8 @@
     track.append(...cards);
     viewport.append(track, previous, next);
     gallery.append(viewport, dots);
-    heroMainVideo.replaceChildren(featuredVideo);
     heroVideos.replaceChildren(gallery);
-    const playback = featuredVideo.play();
-    if (playback) playback.catch(() => {});
+    enableViewportPlayback(cards.map((card) => card.querySelector("video")));
   }
 
   const mainExperimentVideos = document.querySelector("[data-main-experiment-videos]");
