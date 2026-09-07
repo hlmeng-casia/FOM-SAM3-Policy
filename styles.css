@@ -85,7 +85,7 @@ h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 750; lett
 .section-head { display: block; margin-bottom: 38px; text-align: center; }
 .section-head h2 { max-width: 820px; margin: 0 auto; font-size: var(--section-title-size); font-weight: 750; letter-spacing: -.03em; line-height: 1.05; }
 .section-head .section-summary { max-width: 720px; margin: 14px auto 0; color: var(--muted); font-weight: 450; letter-spacing: 0; text-transform: none; }
-.abstract-copy { display: grid; padding: 40px 0 20px; border-top: 1px solid var(--ink); grid-template-columns: repeat(3,1fr); gap: 34px; }
+.abstract-copy { display: grid; padding: 40px 0 20px; grid-template-columns: repeat(3,1fr); gap: 34px; }
 .abstract-copy p { margin: 0; color: #3f5b73; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 1.18rem; line-height: 1.68; }
 .abstract-copy strong { color: var(--ink); font-weight: 750; }
 .menu-button { display: none; border: 1px solid var(--ink); background: transparent; padding: 7px 11px; font-size: .75rem; font-weight: 750; cursor: pointer; }
