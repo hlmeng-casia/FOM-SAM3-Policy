@@ -286,7 +286,7 @@
         const promptLine = document.createElement("p");
         promptLine.className = "experiment-task-prompt";
         const taskPrompt = data.taskPrompts?.[task];
-        promptLine.textContent = taskPrompt ? `Prompt: “${taskPrompt}”` : "";
+        promptLine.textContent = taskPrompt ? `“${taskPrompt}”` : "";
         if (!taskPrompt) promptLine.setAttribute("aria-hidden", "true");
         taskHead.append(taskTitle, promptLine);
 
