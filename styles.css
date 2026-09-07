@@ -100,7 +100,7 @@ h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 600; lett
 .paper-figure figcaption span { color: inherit; font-weight: 400; letter-spacing: normal; text-transform: none; }
 .paper-figure figcaption i { color: var(--green); font-family: inherit; }
 .hero-figure { width: 100%; text-align: left; }
-.hero-presentation { width: 100%; color: var(--white); text-align: left; }
+.hero-presentation { width: 100%; background: #e7f0f8; color: var(--green-dark); text-align: left; }
 .hero-presentation .section-pad { padding-top: 24px; }
 .hero-presentation h2 { margin: 0 0 24px; font-size: var(--section-title-size); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; text-align: center; }
 .hero-video-showcase { width: 100%; margin-top: 28px; padding: 28px 0 22px; background: #e7f0f8; }
