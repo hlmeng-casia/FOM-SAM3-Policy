@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="FOM-SAM3: persistent fine-grained object memory and focused spatial-appearance encoding for robotic imitation learning."
+      content="FOM-SAM3-Policy: persistent fine-grained object memory and focused spatial-appearance encoding for robotic imitation learning."
     />
     <meta name="theme-color" content="#f3f8fc" />
     <title>Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</title>
@@ -22,7 +22,7 @@
 
     <header class="site-header">
       <div class="shell nav-row">
-        <a class="brand" href="#top" aria-label="FOM-SAM3 home"><span aria-hidden="true">F³</span><strong data-field="shortName">FOM-SAM3</strong></a>
+        <a class="brand" href="#top" aria-label="FOM-SAM3-Policy home"><span aria-hidden="true">F³</span><strong data-field="shortName">FOM-SAM3-Policy</strong></a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
         <nav id="primary-nav" aria-label="Primary navigation" data-nav>
           <a href="#abstract-title">Overview</a>
@@ -38,7 +38,7 @@
       <section class="hero" id="top">
         <div class="hero-copy">
           <h1 class="hero-title">
-            <span class="hero-acronym">FO-SAM3:</span>
+            <span class="hero-acronym">FOM-SAM3-Policy:</span>
             <span class="hero-paper-title" data-field="title">Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
           </h1>
           <p class="authors" data-authors>Anonymous Authors</p>
@@ -74,7 +74,7 @@
           <div class="shell content-shell">
             <h2 id="abstract-title">Abstract</h2>
             <figure class="paper-figure abstract-figure">
-              <img src="assets/images/introduction.png" width="1472" height="658" loading="lazy" alt="Comparison of scene-level visual encoding in vanilla DP and ACT, category-level mask and depth conditioning in S2-Diffusion, and fine-grained object segmentation with FOM-SAM3 and FSAE." />
+              <img src="assets/images/introduction.png" width="1472" height="658" alt="Comparison of scene-level visual encoding in vanilla DP and ACT, category-level mask and depth conditioning in S2-Diffusion, and fine-grained object segmentation with FOM-SAM3 and FSAE." />
             </figure>
             <div class="abstract-copy" data-abstract></div>
           </div>
@@ -87,12 +87,12 @@
           <div class="section-head"><div><h2>Method</h2></div></div>
 
           <figure class="paper-figure method-figure">
-            <img src="assets/images/fo-memory-learning.png" width="2841" height="786" loading="lazy" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
+            <img src="assets/images/fo-memory-learning.png" width="2841" height="786" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
             <figcaption><strong>Persistent FO Memory Learning for SAM3.</strong> <span>A learnable linear transformation converts concept-level prompt tokens into persistent FO Memory Tokens while SAM3 and the concept-level tokens remain frozen. One-vs-rest learning treats the queried FO as the positive category and the remaining FOs as negatives; target-present and target-absent losses support detection, segmentation, and rejection of confusing objects. The learned tokens are stored in an FO Memory Bank.</span></figcaption>
           </figure>
 
           <figure class="paper-figure method-figure">
-            <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" loading="lazy" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
+            <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
             <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE).</strong> <span>Retrieved FO Memory Tokens prompt frozen SAM3 to localize the target FOs. Bounding boxes represent their spatial state, while masking, cropping, and resizing SAM3's FPN features extract aligned inside-FO appearance features. FSAE combines appearance keypoints with bounding boxes into a compact visual state for DP, and adds spatial embeddings to pooled appearance embeddings to form visual tokens for ACT.</span></figcaption>
           </figure>
 
@@ -112,7 +112,7 @@
           <div class="table-section robot-section">
             <figure class="paper-figure robot-results-figure">
               <div class="chart-scroll">
-                <img src="assets/images/real-robot-results.webp" loading="lazy" alt="Grouped bar chart comparing RGB-DP, S-squared Diffusion, Ours-DP, RGB-ACT, and Ours-ACT across ID, OOD-Distractors, and OOD-Similar real-robot tasks." />
+                <img src="assets/images/real-robot-results.webp" alt="Grouped bar chart comparing RGB-DP, S-squared Diffusion, Ours-DP, RGB-ACT, and Ours-ACT across ID, OOD-Distractors, and OOD-Similar real-robot tasks." />
               </div>
               <figcaption><strong>Real-robot manipulation results.</strong> <span>Each task bar reports success across ten rollouts, and the left group averages all three tasks within each condition. Across 90 rollouts per method, Ours-DP reaches 94.4% success and Ours-ACT reaches 87.8%, compared with 42.2% for RGB-DP, 61.1% for S²-Diffusion, and 46.7% for RGB-ACT. The largest separation appears under OOD-Similar: FO Memory grounds the queried identity before action generation, while FSAE supplies focused spatial-appearance conditions to both policy backbones.</span></figcaption>
             </figure>
@@ -134,7 +134,7 @@
         <div class="section-head"><div><h2 id="viewpoint-analysis-title">Viewpoint-Aware Target Features</h2></div></div>
         <div class="analysis-layout">
           <figure class="paper-figure analysis-figure">
-            <img src="assets/images/target-feature-tsne.png" width="3159" height="1998" loading="lazy" alt="Joint t-SNE of target features at waypoints P1 to P5. Original-can and OOD-distractor centroid trajectories nearly overlap; the replacement-can trajectory follows a similar progression, especially from P2 to P5." />
+            <img src="assets/images/target-feature-tsne.png" width="3159" height="1998" alt="Joint t-SNE of target features at waypoints P1 to P5. Original-can and OOD-distractor centroid trajectories nearly overlap; the replacement-can trajectory follows a similar progression, especially from P2 to P5." />
             <figcaption><strong>Joint t-SNE of box-mask-focused target features (Fig. 8).</strong> <span>Outlined markers show frame centroids; lines follow the P1–P5 approach trajectory.</span></figcaption>
           </figure>
           <div class="analysis-description">
@@ -156,8 +156,8 @@
 
     <footer class="site-footer">
       <div class="shell content-shell footer-grid">
-        <div><strong data-field="shortName">FOM-SAM3</strong><p>Persistent fine-grained identity for task-focused robotic imitation learning.</p></div>
-        <div><span>Project page</span><p>FOM-SAM3 · <span data-current-year>2026</span></p></div>
+        <div><strong data-field="shortName">FOM-SAM3-Policy</strong><p>Persistent fine-grained identity for task-focused robotic imitation learning.</p></div>
+        <div><span>Project page</span><p>FOM-SAM3-Policy · <span data-current-year>2026</span></p></div>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

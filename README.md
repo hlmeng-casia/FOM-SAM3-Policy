@@ -1,16 +1,15 @@
-# FOM-SAM3 Project Page
+# FOM-SAM3-Policy Project Page
 
 Project Page for *Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning*.
 
-## Live website
+## Publication status
 
-**[Open the FOM-SAM3 Project Page](https://xlcooper.github.io/FOM-SAM3-Project-Page/)**
+The page is prepared from the current project-page design. Paper, arXiv, and code links remain hidden until their final release artifacts are available.
 
 ## View the page
 
 - Entry: [`index.html`](index.html)
 - Local preview: run `python -m http.server 8000` in the project root, then open `http://localhost:8000/`
-- Paper PDF: [`main.pdf`](main.pdf)
 
 ## Project navigation
 
@@ -25,4 +24,4 @@ Project Page for *Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomot
 
 ## Page sections
 
-Video Presentation · Abstract (with robot demonstrations) · Method · Experiments · Resources · BibTeX
+Video Presentation · Abstract (with robot demonstrations) · Method · Experiments · Analysis · BibTeX

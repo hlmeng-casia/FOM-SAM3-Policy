@@ -3,11 +3,23 @@
  * Empty link strings are disabled automatically by the UI.
  */
 window.PROJECT_DATA = {
-  shortName: "FOM-SAM3",
+  shortName: "FOM-SAM3-Policy",
   title: "Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning",
-  label: "FOM-SAM3 · Project Page",
-  authors: ["Anonymous Authors"],
-  institutions: ["Anonymous Institution"],
+  label: "FOM-SAM3-Policy · Project Page",
+  authors: [
+    "Haolong Meng¹,²",
+    "Fangbo Qin*¹,²",
+    "Mengchen Bai¹",
+    "Houwu Wang¹",
+    "Cirong Liu³",
+    "Shan Yu¹,²",
+  ],
+  institutions: [
+    "¹ Institute of Automation, Chinese Academy of Sciences",
+    "² School of Artificial Intelligence, University of Chinese Academy of Sciences",
+    "³ Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences",
+    "* Corresponding author",
+  ],
   summary:
     "FO Memory gives frozen SAM3 a persistent fine-grained identity, while Focused Spatial-Appearance Encoding turns the selected target and its task context into policy-ready conditions for DP or ACT.",
   abstract: [
@@ -22,7 +34,7 @@ window.PROJECT_DATA = {
     "Real-robot experiments",
   ],
   links: {
-    paper: "main.pdf",
+    paper: "",
     arxiv: "",
     code: "",
     video: "#demonstrations-title",
@@ -64,10 +76,11 @@ window.PROJECT_DATA = {
     { method: "RGB-ACT", id: ["10/10", "8/10", "6/10"], distractors: ["4/10", "5/10", "3/10"], similar: ["0/10", "5/10", "1/10"] },
     { method: "Ours-ACT", id: ["10/10", "9/10", "9/10"], distractors: ["8/10", "10/10", "9/10"], similar: ["8/10", "9/10", "7/10"], ours: true },
   ],
-  citation: `@article{anonymous2026fomsam3,
+  citation: `@article{meng2026fomsam3policy,
   title  = {Towards Fine-Grained Object Manipulation: SAM3-Guided
             Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning},
-  author = {Anonymous Authors},
+  author = {Meng, Haolong and Qin, Fangbo and Bai, Mengchen and
+            Wang, Houwu and Liu, Cirong and Yu, Shan},
   year   = {2026},
   note   = {Project page}
 }`,
