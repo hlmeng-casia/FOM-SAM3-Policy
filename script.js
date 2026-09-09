@@ -40,16 +40,10 @@
 
   all("[data-resource]").forEach((link) => {
     const url = data.links?.[link.dataset.resource];
-    if (url) {
-      link.href = url;
-      if (!url.startsWith("#")) {
-        link.target = "_blank";
-        link.rel = "noreferrer";
-      }
-    } else {
-      link.classList.add("disabled");
-      link.setAttribute("aria-disabled", "true");
-      link.removeAttribute("href");
+    link.href = url;
+    if (!url.startsWith("#")) {
+      link.target = "_blank";
+      link.rel = "noreferrer";
     }
   });
 
@@ -366,24 +360,6 @@
         copyButton.textContent = "Select and copy";
       }
       window.setTimeout(() => (copyButton.textContent = "Copy citation"), 1600);
-    });
-  }
-
-  const menuButton = document.querySelector("[data-menu-button]");
-  const nav = document.querySelector("[data-nav]");
-  if (menuButton && nav) {
-    const closeMenu = () => {
-      menuButton.setAttribute("aria-expanded", "false");
-      nav.classList.remove("open");
-    };
-    menuButton.addEventListener("click", () => {
-      const open = menuButton.getAttribute("aria-expanded") !== "true";
-      menuButton.setAttribute("aria-expanded", String(open));
-      nav.classList.toggle("open", open);
-    });
-    all("a", nav).forEach((link) => link.addEventListener("click", closeMenu));
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 680) closeMenu();
     });
   }
 

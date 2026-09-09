@@ -6,7 +6,7 @@
 - [x] Retain the current FOM-SAM3 project-page layout and interactions.
 - [x] Update the project identity to FOM-SAM3-Policy.
 - [x] Add the title, authors, and affiliations from `main.tex`.
-- [x] Remove the stale template PDF and hide unavailable resources.
+- [x] Remove the stale template PDF and unavailable resource placeholders.
 - [ ] Verify the three task-video labels against the final selected clips.
 - [ ] Add the final arXiv and code URLs.
 - [ ] Enable GitHub Pages and verify the public URL in a signed-out browser.

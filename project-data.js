@@ -34,12 +34,7 @@ window.PROJECT_DATA = {
     "Real-robot experiments",
   ],
   links: {
-    paper: "",
-    arxiv: "",
-    code: "",
     video: "#demonstrations-title",
-    dataset: "",
-    demo: "",
   },
   videoPresentation: {
     youtubeId: "1QNsdr-Qx_I",
