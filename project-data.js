@@ -22,6 +22,9 @@ window.PROJECT_DATA = {
     "Real-robot experiments",
   ],
   links: {
+    paper: "",
+    arxiv: "",
+    code: "",
     video: "#demonstrations-title",
   },
   demoVideos: [

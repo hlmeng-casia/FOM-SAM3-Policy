@@ -40,6 +40,12 @@
 
   all("[data-resource]").forEach((link) => {
     const url = data.links?.[link.dataset.resource];
+    if (!url) {
+      link.removeAttribute("href");
+      link.setAttribute("aria-disabled", "true");
+      link.title = "Coming soon";
+      return;
+    }
     link.href = url;
     if (!url.startsWith("#")) {
       link.target = "_blank";

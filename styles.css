@@ -85,6 +85,8 @@ h1 { max-width: 1080px; margin: 0 auto 30px; color: #111; font-weight: 600; lett
 .resource-row span { font-size: 1rem; font-weight: 500; line-height: 1.5; }
 .resource-row .resource-icon { display: block; width: 16px; height: 16px; flex: 0 0 16px; }
 .resource-row a:hover { background: #252525; }
+.resource-row a[aria-disabled="true"] { opacity: .58; cursor: not-allowed; }
+.resource-row a[aria-disabled="true"]:hover { background: #363636; }
 .paper-figure { margin: 0; padding: 0; border: 0; background: transparent; }
 .paper-figure img { display: block; width: 100%; height: auto; padding: 10px; border: 1px solid #b8cad9; border-radius: 6px; background: var(--white); box-shadow: 0 16px 38px rgba(16,42,67,.13),0 3px 10px rgba(16,42,67,.08); }
 .paper-figure figcaption { display: block; margin: 18px 4px 0; padding: 0; border: 0; background: transparent; color: #405b73; font-size: .96rem; line-height: 1.5; }
