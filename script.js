@@ -96,18 +96,6 @@
     });
   };
 
-  const heroMainVideo = document.querySelector("[data-hero-main-video]");
-  if (heroMainVideo && data.videoPresentation?.youtubeId) {
-    const featuredVideo = document.createElement("iframe");
-    featuredVideo.className = "hero-featured-player";
-    featuredVideo.src = `https://www.youtube.com/embed/${encodeURIComponent(data.videoPresentation.youtubeId)}?autoplay=0&controls=0&disablekb=1&mute=1&playsinline=1&rel=0`;
-    featuredVideo.title = "Video Presentation — YouTube";
-    featuredVideo.allow = "encrypted-media; fullscreen; picture-in-picture";
-    featuredVideo.allowFullscreen = true;
-    featuredVideo.referrerPolicy = "strict-origin-when-cross-origin";
-    heroMainVideo.replaceChildren(featuredVideo);
-  }
-
   const heroVideos = document.querySelector("[data-hero-videos]");
   if (heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
     const gallery = document.createElement("div");
@@ -236,23 +224,34 @@
 
   const mainExperimentVideos = document.querySelector("[data-main-experiment-videos]");
   if (mainExperimentVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
-    const taskNames = ["Pick & Place", "Push", "Assemble"];
+    const tasks = [
+      { label: "Pick & Place", key: "pick_place" },
+      { label: "Push", key: "push" },
+      { label: "Assemble", key: "assemble" }
+    ];
     const conditions = [
       {
+        key: "id",
         label: "In-Distribution",
         description: "The seen target and training scene measure the learned manipulation skill."
       },
       {
+        key: "ood_distractors",
         label: "Out-of-Distribution with Distractors",
         description: "A new background and an unrelated object test robustness to ordinary visual interference."
       },
       {
+        key: "ood_similar",
         label: "Out-of-Distribution with Similar-FOs",
         description: "A new background and a same-category Similar-FO test queried-identity selection and task completion."
       }
     ];
-    const methods = Array.isArray(data.robotResults) ? data.robotResults : [];
-    const methodOrder = ["Ours-DP", "RGB-DP", "Ours-ACT", "RGB-ACT"];
+    const methods = [
+      { label: "Ours-DP", key: "ours_dp", ours: true },
+      { label: "RGB-DP", key: "rgb_dp", ours: false },
+      { label: "Ours-ACT", key: "ours_act", ours: true },
+      { label: "RGB-ACT", key: "rgb_act", ours: false }
+    ];
 
     const conditionBlocks = conditions.map((condition, conditionIndex) => {
       const block = document.createElement("section");
@@ -270,16 +269,16 @@
       const conditionContent = document.createElement("div");
       conditionContent.className = "experiment-condition-content";
 
-      taskNames.forEach((task, taskIndex) => {
+      tasks.forEach((task, taskIndex) => {
         const taskGroup = document.createElement("section");
         taskGroup.className = "experiment-task-group";
         const taskHead = document.createElement("div");
         taskHead.className = "experiment-task-head";
         const taskTitle = document.createElement("h5");
-        taskTitle.textContent = task;
+        taskTitle.textContent = task.label;
         const promptLine = document.createElement("p");
         promptLine.className = "experiment-task-prompt";
-        const taskPrompt = data.taskPrompts?.[task];
+        const taskPrompt = data.taskPrompts?.[task.label];
         promptLine.textContent = taskPrompt ? `“${taskPrompt}”` : "";
         if (!taskPrompt) promptLine.setAttribute("aria-hidden", "true");
         taskHead.append(taskTitle, promptLine);
@@ -288,17 +287,21 @@
         scroll.className = "experiment-task-scroll";
         const grid = document.createElement("div");
         grid.className = "experiment-method-grid";
-        methodOrder.forEach((methodName) => {
-          const methodIndex = methods.findIndex((method) => method.method === methodName);
-          if (methodIndex < 0) return;
-          const method = methods[methodIndex];
-          const slotIndex = conditionIndex * taskNames.length * methods.length + taskIndex * methods.length + methodIndex;
-          const item = data.demoVideos[slotIndex % data.demoVideos.length];
+        methods.forEach((method, methodIndex) => {
+          const slotIndex = conditionIndex * tasks.length * methods.length + taskIndex * methods.length + methodIndex;
+          const stem = `${task.key}_${condition.key}_${method.key}_01`;
+          const item = {
+            src: `assets/videos/${stem}.mp4`,
+            poster: `assets/videos/${stem}.jpg`,
+            title: `${task.label} · ${condition.label} · ${method.label}`
+          };
           const card = document.createElement("article");
           card.className = `experiment-video-card${method.ours ? " ours" : ""}`;
           const heading = document.createElement("div");
           heading.className = "experiment-video-head";
-          heading.innerHTML = `<strong>${method.method}</strong>`;
+          const methodLabel = document.createElement("strong");
+          methodLabel.textContent = method.label;
+          heading.appendChild(methodLabel);
           const video = createVideoPlayer(item, slotIndex, "experiment-video-player", {
             autoplay: true,
             controls: false,
@@ -322,13 +325,18 @@
   }
 
   const generalizationGrid = document.querySelector("[data-generalization-videos]");
-  if (generalizationGrid && Array.isArray(data.generalizationDemos) && Array.isArray(data.demoVideos) && data.demoVideos.length) {
-    const cards = data.generalizationDemos.slice(0, 9).map((demo, index) => {
-      const item = data.demoVideos[demo.videoIndex % data.demoVideos.length];
+  if (generalizationGrid && Array.isArray(data.generalizationDemos)) {
+    const cards = data.generalizationDemos.map((demo, index) => {
+      const stem = `${demo.taskKey}_within_type_new_fos_${demo.methodKey}_${demo.sample}`;
+      const item = {
+        src: `assets/videos/${stem}.mp4`,
+        poster: `assets/videos/${stem}.jpg`,
+        title: `${demo.task} · ${demo.method} · New FO ${demo.sample}`
+      };
       const card = document.createElement("article");
       card.className = "generalization-video-card";
       const video = createVideoPlayer(
-        { ...item, title: `${demo.group}: ${demo.title}` },
+        item,
         index,
         "generalization-video-player",
         { autoplay: true, controls: false, loop: true, preload: "metadata" }
@@ -336,31 +344,15 @@
       const caption = document.createElement("div");
       caption.className = "generalization-video-caption";
       const group = document.createElement("small");
-      group.textContent = demo.group;
+      group.textContent = `${demo.task} · New FO ${demo.sample}`;
       const title = document.createElement("strong");
-      title.textContent = demo.title;
+      title.textContent = demo.method;
       caption.append(group, title);
       card.append(video, caption);
       return card;
     });
     generalizationGrid.replaceChildren(...cards);
     enableViewportPlayback(all(".generalization-video-player"));
-  }
-
-  const citation = document.querySelector("[data-citation]");
-  if (citation && data.citation) citation.textContent = data.citation;
-
-  const copyButton = document.querySelector("[data-copy-citation]");
-  if (copyButton && citation) {
-    copyButton.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(citation.textContent.trim());
-        copyButton.textContent = "Copied";
-      } catch (_error) {
-        copyButton.textContent = "Select and copy";
-      }
-      window.setTimeout(() => (copyButton.textContent = "Copy citation"), 1600);
-    });
   }
 
   const currentYear = document.querySelector("[data-current-year]");

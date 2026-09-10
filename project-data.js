@@ -5,21 +5,9 @@
 window.PROJECT_DATA = {
   shortName: "FOM-SAM3-Policy",
   title: "Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning",
-  label: "FOM-SAM3-Policy · Project Page",
-  authors: [
-    "Haolong Meng¹,²",
-    "Fangbo Qin*¹,²",
-    "Mengchen Bai¹",
-    "Houwu Wang¹",
-    "Cirong Liu³",
-    "Shan Yu¹,²",
-  ],
-  institutions: [
-    "¹ Institute of Automation, Chinese Academy of Sciences",
-    "² School of Artificial Intelligence, University of Chinese Academy of Sciences",
-    "³ Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences",
-    "* Corresponding author",
-  ],
+  label: "FOM-SAM3-Policy · Anonymous Project Page",
+  authors: ["Anonymous Authors"],
+  institutions: [],
   summary:
     "FO Memory gives frozen SAM3 a persistent fine-grained identity, while Focused Spatial-Appearance Encoding turns the selected target and its task context into policy-ready conditions for DP or ACT.",
   abstract: [
@@ -36,28 +24,27 @@ window.PROJECT_DATA = {
   links: {
     video: "#demonstrations-title",
   },
-  videoPresentation: {
-    youtubeId: "1QNsdr-Qx_I",
-  },
   demoVideos: [
-    { src: "assets/videos/7120667f7ee628d3572718b42e4181d4-web.mp4", poster: "assets/videos/7120667f7ee628d3572718b42e4181d4_thumb.jpg", title: "Robot demonstration 01" },
-    { src: "assets/videos/761b332e22c9c3354ad8dd4cb17496bd-web.mp4", poster: "assets/videos/761b332e22c9c3354ad8dd4cb17496bd_thumb.jpg", title: "Robot demonstration 02" },
-    { src: "assets/videos/99c1d6ad937239951173e9a425089df7-web.mp4", poster: "assets/videos/99c1d6ad937239951173e9a425089df7_thumb.jpg", title: "Robot demonstration 03" },
-    { src: "assets/videos/bb7614bb9cb0407790399c410935142e-web.mp4", poster: "assets/videos/bb7614bb9cb0407790399c410935142e_thumb.jpg", title: "Robot demonstration 04" },
-    { src: "assets/videos/cc3d9e164d8125a42e45f3658c80bbf6-web.mp4", poster: "assets/videos/cc3d9e164d8125a42e45f3658c80bbf6_thumb.jpg", title: "Robot demonstration 05" },
-    { src: "assets/videos/dff5ab82737ffcf5eb01ed6258cc3b16-web.mp4", poster: "assets/videos/dff5ab82737ffcf5eb01ed6258cc3b16_thumb.jpg", title: "Robot demonstration 06" },
-    { src: "assets/videos/e03611c5f4cf1207a428a79dc9ac6bb6-web.mp4", poster: "assets/videos/e03611c5f4cf1207a428a79dc9ac6bb6_thumb.jpg", title: "Robot demonstration 07" },
+    { src: "assets/videos/pick_place_ood_similar_ours_dp_01.mp4", poster: "assets/videos/pick_place_ood_similar_ours_dp_01.jpg", title: "Pick & Place · Ours-DP · OOD-Similar" },
+    { src: "assets/videos/pick_place_ood_similar_ours_act_01.mp4", poster: "assets/videos/pick_place_ood_similar_ours_act_01.jpg", title: "Pick & Place · Ours-ACT · OOD-Similar" },
+    { src: "assets/videos/push_ood_similar_ours_dp_01.mp4", poster: "assets/videos/push_ood_similar_ours_dp_01.jpg", title: "Push · Ours-DP · OOD-Similar" },
+    { src: "assets/videos/push_ood_similar_ours_act_01.mp4", poster: "assets/videos/push_ood_similar_ours_act_01.jpg", title: "Push · Ours-ACT · OOD-Similar" },
+    { src: "assets/videos/assemble_ood_similar_ours_dp_01.mp4", poster: "assets/videos/assemble_ood_similar_ours_dp_01.jpg", title: "Assemble · Ours-DP · OOD-Similar" },
+    { src: "assets/videos/assemble_ood_similar_ours_act_01.mp4", poster: "assets/videos/assemble_ood_similar_ours_act_01.jpg", title: "Assemble · Ours-ACT · OOD-Similar" },
   ],
   generalizationDemos: [
-    { group: "New-FO reuse", title: "Pick & Place", videoIndex: 0 },
-    { group: "New-FO reuse", title: "Push", videoIndex: 1 },
-    { group: "New-FO reuse", title: "Assemble", videoIndex: 2 },
-    { group: "Identity & instance variation", title: "Similar-FO selection", videoIndex: 3 },
-    { group: "Identity & instance variation", title: "Novel instance", videoIndex: 4 },
-    { group: "Identity & instance variation", title: "Large appearance shift", videoIndex: 5 },
-    { group: "Background generalization", title: "Seen background", videoIndex: 6 },
-    { group: "Background generalization", title: "Background shift", videoIndex: 0 },
-    { group: "Background generalization", title: "Clutter", videoIndex: 1 },
+    { task: "Pick & Place", taskKey: "pick_place", method: "Ours-DP", methodKey: "ours_dp", sample: "01" },
+    { task: "Pick & Place", taskKey: "pick_place", method: "Ours-DP", methodKey: "ours_dp", sample: "02" },
+    { task: "Pick & Place", taskKey: "pick_place", method: "Ours-ACT", methodKey: "ours_act", sample: "01" },
+    { task: "Pick & Place", taskKey: "pick_place", method: "Ours-ACT", methodKey: "ours_act", sample: "02" },
+    { task: "Push", taskKey: "push", method: "Ours-DP", methodKey: "ours_dp", sample: "01" },
+    { task: "Push", taskKey: "push", method: "Ours-DP", methodKey: "ours_dp", sample: "02" },
+    { task: "Push", taskKey: "push", method: "Ours-ACT", methodKey: "ours_act", sample: "01" },
+    { task: "Push", taskKey: "push", method: "Ours-ACT", methodKey: "ours_act", sample: "02" },
+    { task: "Assemble", taskKey: "assemble", method: "Ours-DP", methodKey: "ours_dp", sample: "01" },
+    { task: "Assemble", taskKey: "assemble", method: "Ours-DP", methodKey: "ours_dp", sample: "02" },
+    { task: "Assemble", taskKey: "assemble", method: "Ours-ACT", methodKey: "ours_act", sample: "01" },
+    { task: "Assemble", taskKey: "assemble", method: "Ours-ACT", methodKey: "ours_act", sample: "02" },
   ],
   taskPrompts: {
     "Pick & Place": "red CocaCola soda can",
@@ -71,12 +58,4 @@ window.PROJECT_DATA = {
     { method: "RGB-ACT", id: ["10/10", "8/10", "6/10"], distractors: ["4/10", "5/10", "3/10"], similar: ["0/10", "5/10", "1/10"] },
     { method: "Ours-ACT", id: ["10/10", "9/10", "9/10"], distractors: ["8/10", "10/10", "9/10"], similar: ["8/10", "9/10", "7/10"], ours: true },
   ],
-  citation: `@article{meng2026fomsam3policy,
-  title  = {Towards Fine-Grained Object Manipulation: SAM3-Guided
-            Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning},
-  author = {Meng, Haolong and Qin, Fangbo and Bai, Mengchen and
-            Wang, Houwu and Liu, Cirong and Yu, Shan},
-  year   = {2026},
-  note   = {Project page}
-}`,
 };

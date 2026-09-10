@@ -14,8 +14,8 @@
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="styles.css?v=20260907-analysis-layout" />
-    <script src="project-data.js?v=20260907-youtube" defer></script>
-    <script src="script.js?v=20260907-prompt-text" defer></script>
+    <script src="project-data.js?v=20260910-anonymous-videos" defer></script>
+    <script src="script.js?v=20260910-anonymous-videos" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -28,7 +28,6 @@
             <span class="hero-paper-title" data-field="title">Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
           </h1>
           <p class="authors" data-authors>Anonymous Authors</p>
-          <p class="institutions" data-institutions>Anonymous Institution</p>
           <div class="resource-row" aria-label="Project resources">
             <a data-resource="video">
               <svg class="resource-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="m10 9 6 3-6 3Z" fill="#363636"/></svg>
@@ -36,13 +35,6 @@
             </a>
           </div>
         </div>
-
-        <section class="hero-presentation" aria-labelledby="video-presentation-title">
-          <div class="shell content-shell section-pad">
-            <h2 id="video-presentation-title">Video Presentation</h2>
-            <div data-hero-main-video></div>
-          </div>
-        </section>
 
         <section class="hero-abstract" aria-labelledby="abstract-title">
           <div class="shell content-shell">
@@ -99,8 +91,8 @@
           <div class="supporting-head">
             <h3 id="generalization-title">Generalization</h3>
           </div>
-          <div class="generalization-video-grid" data-generalization-videos aria-label="Nine generalization demonstration videos"></div>
-          <p class="chart-note generalization-analysis"><strong>Frozen policies retain the learned skill across identity, instance, and scene changes.</strong> Replacing only FO Memory Tokens yields 28/30 successful Ours-DP rollouts and 23/30 Ours-ACT rollouts on newly registered Similar-FOs. Ours-DP also succeeds on every tested Similar-FO and novel-instance trial, completes all five larger instance-variation trials, and reaches 10/10 under a background shift and 9/10 in clutter. These results cover geometry-compatible reuse with frozen FOM-SAM3, FSAE, and action policies.</p>
+          <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type new-FO reuse demonstrations"></div>
+          <p class="chart-note generalization-analysis"><strong>Within-type new-FO reuse with frozen policies.</strong> Switching only the retrieved FO Memory Tokens extends the learned skill to newly registered Similar-FOs with compatible interaction geometry. Ours-DP completes 28/30 rollouts and Ours-ACT completes 23/30 rollouts without additional manipulation demonstrations or policy updates.</p>
         </section>
       </section>
 
@@ -119,13 +111,6 @@
         </div>
       </section>
 
-      <section class="citation-section shell content-shell section-pad" id="citation">
-        <div class="section-head"><div><h2>BibTeX</h2></div></div>
-        <div class="citation-block">
-          <div><span>BibTeX</span><button type="button" data-copy-citation>Copy citation</button></div>
-          <pre><code data-citation></code></pre>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
