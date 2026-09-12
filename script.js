@@ -334,33 +334,47 @@
 
   const generalizationGrid = document.querySelector("[data-generalization-videos]");
   if (generalizationGrid && Array.isArray(data.generalizationDemos)) {
-    const cards = data.generalizationDemos.map((demo, index) => {
-      const item = {
-        src: demo.src,
-        title: `${demo.setting} · ${demo.fo}`
-      };
-      const card = document.createElement("article");
-      card.className = "generalization-video-card";
-      const video = createVideoPlayer(
-        item,
-        index,
-        "generalization-video-player",
-        { autoplay: true, controls: false, loop: true, preload: "metadata" }
-      );
-      const caption = document.createElement("div");
-      caption.className = "generalization-video-caption";
-      const group = document.createElement("small");
-      group.textContent = demo.setting;
-      const title = document.createElement("strong");
-      const prefix = document.createElement("span");
-      prefix.className = "fo-prefix";
-      prefix.textContent = "<FO>: ";
-      title.append(prefix, demo.fo);
-      caption.append(group, title);
-      card.append(video, caption);
-      return card;
+    const taskNames = [...new Set(data.generalizationDemos.map((demo) => demo.task))];
+    const taskGroups = taskNames.map((task) => {
+      const section = document.createElement("section");
+      section.className = "generalization-task";
+      const heading = document.createElement("h4");
+      heading.textContent = task;
+      const row = document.createElement("div");
+      row.className = "generalization-task-grid";
+      const taskDemos = data.generalizationDemos.filter((demo) => demo.task === task);
+      const cards = taskDemos.map((demo, index) => {
+        const item = {
+          src: demo.src,
+          poster: demo.poster,
+          title: `${demo.task} · ${demo.fo} · ${demo.method}`
+        };
+        const card = document.createElement("article");
+        card.className = "generalization-video-card";
+        const video = createVideoPlayer(
+          item,
+          index,
+          "generalization-video-player",
+          { autoplay: true, controls: false, loop: true, preload: "metadata" }
+        );
+        const caption = document.createElement("div");
+        caption.className = "generalization-video-caption";
+        const group = document.createElement("small");
+        group.textContent = demo.method;
+        const title = document.createElement("strong");
+        const prefix = document.createElement("span");
+        prefix.className = "fo-prefix";
+        prefix.textContent = "<FO>: ";
+        title.append(prefix, demo.fo);
+        caption.append(group, title);
+        card.append(video, caption);
+        return card;
+      });
+      row.append(...cards);
+      section.append(heading, row);
+      return section;
     });
-    generalizationGrid.replaceChildren(...cards);
+    generalizationGrid.replaceChildren(...taskGroups);
     enableViewportPlayback(all(".generalization-video-player"));
   }
 
