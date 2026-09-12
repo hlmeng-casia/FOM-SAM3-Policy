@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260910-compact-layout" />
-    <script src="project-data.js?v=20260910-resource-placeholders" defer></script>
-    <script src="script.js?v=20260910-resource-placeholders" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260912-paper-aligned" />
+    <script src="project-data.js?v=20260912-paper-aligned" defer></script>
+    <script src="script.js?v=20260912-paper-aligned" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -24,10 +24,11 @@
       <section class="hero" id="top">
         <div class="hero-copy">
           <h1 class="hero-title">
-            <span class="hero-acronym">FOM-SAM3-Policy:</span>
+            <span class="hero-acronym">FOM-SAM3-Policy</span>
             <span class="hero-paper-title" data-field="title">Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
           </h1>
-          <p class="authors" data-authors>Anonymous Authors</p>
+          <p class="authors" data-authors></p>
+          <p class="institutions" data-institutions></p>
           <div class="resource-row" aria-label="Project resources">
             <a data-resource="paper">
               <svg class="resource-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm8 1.8V8h4.2L14 3.8ZM8 12v1.5h8V12H8Zm0 3.5V17h8v-1.5H8Zm0 3.5v1.5h5V19H8Z"/></svg>
@@ -69,6 +70,14 @@
             <figcaption><strong>Persistent FO Memory Learning for SAM3.</strong> <span>A learnable linear transformation converts concept-level prompt tokens into persistent FO Memory Tokens while SAM3 and the concept-level tokens remain frozen. One-vs-rest learning treats the queried FO as the positive category and the remaining FOs as negatives; target-present and target-absent losses support detection, segmentation, and rejection of confusing objects. The learned tokens are stored in an FO Memory Bank.</span></figcaption>
           </figure>
 
+          <aside class="contribution-bridge" aria-label="Method contributions">
+            <span>Two contributions, one focused policy</span>
+            <div>
+              <p><strong>Persistent FO Memory.</strong> A few registered views create reusable identity tokens while SAM3 remains fully frozen.</p>
+              <p><strong>Focused policy conditioning.</strong> FSAE preserves ordered target and manipulation-context appearance and geometry for either DP or ACT.</p>
+            </div>
+          </aside>
+
           <figure class="paper-figure method-figure">
             <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
             <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE).</strong> <span>Retrieved FO Memory Tokens prompt frozen SAM3 to localize the target FOs. Bounding boxes represent their spatial state, while masking, cropping, and resizing SAM3's FPN features extract aligned inside-FO appearance features. FSAE combines appearance keypoints with bounding boxes into a compact visual state for DP, and adds spatial embeddings to pooled appearance embeddings to form visual tokens for ACT.</span></figcaption>
@@ -88,12 +97,16 @@
           </div>
 
           <div class="table-section robot-section">
-            <figure class="paper-figure robot-results-figure">
-              <div class="chart-scroll">
-                <img src="assets/images/real-robot-results.webp" alt="Grouped bar chart comparing RGB-DP, S-squared Diffusion, Ours-DP, RGB-ACT, and Ours-ACT across ID, OOD-Distractors, and OOD-Similar real-robot tasks." />
-              </div>
-              <figcaption><strong>Real-robot manipulation results.</strong> <span>Each task bar reports success across ten rollouts, and the left group averages all three tasks within each condition. Across 90 rollouts per method, Ours-DP reaches 94.4% success and Ours-ACT reaches 87.8%, compared with 42.2% for RGB-DP, 61.1% for S²-Diffusion, and 46.7% for RGB-ACT. The largest separation appears under OOD-Similar: FO Memory grounds the queried identity before action generation, while FSAE supplies focused spatial-appearance conditions to both policy backbones.</span></figcaption>
-            </figure>
+            <div class="experiment-result-grid">
+              <figure class="paper-figure experiment-result-card">
+                <img src="assets/images/main-experiment-overall.png" alt="Average real-robot success rates for DemoFO, DemoFO with distractors, and DemoFO with SimilarFOs." />
+                <figcaption><strong>Overall comparison.</strong> <span>Ours-DP achieves 85/90 successful rollouts and Ours-ACT achieves 79/90, compared with 38/90 for DP, 55/90 for S²-Diffusion, and 42/90 for ACT.</span></figcaption>
+              </figure>
+              <figure class="paper-figure experiment-result-card wide-chart">
+                <div class="chart-scroll"><img src="assets/images/main-experiment-by-task.png" alt="Per-task real-robot success rates for Collect Can, Push Box, and Lid Cup under three evaluation settings." /></div>
+                <figcaption><strong>Per-task breakdown.</strong> <span>Collect Can, Push Box, and Lid Cup are evaluated with DemoFO, unrelated distractors, and confusing SimilarFOs.</span></figcaption>
+              </figure>
+            </div>
           </div>
 
           <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
@@ -103,23 +116,20 @@
           <div class="supporting-head">
             <h3 id="generalization-title">Generalization</h3>
           </div>
+          <p class="chart-note generalization-analysis"><strong>Generalization with frozen policies.</strong> The policy reuses the learned manipulation skill in changed backgrounds and cluttered scenes. Only the retrieved FO Memory Tokens are switched for a newly registered fine-grained object; no manipulation demonstrations or policy updates are required.</p>
           <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type new-FO reuse demonstrations"></div>
-          <p class="chart-note generalization-analysis"><strong>Within-type new-FO reuse with frozen policies.</strong> Switching only the retrieved FO Memory Tokens extends the learned skill to newly registered Similar-FOs with compatible interaction geometry. Ours-DP completes 28/30 rollouts and Ours-ACT completes 23/30 rollouts without additional manipulation demonstrations or policy updates.</p>
         </section>
       </section>
 
       <section class="analysis-section shell content-shell section-pad" id="viewpoint-analysis" aria-labelledby="viewpoint-analysis-title">
-        <div class="section-head"><div><h2 id="viewpoint-analysis-title">Viewpoint-Aware Target Features</h2></div></div>
-        <div class="analysis-layout">
-          <figure class="paper-figure analysis-figure">
-            <img src="assets/images/target-feature-tsne.png" width="3159" height="1998" alt="Joint t-SNE of target features at waypoints P1 to P5. Original-can and OOD-distractor centroid trajectories nearly overlap; the replacement-can trajectory follows a similar progression, especially from P2 to P5." />
-            <figcaption><strong>Joint t-SNE of box-mask-focused target features (Fig. 8).</strong> <span>Outlined markers show frame centroids; lines follow the P1–P5 approach trajectory.</span></figcaption>
-          </figure>
-          <div class="analysis-description">
-            <p class="analysis-copy"><strong>Experiment.</strong> Five approach waypoints are repeated with the original can, OOD distractors, and a same-category replacement can, yielding 15 pose-aligned frames. After target ROIs are visually verified, 3,113 mask-valid spatial features are jointly standardized, reduced with PCA, and embedded with t-SNE.</p>
-            <p class="analysis-copy"><strong>Reading the plot.</strong> Color denotes viewpoint from P1 (far) to P5 (near); marker shape denotes the condition. Each small point represents one target-local spatial feature.</p>
-            <p class="analysis-copy"><strong>Viewpoint progression.</strong> Original and Original+OOD centroid trajectories nearly overlap; the replacement can follows a similar progression, especially from P2 to P5. This suggests reduced distractor influence after correct target selection, while retaining viewpoint sensitivity. The visualization is qualitative: t-SNE distances have no physical units and do not establish invariance or statistical significance.</p>
-          </div>
+        <div class="section-head"><div><h2 id="viewpoint-analysis-title">Visual Analysis of FSAE Representations</h2></div></div>
+        <figure class="paper-figure analysis-figure">
+          <img src="assets/images/fsae-representation.png" width="4434" height="1781" alt="FSAE representation visualization along six manipulation waypoints and t-SNE trajectories for FO1, FO1 with distractors, and a Similar FO." />
+          <figcaption><strong>Visualization of FSAE representations (Fig. 7).</strong> <span>Left: explicit boxes and ROI-aligned, mask-filtered appearance features are constructed along six manipulation waypoints P1–P6. Right: t-SNE trajectories compare FO1, FO1 with distractors, and a Similar FO.</span></figcaption>
+        </figure>
+        <div class="analysis-description">
+          <p class="analysis-copy"><strong>Focused construction.</strong> Bounding boxes retain explicit target position and scale, while ROIAlign and mask filtering suppress background and non-object regions before the appearance representation is pooled.</p>
+          <p class="analysis-copy"><strong>Representation behavior.</strong> FO1 and FO1+Distractors follow closely aligned trajectories across the six viewpoints, whereas the Similar FO remains distinguishable, reflecting distractor robustness without discarding fine-grained identity.</p>
         </div>
       </section>
 

@@ -121,7 +121,9 @@
         loop: true,
         preload: "metadata"
       });
-      card.append(video);
+      const caption = document.createElement("figcaption");
+      caption.textContent = item.title;
+      card.append(video, caption);
       return card;
     });
 
