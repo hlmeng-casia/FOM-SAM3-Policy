@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260912-paper-aligned" />
-    <script src="project-data.js?v=20260912-paper-aligned" defer></script>
-    <script src="script.js?v=20260912-paper-aligned" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260912-final-layout" />
+    <script src="project-data.js?v=20260912-final-layout" defer></script>
+    <script src="script.js?v=20260912-final-layout" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -97,16 +97,10 @@
           </div>
 
           <div class="table-section robot-section">
-            <div class="experiment-result-grid">
-              <figure class="paper-figure experiment-result-card">
-                <img src="assets/images/main-experiment-overall.png" alt="Average real-robot success rates for DemoFO, DemoFO with distractors, and DemoFO with SimilarFOs." />
-                <figcaption><strong>Overall comparison.</strong> <span>Ours-DP achieves 85/90 successful rollouts and Ours-ACT achieves 79/90, compared with 38/90 for DP, 55/90 for S²-Diffusion, and 42/90 for ACT.</span></figcaption>
-              </figure>
-              <figure class="paper-figure experiment-result-card wide-chart">
-                <div class="chart-scroll"><img src="assets/images/main-experiment-by-task.png" alt="Per-task real-robot success rates for Collect Can, Push Box, and Lid Cup under three evaluation settings." /></div>
-                <figcaption><strong>Per-task breakdown.</strong> <span>Collect Can, Push Box, and Lid Cup are evaluated with DemoFO, unrelated distractors, and confusing SimilarFOs.</span></figcaption>
-              </figure>
-            </div>
+            <figure class="paper-figure experiment-result-figure">
+              <img src="assets/images/main-experiment-results.png" alt="Complete real-robot manipulation results, including the overall and per-task success rates for Collect Can, Push Box, and Lid Cup." />
+              <figcaption><strong>Real-robot manipulation results.</strong> <span>Ours-DP achieves 85/90 successful rollouts and Ours-ACT achieves 79/90 across Collect Can, Push Box, and Lid Cup.</span></figcaption>
+            </figure>
           </div>
 
           <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
@@ -116,7 +110,7 @@
           <div class="supporting-head">
             <h3 id="generalization-title">Generalization</h3>
           </div>
-          <p class="chart-note generalization-analysis"><strong>Generalization with frozen policies.</strong> The policy reuses the learned manipulation skill in changed backgrounds and cluttered scenes. Only the retrieved FO Memory Tokens are switched for a newly registered fine-grained object; no manipulation demonstrations or policy updates are required.</p>
+          <p class="chart-note generalization-analysis"><strong>New-FO reuse with a frozen policy.</strong> Switching FO Memory Tokens preserves the learned Collect Can skill across new backgrounds and clutter, without policy updates.</p>
           <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type new-FO reuse demonstrations"></div>
         </section>
       </section>

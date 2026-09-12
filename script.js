@@ -335,11 +335,9 @@
   const generalizationGrid = document.querySelector("[data-generalization-videos]");
   if (generalizationGrid && Array.isArray(data.generalizationDemos)) {
     const cards = data.generalizationDemos.map((demo, index) => {
-      const stem = `${demo.taskKey}_within_type_new_fos_${demo.methodKey}_${demo.sample}`;
       const item = {
-        src: `assets/videos/${stem}.mp4`,
-        poster: `assets/videos/${stem}.jpg`,
-        title: `${demo.task} · ${demo.method} · New FO ${demo.sample}`
+        src: demo.src,
+        title: `${demo.setting} · ${demo.fo}`
       };
       const card = document.createElement("article");
       card.className = "generalization-video-card";
@@ -352,9 +350,12 @@
       const caption = document.createElement("div");
       caption.className = "generalization-video-caption";
       const group = document.createElement("small");
-      group.textContent = `${demo.task} · New FO ${demo.sample}`;
+      group.textContent = demo.setting;
       const title = document.createElement("strong");
-      title.textContent = demo.method;
+      const prefix = document.createElement("span");
+      prefix.className = "fo-prefix";
+      prefix.textContent = "<FO>: ";
+      title.append(prefix, demo.fo);
       caption.append(group, title);
       card.append(video, caption);
       return card;
