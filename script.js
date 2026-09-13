@@ -378,6 +378,35 @@
     enableViewportPlayback(all(".generalization-video-player"));
   }
 
+  const sceneGeneralizationGrid = document.querySelector("[data-scene-generalization-videos]");
+  if (sceneGeneralizationGrid && Array.isArray(data.sceneGeneralizationDemos)) {
+    const cards = data.sceneGeneralizationDemos.map((demo, index) => {
+      const item = { src: demo.src, title: `${demo.setting} · ${demo.fo}` };
+      const card = document.createElement("article");
+      card.className = "generalization-video-card";
+      const video = createVideoPlayer(
+        item,
+        index,
+        "generalization-video-player",
+        { autoplay: true, controls: false, loop: true, preload: "metadata" }
+      );
+      const caption = document.createElement("div");
+      caption.className = "generalization-video-caption";
+      const setting = document.createElement("small");
+      setting.textContent = demo.setting;
+      const title = document.createElement("strong");
+      const prefix = document.createElement("span");
+      prefix.className = "fo-prefix";
+      prefix.textContent = "<FO>: ";
+      title.append(prefix, demo.fo);
+      caption.append(setting, title);
+      card.append(video, caption);
+      return card;
+    });
+    sceneGeneralizationGrid.replaceChildren(...cards);
+    enableViewportPlayback(all(".scene-generalization-grid .generalization-video-player"));
+  }
+
   const currentYear = document.querySelector("[data-current-year]");
   if (currentYear) currentYear.textContent = new Date().getFullYear();
 })();

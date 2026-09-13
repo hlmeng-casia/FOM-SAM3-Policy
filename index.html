@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260912-full-generalization" />
-    <script src="project-data.js?v=20260912-full-generalization" defer></script>
-    <script src="script.js?v=20260912-full-generalization" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260913-paper-figures" />
+    <script src="project-data.js?v=20260913-paper-figures" defer></script>
+    <script src="script.js?v=20260913-paper-figures" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -63,11 +63,16 @@
 
       <section id="method">
         <div class="shell content-shell section-pad">
-          <div class="section-head"><div><h2>Method</h2></div></div>
+          <div class="section-head">
+            <div>
+              <h2>Method</h2>
+              <p class="section-summary">FOM-SAM3 retrieves a persistent FO identity, and FSAE converts the selected objects into focused policy conditions.</p>
+            </div>
+          </div>
 
           <figure class="paper-figure method-figure">
             <img src="assets/images/fo-memory-learning.png" width="2841" height="786" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
-            <figcaption><strong>Persistent FO Memory Learning for SAM3.</strong> <span>A learnable linear transformation converts concept-level prompt tokens into persistent FO Memory Tokens while SAM3 and the concept-level tokens remain frozen. One-vs-rest learning treats the queried FO as the positive category and the remaining FOs as negatives; target-present and target-absent losses support detection, segmentation, and rejection of confusing objects. The learned tokens are stored in an FO Memory Bank.</span></figcaption>
+            <figcaption><strong>Persistent FO Memory Learning</strong></figcaption>
           </figure>
 
           <aside class="contribution-bridge" aria-label="Method contributions">
@@ -80,7 +85,7 @@
 
           <figure class="paper-figure method-figure">
             <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
-            <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE).</strong> <span>Retrieved FO Memory Tokens prompt frozen SAM3 to localize the target FOs. Bounding boxes represent their spatial state, while masking, cropping, and resizing SAM3's FPN features extract aligned inside-FO appearance features. FSAE combines appearance keypoints with bounding boxes into a compact visual state for DP, and adds spatial embeddings to pooled appearance embeddings to form visual tokens for ACT.</span></figcaption>
+            <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE)</strong></figcaption>
           </figure>
 
         </div>
@@ -112,6 +117,10 @@
           </div>
           <p class="chart-note generalization-analysis"><strong>Shared-policy New-FO reuse.</strong> For each task, Ours-DP and Ours-ACT manipulate two new FOs by switching only the FO Memory Tokens.</p>
           <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type new-FO reuse demonstrations"></div>
+          <section class="scene-generalization" aria-labelledby="scene-generalization-title">
+            <h4 id="scene-generalization-title">Background and Clutter Generalization</h4>
+            <div class="scene-generalization-grid" data-scene-generalization-videos></div>
+          </section>
         </section>
       </section>
 
@@ -119,12 +128,8 @@
         <div class="section-head"><div><h2 id="viewpoint-analysis-title">Visual Analysis of FSAE Representations</h2></div></div>
         <figure class="paper-figure analysis-figure">
           <img src="assets/images/fsae-representation.png" width="4434" height="1781" alt="FSAE representation visualization along six manipulation waypoints and t-SNE trajectories for FO1, FO1 with distractors, and a Similar FO." />
-          <figcaption><strong>Visualization of FSAE representations (Fig. 7).</strong> <span>Left: explicit boxes and ROI-aligned, mask-filtered appearance features are constructed along six manipulation waypoints P1–P6. Right: t-SNE trajectories compare FO1, FO1 with distractors, and a Similar FO.</span></figcaption>
+          <figcaption><strong>FSAE representations across six manipulation waypoints (Fig. 7).</strong> <span>Spatial boxes remain explicit, while pooled mask-valid features form the appearance trajectories.</span></figcaption>
         </figure>
-        <div class="analysis-description">
-          <p class="analysis-copy"><strong>Focused construction.</strong> Bounding boxes retain explicit target position and scale, while ROIAlign and mask filtering suppress background and non-object regions before the appearance representation is pooled.</p>
-          <p class="analysis-copy"><strong>Representation behavior.</strong> FO1 and FO1+Distractors follow closely aligned trajectories across the six viewpoints, whereas the Similar FO remains distinguishable, reflecting distractor robustness without discarding fine-grained identity.</p>
-        </div>
       </section>
 
     </main>

@@ -65,6 +65,12 @@ window.PROJECT_DATA = {
     { task: "Lid Cup", fo: "New FO 2", method: "Ours-DP", src: "assets/videos/assemble_within_type_new_fos_ours_dp_02.mp4", poster: "assets/videos/assemble_within_type_new_fos_ours_dp_02.jpg" },
     { task: "Lid Cup", fo: "New FO 2", method: "Ours-ACT", src: "assets/videos/assemble_within_type_new_fos_ours_act_02.mp4", poster: "assets/videos/assemble_within_type_new_fos_ours_act_02.jpg" },
   ],
+  sceneGeneralizationDemos: [
+    { setting: "Background", fo: "Red Wontae Strawberry Juice Can", src: "assets/videos/gen1.mp4" },
+    { setting: "Background", fo: "Red Wontae Strawberry Juice Can", src: "assets/videos/gen2.mp4" },
+    { setting: "Clutter Scene", fo: "Red CocaCola Soda Can", src: "assets/videos/gen3.mp4" },
+    { setting: "Clutter Scene", fo: "Red Wontae Strawberry Juice Can", src: "assets/videos/gen4.mp4" },
+  ],
   taskPrompts: {
     "Pick & Place": "red CocaCola soda can",
     Push: "white pill box",
