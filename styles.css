@@ -58,7 +58,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
-body { margin: 0; background: linear-gradient(180deg,#f9fcff 0%,var(--paper) 42%,#edf5fb 100%); color: var(--ink); font: 400 16px/1.55 var(--font-body); }
+body { margin: 0; background: linear-gradient(180deg,#f9fcff 0%,var(--paper) 42%,#edf5fb 100%); color: var(--ink); font: 400 15px/1.55 var(--font-body); }
 ::selection { background: var(--mint); color: var(--green-dark); }
 a { color: inherit; text-decoration: none; }
 .shell { width: min(var(--max), calc(100% - 56px)); margin: 0 auto; }
@@ -150,11 +150,11 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .contribution-bridge strong { color: var(--ink); }
 .perception-experiment { margin-bottom: 30px; }
 .perception-experiment .supporting-head { margin: 0 0 12px; padding: 0 0 8px; border-bottom-color: rgba(22,135,75,.45); }
-.perception-experiment .supporting-head h3 { color: var(--paper-green); font-size: 1.3rem; font-weight: 700; text-align: left; }
+.perception-experiment .supporting-head h3 { color: var(--paper-green); font-size: var(--experiment-title-size); font-weight: 600; text-align: left; }
 .perception-figure img { padding: 0; border: 0; box-shadow: none; }
-.perception-figure figcaption { display: grid; margin: 10px 1px 0; color: #405b73; font-size: .9rem; gap: 4px; text-align: left; }
-.perception-scores { color: var(--green-dark); font-size: .94rem; }
-.perception-scores strong { color: var(--paper-green); font-size: 1.02rem; }
+.perception-figure figcaption { display: grid; margin: 10px 1px 0; color: #405b73; font-size: .82rem; gap: 4px; text-align: left; }
+.perception-scores { color: var(--green-dark); font-size: .86rem; }
+.perception-scores strong { color: var(--paper-green); font-size: .94rem; }
 .perception-scores i { margin: 0 7px; color: var(--line); font-style: normal; }
 .main-experiment { margin-bottom: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .main-experiment-head { display: block; padding-bottom: 10px; border-bottom: 1px solid var(--ink); text-align: center; }
@@ -165,7 +165,7 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .experiment-condition-block:first-child { margin-top: 0; }
 .experiment-condition-head { margin: 0 4px 9px; text-align: left; }
 .experiment-condition-head h4 { margin: 0; color: var(--ink); font: 600 1.22rem var(--font-body); letter-spacing: -.015em; }
-.experiment-condition-head p { max-width: 800px; margin: 4px 0 0; color: #405b73; font-size: .9rem; line-height: 1.5; }
+.experiment-condition-head p { max-width: 800px; margin: 4px 0 0; color: #405b73; font-size: .86rem; line-height: 1.48; }
 .experiment-condition-content { padding: 2px 14px 0; border: 1px solid #d2dde7; border-radius: 8px; background: rgba(255,255,255,.68); }
 .experiment-task-group { padding: 11px 0; }
 .experiment-task-group + .experiment-task-group { border-top: 1px solid var(--line); }
