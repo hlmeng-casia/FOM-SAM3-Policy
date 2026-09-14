@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260914-perception-story" />
-    <script src="project-data.js?v=20260914-perception-story" defer></script>
-    <script src="script.js?v=20260914-perception-story" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260914-perception-caption" />
+    <script src="project-data.js?v=20260914-perception-caption" defer></script>
+    <script src="script.js?v=20260914-perception-caption" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -101,14 +101,12 @@
 
         <section class="perception-experiment" aria-labelledby="perception-title">
           <div class="supporting-head"><h3 id="perception-title">Fine-Grained FO Perception</h3></div>
-          <p class="experiment-claim">FOM-SAM3 identifies the queried FO among same-category distractors and rejects absent targets.</p>
-          <div class="perception-metrics" aria-label="FOM-SAM3 segmentation results">
-            <div><strong>93.04%</strong><span>mIoU · FO-30-S</span></div>
-            <div><strong>83.25%</strong><span>mIoU · FO-30-C</span></div>
-          </div>
           <figure class="paper-figure perception-figure">
             <img src="assets/images/fo_30_perception.png" width="2796" height="498" loading="lazy" alt="Qualitative FO-30 comparison between SAM3 text prompting and FOM-SAM3 in confusion and rejection cases." />
-            <figcaption><strong>FO-30 qualitative comparison.</strong> <span>FOM-SAM3 selects the queried FO and suppresses false positives when it is absent.</span></figcaption>
+            <figcaption>
+              <span>FOM-SAM3 identifies the queried FO among same-category distractors and rejects absent targets.</span>
+              <span class="perception-scores"><strong>93.04%</strong> mIoU · FO-30-S <i>·</i> <strong>83.25%</strong> mIoU · FO-30-C</span>
+            </figcaption>
           </figure>
         </section>
 
@@ -126,7 +124,6 @@
             </figure>
           </div>
 
-          <p class="experiment-protocol-note">Each setting uses 10 real-robot rollouts per task with the manipulation target and task fixed.</p>
           <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
         </section>
 
