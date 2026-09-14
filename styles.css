@@ -157,9 +157,9 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .perception-scores strong { color: var(--paper-green); font-size: .94rem; }
 .perception-scores i { margin: 0 7px; color: var(--line); font-style: normal; }
 .main-experiment { margin-bottom: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
-.main-experiment-head { display: block; padding-bottom: 10px; border-bottom: 1px solid var(--ink); text-align: center; }
+.main-experiment-head { display: block; padding-bottom: 10px; border-bottom: 1px solid rgba(22,135,75,.45); text-align: left; }
 .main-experiment-head > div { max-width: none; }
-.main-experiment-head h3 { margin: 0; color: var(--green-dark); font: 600 var(--experiment-title-size)/1.12 var(--font-body); letter-spacing: -.015em; }
+.main-experiment-head h3 { margin: 0; color: var(--paper-green); font: 600 var(--experiment-title-size)/1.12 var(--font-body); letter-spacing: -.015em; }
 .main-experiment-video-grid { margin-top: 12px; }
 .experiment-condition-block { margin-top: 24px; }
 .experiment-condition-block:first-child { margin-top: 0; }
@@ -202,6 +202,8 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .supporting-head h3 { text-align: center; }
 .supporting-head h3 { margin: 0; color: var(--green-dark); font: 600 var(--experiment-title-size)/1.12 var(--font-body); letter-spacing: -.015em; }
 .supporting-head > p:last-child { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.65; }
+.generalization-experiment > .supporting-head { margin-bottom: 12px; padding-bottom: 0; border-bottom: 0; }
+.generalization-experiment > .supporting-head h3 { color: var(--paper-green); text-align: left; }
 .generalization-video-grid { display: grid; gap: 14px; }
 .generalization-task { overflow: hidden; border: 1px solid #d2dde7; border-radius: 8px; background: rgba(255,255,255,.68); }
 .generalization-task h4 { margin: 0; padding: 9px 12px; border-bottom: 1px solid var(--line); color: var(--ink); font-size: .96rem; }
@@ -211,7 +213,7 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .generalization-video-caption { display: grid; padding: 8px 2px 0; gap: 2px; }
 .generalization-video-caption small { color: var(--green); font-size: .64rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .generalization-video-caption strong { color: var(--ink); font-size: .92rem; font-weight: 700; }
-.generalization-analysis { width: min(760px,100%); margin: 0 auto 16px; text-align: center; }
+.generalization-analysis { width: min(760px,100%); margin: 0 0 16px; text-align: left; }
 .scene-generalization { overflow: hidden; margin-top: 14px; border: 1px solid #d2dde7; border-radius: 8px; background: rgba(255,255,255,.68); }
 .scene-generalization h4 { margin: 0; padding: 9px 12px; border-bottom: 1px solid var(--line); color: var(--ink); font-size: .96rem; }
 .scene-generalization-grid { display: grid; padding: 12px; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; }
