@@ -3,15 +3,10 @@
   const data = window.PROJECT_DATA || {};
   const all = (selector) => Array.from(document.querySelectorAll(selector));
 
-  ["shortName", "title", "label", "summary"].forEach((field) => {
+  ["shortName", "title", "label", "venue", "summary"].forEach((field) => {
     if (!data[field]) return;
     all(`[data-field="${field}"]`).forEach((node) => (node.textContent = data[field]));
   });
-
-  const authors = document.querySelector("[data-authors]");
-  const institutions = document.querySelector("[data-institutions]");
-  if (authors && Array.isArray(data.authors)) authors.textContent = data.authors.join(" · ");
-  if (institutions && Array.isArray(data.institutions)) institutions.textContent = data.institutions.join(" · ");
 
   const abstract = document.querySelector("[data-abstract]");
   if (abstract && Array.isArray(data.abstract)) {
@@ -233,25 +228,25 @@
   const mainExperimentVideos = document.querySelector("[data-main-experiment-videos]");
   if (mainExperimentVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
     const tasks = [
-      { label: "Pick & Place", key: "pick_place" },
-      { label: "Push", key: "push" },
-      { label: "Assemble", key: "assemble" }
+      { label: "Collect Can", key: "pick_place" },
+      { label: "Push Box", key: "push" },
+      { label: "Lid Cup", key: "assemble" }
     ];
     const conditions = [
       {
         key: "id",
-        label: "In-Distribution",
-        description: "The seen target and training scene measure the learned manipulation skill."
+        label: "DemoFO Only",
+        description: "The scene contains only the DemoFO used in demonstrations. This setting measures the learned manipulation skill and basic policy capability."
       },
       {
         key: "ood_distractors",
-        label: "Out-of-Distribution with Distractors",
-        description: "A new background and an unrelated object test robustness to ordinary visual interference."
+        label: "DemoFO + Distractors",
+        description: "Two objects from different coarse categories are added as distractors. This setting evaluates robustness to ordinary visual interference while keeping the target FO unchanged."
       },
       {
         key: "ood_similar",
-        label: "Out-of-Distribution with Similar-FOs",
-        description: "A new background and a same-category Similar-FO test queried-identity selection and task completion."
+        label: "DemoFO + SimilarFOs",
+        description: "Visually similar objects from the same coarse category are placed beside the DemoFO as confusing distractors. This setting evaluates whether the policy can correctly select the queried DemoFO and complete the manipulation task."
       }
     ];
     const methods = [
@@ -362,10 +357,7 @@
         const group = document.createElement("small");
         group.textContent = demo.method;
         const title = document.createElement("strong");
-        const prefix = document.createElement("span");
-        prefix.className = "fo-prefix";
-        prefix.textContent = "<FO>: ";
-        title.append(prefix, demo.fo);
+        title.textContent = demo.fo;
         caption.append(group, title);
         card.append(video, caption);
         return card;
@@ -395,10 +387,7 @@
       const setting = document.createElement("small");
       setting.textContent = demo.setting;
       const title = document.createElement("strong");
-      const prefix = document.createElement("span");
-      prefix.className = "fo-prefix";
-      prefix.textContent = "<FO>: ";
-      title.append(prefix, demo.fo);
+      title.textContent = demo.fo;
       caption.append(setting, title);
       card.append(video, caption);
       return card;

@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260913-paper-figures" />
-    <script src="project-data.js?v=20260913-paper-figures" defer></script>
-    <script src="script.js?v=20260913-paper-figures" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260914-perception-story" />
+    <script src="project-data.js?v=20260914-perception-story" defer></script>
+    <script src="script.js?v=20260914-perception-story" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -27,8 +27,7 @@
             <span class="hero-acronym">FOM-SAM3-Policy</span>
             <span class="hero-paper-title" data-field="title">Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
           </h1>
-          <p class="authors" data-authors></p>
-          <p class="institutions" data-institutions></p>
+          <p class="venue" data-field="venue">ICRA 2027 Submission</p>
           <div class="resource-row" aria-label="Project resources">
             <a data-resource="paper">
               <svg class="resource-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm8 1.8V8h4.2L14 3.8ZM8 12v1.5h8V12H8Zm0 3.5V17h8v-1.5H8Zm0 3.5v1.5h5V19H8Z"/></svg>
@@ -47,7 +46,13 @@
               <span>Video</span>
             </a>
           </div>
+          <p class="summary" data-field="summary">FOM-SAM3 remembers a specific fine-grained object, while FSAE turns that identity and its manipulation context into focused conditions for DP or ACT.</p>
         </div>
+
+        <section class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations">
+          <p class="teaser-flow"><span>DemoFO</span><i>→</i><span>SimilarFO distractors</span><i>→</i><span>Switch FO Memory</span><i>→</i><span>Frozen-policy SimilarFO reuse</span></p>
+          <div data-hero-videos></div>
+        </section>
 
         <section class="hero-abstract" aria-labelledby="abstract-title">
           <div class="shell content-shell">
@@ -57,7 +62,6 @@
             </figure>
             <div class="abstract-copy" data-abstract></div>
           </div>
-          <div class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations" data-hero-videos></div>
         </section>
       </section>
 
@@ -94,6 +98,19 @@
       <section class="results-section shell content-shell section-pad" id="results">
         <div class="section-head"><div><h2>Experiments</h2></div></div>
 
+        <section class="perception-experiment" aria-labelledby="perception-title">
+          <div class="supporting-head"><h3 id="perception-title">Fine-Grained FO Perception</h3></div>
+          <p class="experiment-claim">FOM-SAM3 identifies the queried FO among same-category distractors and rejects absent targets.</p>
+          <div class="perception-metrics" aria-label="FOM-SAM3 segmentation results">
+            <div><strong>93.04%</strong><span>mIoU · FO-30-S</span></div>
+            <div><strong>83.25%</strong><span>mIoU · FO-30-C</span></div>
+          </div>
+          <figure class="paper-figure perception-figure">
+            <img src="assets/images/fo_30_perception.png" width="2796" height="498" loading="lazy" alt="Qualitative FO-30 comparison between SAM3 text prompting and FOM-SAM3 in confusion and rejection cases." />
+            <figcaption><strong>FO-30 qualitative comparison.</strong> <span>FOM-SAM3 selects the queried FO and suppresses false positives when it is absent.</span></figcaption>
+          </figure>
+        </section>
+
         <section class="main-experiment" aria-labelledby="main-experiment-title">
           <div class="main-experiment-head">
             <div>
@@ -104,10 +121,11 @@
           <div class="table-section robot-section">
             <figure class="paper-figure experiment-result-figure">
               <img src="assets/images/main-experiment-results.png" alt="Complete real-robot manipulation results, including the overall and per-task success rates for Collect Can, Push Box, and Lid Cup." />
-              <figcaption><strong>Real-robot manipulation results.</strong> <span>Ours-DP achieves 85/90 successful rollouts and Ours-ACT achieves 79/90 across Collect Can, Push Box, and Lid Cup.</span></figcaption>
+              <figcaption><strong>Real-robot manipulation results.</strong> <span>Across Collect Can, Push Box, and Lid Cup, Ours-DP achieves 94.4% overall success and Ours-ACT achieves 87.8%.</span></figcaption>
             </figure>
           </div>
 
+          <p class="experiment-protocol-note">Each setting uses 10 real-robot rollouts per task with the manipulation target and task fixed.</p>
           <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
         </section>
 
@@ -115,10 +133,10 @@
           <div class="supporting-head">
             <h3 id="generalization-title">Generalization</h3>
           </div>
-          <p class="chart-note generalization-analysis"><strong>Shared-policy New-FO reuse.</strong> For each task, Ours-DP and Ours-ACT manipulate two new FOs by switching only the FO Memory Tokens.</p>
-          <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type new-FO reuse demonstrations"></div>
+          <p class="chart-note generalization-analysis"><strong>Frozen-policy reuse.</strong> The same frozen policy operates on different registered SimilarFOs without retraining; only the FO Memory Tokens are switched.</p>
+          <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type SimilarFO reuse demonstrations"></div>
           <section class="scene-generalization" aria-labelledby="scene-generalization-title">
-            <h4 id="scene-generalization-title">Background and Clutter Generalization</h4>
+            <h4 id="scene-generalization-title">Scene Robustness</h4>
             <div class="scene-generalization-grid" data-scene-generalization-videos></div>
           </section>
         </section>
@@ -128,8 +146,16 @@
         <div class="section-head"><div><h2 id="viewpoint-analysis-title">Visual Analysis of FSAE Representations</h2></div></div>
         <figure class="paper-figure analysis-figure">
           <img src="assets/images/fsae-representation.png" width="4434" height="1781" alt="FSAE representation visualization along six manipulation waypoints and t-SNE trajectories for FO1, FO1 with distractors, and a Similar FO." />
-          <figcaption><strong>FSAE representations across six manipulation waypoints (Fig. 7).</strong> <span>Spatial boxes remain explicit, while pooled mask-valid features form the appearance trajectories.</span></figcaption>
+          <figcaption><strong>FSAE representations across six manipulation waypoints (Fig. 7).</strong> <span>Boxes preserve spatial grounding; focused appearance features track task progress, remain stable with distractors, and distinguish SimilarFOs.</span></figcaption>
         </figure>
+      </section>
+
+      <section class="citation-section shell content-shell section-pad" id="citation" aria-labelledby="citation-title">
+        <div class="section-head"><div><h2 id="citation-title">Citation</h2></div></div>
+        <div class="citation-block">
+          <div><span>BibTeX</span><span class="citation-status">Coming soon</span></div>
+          <pre><code>Citation will be added after publication.</code></pre>
+        </div>
       </section>
 
     </main>
