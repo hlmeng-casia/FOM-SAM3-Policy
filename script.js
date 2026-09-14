@@ -1,6 +1,7 @@
 (function () {
   "use strict";
   const data = window.PROJECT_DATA || {};
+  const videoVersion = "20260914-optimized";
   const all = (selector) => Array.from(document.querySelectorAll(selector));
 
   ["title", "venue"].forEach((field) => {
@@ -83,7 +84,7 @@
       return;
     }
     const source = document.createElement("source");
-    source.src = video.dataset.videoSrc;
+    source.src = `${video.dataset.videoSrc}?v=${videoVersion}`;
     source.type = "video/mp4";
     video.replaceChildren(source, document.createTextNode("MP4 playback requires a compatible browser."));
     video.dataset.sourceLoaded = "true";
