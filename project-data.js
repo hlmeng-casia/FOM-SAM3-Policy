@@ -3,22 +3,18 @@
  * Empty link strings are disabled automatically by the UI.
  */
 window.PROJECT_DATA = {
-  shortName: "FOM-SAM3-Policy",
   title: "Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning",
-  label: "FOM-SAM3-Policy · Project Page",
   venue: "ICRA 2027 Submission",
-  summary:
-    "FOM-SAM3 remembers a specific fine-grained object, while FSAE turns that identity and its manipulation context into focused conditions for DP or ACT.",
   abstract: [
-    "Imitation learning of visuomotor policies endows the robot with dexterous manipulation skills. However, even in a familiar scene where a robot repeats its tasks, distinguishing a target fine-grained object (FO) from similar objects in the same coarse category remains an unresolved issue. Besides, current visuomotor policies encode the scene image as the visual condition, which might be prone to visual distractors. To address these problems, we first propose FO Memory-enhanced Segment Anything Model 3 (FOM-SAM3). With SAM3 fully frozen, it converts a coarse concept prompt into reusable FO Memory Tokens from a few multi-view registration images. At deployment, the tokens directly prompt frozen SAM3 without registration images or model adaptation. Second, we introduce Focused Spatial-Appearance Encoding (FSAE), which focuses the action policy on ordered target and manipulation-context regions and models their local appearance and relative geometry. FSAE produces a compact condition vector for DP or object condition tokens for ACT without changing either action objective. Experiments on 30 FOs from 4 coarse categories show that FO Memory improves target segmentation, ranks the queried FO above visually similar candidates, suppresses Similar-FO confusion, and rejects absent identities more reliably. Real-robot experiments report completed and failed rollouts and evaluate within-type new-FO reuse with frozen policies.",
+    "Fine-grained object (FO) manipulation requires robots to distinguish a specified FO from visually similar objects and execute actions reliably despite scene distractors. However, scene-level visual conditioning lacks explicit object selection, while category-level guidance cannot reliably distinguish FOs within the same category. We present a SAM3-guided visuomotor framework that addresses these challenges through persistent object memory and focused visual conditioning. First, we introduce FO Memory-driven SAM3 (FOM-SAM3), which learns reusable FO memory tokens from limited multi-view registration images while keeping SAM3 fully frozen. Through one-vs-rest learning, these tokens encode persistent memories for localizing target FOs and rejecting similar alternatives, which can be stored in a memory bank. Second, we propose Focused Spatial-Appearance Encoding (FSAE), which combines in-FO local appearance features with explicit bounding-box coordinates to condition action policies including Diffusion Policy (DP) and Action Chunking with Transformers (ACT). The effectiveness of the proposed FOM-SAM3 is validated on the FO-30 dataset comprising 30 physical objects across four coarse categories. Across three real-robot FO manipulation tasks, our FOM-SAM3-guided policies demonstrated the robustness against distractors, discriminative ability of similar FOs, and extendibility to new FOs.",
   ],
   abstractHighlights: [
     "fine-grained object (FO)",
-    "FO Memory-enhanced Segment Anything Model 3 (FOM-SAM3)",
-    "reusable FO Memory Tokens",
+    "FO Memory-driven SAM3 (FOM-SAM3)",
+    "reusable FO memory tokens",
     "Focused Spatial-Appearance Encoding (FSAE)",
-    "30 FOs from 4 coarse categories",
-    "Real-robot experiments",
+    "FO-30 dataset",
+    "three real-robot FO manipulation tasks",
   ],
   links: {
     paper: "",

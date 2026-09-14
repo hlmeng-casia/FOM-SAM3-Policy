@@ -3,7 +3,7 @@
   const data = window.PROJECT_DATA || {};
   const all = (selector) => Array.from(document.querySelectorAll(selector));
 
-  ["shortName", "title", "label", "venue", "summary"].forEach((field) => {
+  ["title", "venue"].forEach((field) => {
     if (!data[field]) return;
     all(`[data-field="${field}"]`).forEach((node) => (node.textContent = data[field]));
   });
@@ -52,7 +52,7 @@
     const video = document.createElement("video");
     video.className = className;
     video.controls = options.controls ?? true;
-    video.preload = options.preload || "metadata";
+    video.preload = "none";
     video.playsInline = true;
     video.muted = true;
     video.defaultMuted = true;
@@ -68,32 +68,78 @@
     }
     if (item.poster) video.poster = item.poster;
     video.setAttribute("aria-label", item.title || `Robot demonstration ${index + 1}`);
-    const source = document.createElement("source");
-    source.src = item.src;
-    source.type = "video/mp4";
-    video.append(source, "MP4 playback requires a compatible browser.");
+    video.dataset.videoSrc = item.src;
+    video.append(document.createTextNode("MP4 playback requires a compatible browser."));
     return video;
+  };
+
+  /**
+   * 按需连接视频源，避免页面初始化时同时请求全部素材。
+   * Attach one video source on demand so the page never requests every asset at startup.
+   */
+  const loadVideoSource = (video, preload = "metadata") => {
+    if (video.dataset.sourceLoaded === "true") {
+      if (preload === "auto") video.preload = "auto";
+      return;
+    }
+    const source = document.createElement("source");
+    source.src = video.dataset.videoSrc;
+    source.type = "video/mp4";
+    video.replaceChildren(source, document.createTextNode("MP4 playback requires a compatible browser."));
+    video.dataset.sourceLoaded = "true";
+    video.preload = preload;
+    video.load();
+  };
+
+  /**
+   * 在浏览器允许时启动静音循环播放，并在媒体可播放后自动重试。
+   * Start muted playback and retry as soon as enough media data becomes available.
+   */
+  const startVideo = (video) => {
+    loadVideoSource(video, "auto");
+    const retry = () => {
+      if (!video.isConnected || video.dataset.inViewport !== "true") return;
+      const playback = video.play();
+      if (playback) playback.catch(() => {});
+    };
+    retry();
+    if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA && video.dataset.retryBound !== "true") {
+      video.dataset.retryBound = "true";
+      video.addEventListener("canplay", retry);
+      video.addEventListener("loadeddata", retry);
+    }
   };
 
   const enableViewportPlayback = (videos) => {
     if (!videos.length) return;
     if ("IntersectionObserver" in window) {
+      const sourceObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          loadVideoSource(entry.target, "metadata");
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: "260px", threshold: 0.01 });
       const playbackObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const playback = entry.target.play();
-            if (playback) playback.catch(() => {});
+            entry.target.dataset.inViewport = "true";
+            startVideo(entry.target);
           } else {
+            entry.target.dataset.inViewport = "false";
             entry.target.pause();
           }
         });
-      }, { rootMargin: "120px 0px", threshold: 0.2 });
-      videos.forEach((video) => playbackObserver.observe(video));
+      }, { threshold: 0.08 });
+      videos.forEach((video) => {
+        sourceObserver.observe(video);
+        playbackObserver.observe(video);
+      });
       return;
     }
     videos.forEach((video) => {
-      const playback = video.play();
-      if (playback) playback.catch(() => {});
+      video.dataset.inViewport = "true";
+      startVideo(video);
     });
   };
 
@@ -195,6 +241,7 @@
       const lastStartIndex = cards.findIndex((card) => card.offsetLeft >= maxScrollLeft() - 1);
       const lastIndex = lastStartIndex < 0 ? cards.length - 1 : lastStartIndex;
       activeIndex = Math.max(0, Math.min(lastIndex, index));
+      cards.slice(activeIndex, activeIndex + 4).forEach((card) => loadVideoSource(card.querySelector("video")));
       animateTrackTo(cardLeft(activeIndex));
       updateDots();
     };
@@ -222,6 +269,7 @@
     viewport.append(track, previous, next);
     gallery.append(viewport, dots);
     heroVideos.replaceChildren(gallery);
+    cards.slice(0, 4).forEach((card) => loadVideoSource(card.querySelector("video")));
     enableViewportPlayback(cards.map((card) => card.querySelector("video")));
   }
 
@@ -359,7 +407,7 @@
         const title = document.createElement("strong");
         title.textContent = demo.fo;
         caption.append(group, title);
-        card.append(video, caption);
+        card.append(caption, video);
         return card;
       });
       row.append(...cards);
@@ -389,7 +437,7 @@
       const title = document.createElement("strong");
       title.textContent = demo.fo;
       caption.append(setting, title);
-      card.append(video, caption);
+      card.append(caption, video);
       return card;
     });
     sceneGeneralizationGrid.replaceChildren(...cards);

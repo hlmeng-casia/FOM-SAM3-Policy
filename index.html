@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260914-final-layout" />
-    <script src="project-data.js?v=20260914-final-layout" defer></script>
-    <script src="script.js?v=20260914-final-layout" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260914-playback" />
+    <script src="project-data.js?v=20260914-playback" defer></script>
+    <script src="script.js?v=20260914-playback" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -24,7 +24,6 @@
       <section class="hero" id="top">
         <div class="hero-copy">
           <h1 class="hero-title">
-            <span class="hero-acronym">FOM-SAM3-Policy</span>
             <span class="hero-paper-title" data-field="title">Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
           </h1>
           <p class="venue" data-field="venue">ICRA 2027 Submission</p>
@@ -46,20 +45,18 @@
               <span>Video</span>
             </a>
           </div>
-          <p class="summary" data-field="summary">FOM-SAM3 remembers a specific fine-grained object, while FSAE turns that identity and its manipulation context into focused conditions for DP or ACT.</p>
         </div>
 
         <section class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations">
-          <p class="teaser-flow"><span>DemoFO</span><i>→</i><span>SimilarFO distractors</span><i>→</i><span>Switch FO Memory</span><i>→</i><span>Frozen-policy SimilarFO reuse</span></p>
-          <p class="video-speed-note">All videos on this page are shown at 3× speed.</p>
           <div data-hero-videos></div>
+          <p class="video-speed-note"><strong>All videos on this page are shown at 3× speed.</strong></p>
         </section>
 
         <section class="hero-abstract" aria-labelledby="abstract-title">
           <div class="shell content-shell">
             <h2 id="abstract-title">Abstract</h2>
             <figure class="paper-figure abstract-figure">
-              <img src="assets/images/introduction.png" width="1472" height="658" alt="Comparison of scene-level visual encoding in vanilla DP and ACT, category-level mask and depth conditioning in S2-Diffusion, and fine-grained object segmentation with FOM-SAM3 and FSAE." />
+              <img src="assets/images/introduction.png" width="1439" height="649" alt="Comparison of scene-level visual conditioning, category-level conditioning, and fine-grained object-focused conditioning with FOM-SAM3 and FSAE." />
             </figure>
             <div class="abstract-copy" data-abstract></div>
           </div>
@@ -99,21 +96,11 @@
       <section class="results-section shell content-shell section-pad" id="results">
         <div class="section-head"><div><h2>Experiments</h2></div></div>
 
-        <section class="perception-experiment" aria-labelledby="perception-title">
-          <div class="supporting-head"><h3 id="perception-title">Fine-Grained FO Perception</h3></div>
-          <figure class="paper-figure perception-figure">
-            <img src="assets/images/fo_30_perception.png" width="2796" height="498" loading="lazy" alt="Qualitative FO-30 comparison between SAM3 text prompting and FOM-SAM3 in confusion and rejection cases." />
-            <figcaption>
-              <span>FOM-SAM3 identifies the queried FO among same-category distractors and rejects absent targets.</span>
-              <span class="perception-scores"><strong>93.04%</strong> mIoU · FO-30-S <i>·</i> <strong>83.25%</strong> mIoU · FO-30-C</span>
-            </figcaption>
-          </figure>
-        </section>
-
         <section class="main-experiment" aria-labelledby="main-experiment-title">
           <div class="main-experiment-head">
             <div>
               <h3 id="main-experiment-title">REAL-ROBOT MANIPULATION</h3>
+              <p class="teaser-flow"><span>DemoFO</span><i>→</i><span>SimilarFO distractors</span><i>→</i><span>Switch FO Memory</span><i>→</i><span>Frozen-policy SimilarFO reuse</span></p>
             </div>
           </div>
 
@@ -160,8 +147,7 @@
 
     <footer class="site-footer">
       <div class="shell content-shell footer-grid">
-        <div><strong data-field="shortName">FOM-SAM3-Policy</strong><p>Persistent fine-grained identity for task-focused robotic imitation learning.</p></div>
-        <div><span>Project page</span><p>FOM-SAM3-Policy · <span data-current-year>2026</span></p></div>
+        <div><span>Project page</span><p>ICRA 2027 Submission · <span data-current-year>2026</span></p></div>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>
