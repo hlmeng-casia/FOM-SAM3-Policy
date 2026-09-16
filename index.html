@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260914-optimized" />
-    <script src="project-data.js?v=20260914-optimized" defer></script>
-    <script src="script.js?v=20260914-optimized" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260916-streaming" />
+    <script src="project-data.js?v=20260916-streaming" defer></script>
+    <script src="script.js?v=20260916-streaming" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -100,7 +100,7 @@
           <div class="main-experiment-head">
             <div>
               <h3 id="main-experiment-title">REAL-ROBOT MANIPULATION</h3>
-              <p class="teaser-flow"><span>DemoFO</span><i>→</i><span>SimilarFO distractors</span><i>→</i><span>Switch FO Memory</span><i>→</i><span>Frozen-policy SimilarFO reuse</span></p>
+              <p class="teaser-flow" aria-label="DemoFO skill, similar-object distractors, switch FO memory, reuse the frozen policy"><span>DemoFO skill</span><i aria-hidden="true">→</i><span>SimilarFO distractors</span><i aria-hidden="true">→</i><span>Switch FO memory</span><i aria-hidden="true">→</i><span>Reuse frozen policy</span></p>
             </div>
           </div>
 
@@ -119,6 +119,7 @@
             <h3 id="generalization-title">Generalization</h3>
           </div>
           <p class="chart-note generalization-analysis"><strong>Frozen-policy reuse.</strong> The same frozen policy operates on different registered SimilarFOs without retraining; only the FO Memory Tokens are switched.</p>
+          <figure class="generalization-overview" data-generalization-overview aria-label="Generalization overview"></figure>
           <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type SimilarFO reuse demonstrations"></div>
           <section class="scene-generalization" aria-labelledby="scene-generalization-title">
             <h4 id="scene-generalization-title">Scene Robustness</h4>

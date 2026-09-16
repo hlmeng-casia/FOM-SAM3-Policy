@@ -1,7 +1,7 @@
 (function () {
   "use strict";
   const data = window.PROJECT_DATA || {};
-  const videoVersion = "20260915-counted-13s";
+  const videoVersion = "20260916-streaming";
   const all = (selector) => Array.from(document.querySelectorAll(selector));
 
   ["title", "venue"].forEach((field) => {
@@ -64,10 +64,9 @@
       if (video.volume !== 0) video.volume = 0;
     });
     if (options.autoplay) {
-      video.autoplay = true;
       video.loop = options.loop ?? true;
     }
-    if (item.poster) video.poster = item.poster;
+    video.poster = item.poster || item.src.replace(/\.mp4$/, ".jpg");
     video.setAttribute("aria-label", item.title || `Robot demonstration ${index + 1}`);
     video.dataset.videoSrc = item.src;
     video.append(document.createTextNode("MP4 playback requires a compatible browser."));
@@ -78,71 +77,69 @@
    * 按需连接视频源，避免页面初始化时同时请求全部素材。
    * Attach one video source on demand so the page never requests every asset at startup.
    */
-  const loadVideoSource = (video, preload = "metadata") => {
-    if (video.dataset.sourceLoaded === "true") {
-      if (preload === "auto") video.preload = "auto";
-      return;
-    }
+  const loadVideoSource = (video) => {
+    if (video.dataset.sourceLoaded === "true") return;
     const source = document.createElement("source");
     source.src = `${video.dataset.videoSrc}?v=${videoVersion}`;
     source.type = "video/mp4";
     video.replaceChildren(source, document.createTextNode("MP4 playback requires a compatible browser."));
     video.dataset.sourceLoaded = "true";
-    video.preload = preload;
+    video.preload = "auto";
     video.load();
   };
 
   /**
-   * 在浏览器允许时启动静音循环播放，并在媒体可播放后自动重试。
-   * Start muted playback and retry as soon as enough media data becomes available.
+   * """启动可见视频，输入播放器；返回无值。播放请求会等待缓冲完成。
+   * Start a visible player; playback waits for media readiness. Returns nothing."""
    */
   const startVideo = (video) => {
-    loadVideoSource(video, "auto");
-    const retry = () => {
-      if (!video.isConnected || video.dataset.inViewport !== "true") return;
-      const playback = video.play();
-      if (playback) playback.catch(() => {});
-    };
-    retry();
-    if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA && video.dataset.retryBound !== "true") {
-      video.dataset.retryBound = "true";
-      video.addEventListener("canplay", retry);
-      video.addEventListener("loadeddata", retry);
+    loadVideoSource(video);
+    video.play().catch((error) => {
+      if (error.name !== "AbortError" && error.name !== "NotAllowedError") {
+        console.warn("Video playback failed:", video.dataset.videoSrc, error);
+      }
+    });
+  };
+
+  /**
+   * """暂停播放器并中止未完成的下载；输入播放器，返回无值。
+   * Pause a player and cancel unfinished downloads. Returns nothing."""
+   */
+  const stopVideo = (video) => {
+    video.pause();
+    const fullyBuffered = video.buffered.length &&
+      video.buffered.start(0) === 0 &&
+      video.buffered.end(video.buffered.length - 1) >= video.duration - 0.1;
+    if (video.dataset.sourceLoaded === "true" && !fullyBuffered) {
+      video.replaceChildren(); // # 释放未完成的请求，将带宽留给当前画面
+      delete video.dataset.sourceLoaded;
+      video.preload = "none";
+      video.load();
     }
   };
 
+  /**
+   * """为一组播放器绑定可见性控制；只加载视野中的视频，返回无值。
+   * Observe players and load only visible videos. Returns nothing."""
+   */
   const enableViewportPlayback = (videos) => {
-    if (!videos.length) return;
-    if ("IntersectionObserver" in window) {
-      const sourceObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          loadVideoSource(entry.target, "metadata");
-          observer.unobserve(entry.target);
-        });
-      }, { rootMargin: "260px", threshold: 0.01 });
-      const playbackObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.dataset.inViewport = "true";
-            startVideo(entry.target);
-          } else {
-            entry.target.dataset.inViewport = "false";
-            entry.target.pause();
-          }
-        });
-      }, { threshold: 0.08 });
-      videos.forEach((video) => {
-        sourceObserver.observe(video);
-        playbackObserver.observe(video);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target: video, isIntersecting, intersectionRatio }) => {
+        const visible = isIntersecting && intersectionRatio >= 0.25;
+        video.dataset.inViewport = String(visible);
+        if (visible && !document.hidden) startVideo(video);
+        else stopVideo(video);
       });
-      return;
-    }
-    videos.forEach((video) => {
-      video.dataset.inViewport = "true";
-      startVideo(video);
-    });
+    }, { threshold: [0, 0.25] });
+    videos.forEach((video) => observer.observe(video));
   };
+
+  document.addEventListener("visibilitychange", () => {
+    all("video").forEach((video) => {
+      if (!document.hidden && video.dataset.inViewport === "true") startVideo(video);
+      else stopVideo(video);
+    });
+  });
 
   const heroVideos = document.querySelector("[data-hero-videos]");
   if (heroVideos && Array.isArray(data.demoVideos) && data.demoVideos.length) {
@@ -160,8 +157,7 @@
       const video = createVideoPlayer(item, index, "hero-demo-player", {
         controls: true,
         autoplay: true,
-        loop: true,
-        preload: "metadata"
+        loop: true
       });
       const caption = document.createElement("figcaption");
       caption.textContent = item.title;
@@ -242,7 +238,6 @@
       const lastStartIndex = cards.findIndex((card) => card.offsetLeft >= maxScrollLeft() - 1);
       const lastIndex = lastStartIndex < 0 ? cards.length - 1 : lastStartIndex;
       activeIndex = Math.max(0, Math.min(lastIndex, index));
-      cards.slice(activeIndex, activeIndex + 4).forEach((card) => loadVideoSource(card.querySelector("video")));
       animateTrackTo(cardLeft(activeIndex));
       updateDots();
     };
@@ -270,7 +265,6 @@
     viewport.append(track, previous, next);
     gallery.append(viewport, dots);
     heroVideos.replaceChildren(gallery);
-    cards.slice(0, 4).forEach((card) => loadVideoSource(card.querySelector("video")));
     enableViewportPlayback(cards.map((card) => card.querySelector("video")));
   }
 
@@ -356,9 +350,8 @@
           heading.appendChild(methodLabel);
           const video = createVideoPlayer(item, slotIndex, "experiment-video-player", {
             autoplay: true,
-            controls: false,
-            loop: true,
-            preload: "metadata"
+            controls: true,
+            loop: true
           });
           card.append(heading, video);
           grid.appendChild(card);
@@ -375,6 +368,14 @@
     mainExperimentVideos.replaceChildren(...conditionBlocks);
     enableViewportPlayback(all(".experiment-video-player"));
   }
+
+  const overview = document.querySelector("[data-generalization-overview]");
+  const overviewVideo = createVideoPlayer({
+    src: "assets/videos/generalization_overview.mp4",
+    title: "Generalization · Combined overview"
+  }, 0, "generalization-overview-player", { autoplay: true, controls: true });
+  overview.append(overviewVideo);
+  enableViewportPlayback([overviewVideo]);
 
   const generalizationGrid = document.querySelector("[data-generalization-videos]");
   if (generalizationGrid && Array.isArray(data.generalizationDemos)) {
@@ -399,7 +400,7 @@
           item,
           index,
           "generalization-video-player",
-          { autoplay: true, controls: false, loop: true, preload: "metadata" }
+          { autoplay: true, controls: true, loop: true }
         );
         const caption = document.createElement("div");
         caption.className = "generalization-video-caption";
@@ -422,22 +423,20 @@
   const sceneGeneralizationGrid = document.querySelector("[data-scene-generalization-videos]");
   if (sceneGeneralizationGrid && Array.isArray(data.sceneGeneralizationDemos)) {
     const cards = data.sceneGeneralizationDemos.map((demo, index) => {
-      const item = { src: demo.src, title: `${demo.setting} · ${demo.fo}` };
+      const item = { src: demo.src, title: `${demo.setting} · ${index + 1}` };
       const card = document.createElement("article");
       card.className = "generalization-video-card";
       const video = createVideoPlayer(
         item,
         index,
         "generalization-video-player",
-        { autoplay: true, controls: false, loop: true, preload: "metadata" }
+        { autoplay: true, controls: true, loop: true }
       );
       const caption = document.createElement("div");
       caption.className = "generalization-video-caption";
       const setting = document.createElement("small");
       setting.textContent = demo.setting;
-      const title = document.createElement("strong");
-      title.textContent = demo.fo;
-      caption.append(setting, title);
+      caption.append(setting);
       card.append(caption, video);
       return card;
     });
