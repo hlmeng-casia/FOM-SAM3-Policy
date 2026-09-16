@@ -26,6 +26,7 @@ window.PROJECT_DATA = {
     { src: "assets/videos/1.mp4", title: "Collect Can · Continuous long-horizon rollout" },
     { src: "assets/videos/2.mp4", title: "Push Box · Continuous long-horizon rollout" },
     { src: "assets/videos/3.mp4", title: "Lid Cup · Continuous long-horizon rollout" },
+    { src: "assets/videos/4.mp4", title: "Collect Can · Cluttered scene" },
     { src: "assets/videos/pick_place_id_ours_dp_01.mp4", poster: "assets/videos/pick_place_id_ours_dp_01.jpg", title: "DemoFO · Ours-DP" },
     { src: "assets/videos/pick_place_ood_similar_ours_dp_01.mp4", poster: "assets/videos/pick_place_ood_similar_ours_dp_01.jpg", title: "SimilarFO distractors · Ours-DP" },
     { src: "assets/videos/pick_place_within_type_new_fos_ours_dp_01.mp4", poster: "assets/videos/pick_place_within_type_new_fos_ours_dp_01.jpg", title: "Switch FO Memory · SimilarFO1 · Ours-DP" },
