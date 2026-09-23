@@ -2,7 +2,7 @@
 
 Code for **Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning**.
 
-[Paper](https://arxiv.org/abs/2609.21621) · [Project page](https://hlmeng-casia.github.io/FOM-SAM3-Policy/)
+[Project page](index.html)
 
 Includes FO Memory learning, frozen SAM3 inference, and FSAE conditioning for Diffusion Policy and ACT. Data, checkpoints, and robot deployment code are not included.
 

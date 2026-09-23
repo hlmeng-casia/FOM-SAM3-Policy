@@ -16,9 +16,6 @@ window.PROJECT_DATA = {
     "three real-robot FO manipulation tasks",
   ],
   links: {
-    paper: "https://arxiv.org/pdf/2609.21621",
-    arxiv: "https://arxiv.org/abs/2609.21621",
-    code: "https://github.com/hlmeng-casia/FOM-SAM3-Policy",
     video: "#main-video",
   },
   demoVideos: [
