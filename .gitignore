@@ -25,3 +25,16 @@ Thumbs.db
 
 # Local logs
 *.log
+
+# User-provided assets and generated outputs are intentionally excluded.
+data/
+checkpoints/
+outputs/
+third_party/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+__pycache__/
+*.py[cod]
+.pytest_cache/

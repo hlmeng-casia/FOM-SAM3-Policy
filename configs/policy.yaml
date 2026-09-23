@@ -1,0 +1,59 @@
+seed: 7
+device: cuda
+active_backend: dp
+
+data:
+  cache_root: data/policy_cache
+  manifest: manifest.json
+
+fsae:
+  num_cameras: 2
+  feature_channels: 256
+  feature_height: 24
+  feature_width: 24
+  objects_per_camera: 2
+  roi_size: 16
+  mask_threshold: 0.3
+  relation_dim: 32
+  context_grid_size: 4
+  spatial_keypoints: 16
+  act_token_grid_size: 8
+  act_dim: 512
+
+state_dim: 10
+state_history: 2
+action_dim: 10
+
+dp:
+  horizon: 24
+  action_steps: 16
+  train_timesteps: 100
+  inference_steps: 40
+  beta_schedule: squaredcos_cap_v2
+  diffusion_step_dim: 128
+  down_dims: [512, 1024, 2048]
+  kernel_size: 5
+  groups: 8
+  film_scale: true
+
+act:
+  chunk_size: 30
+  dim_model: 512
+  heads: 8
+  encoder_layers: 4
+  decoder_layers: 1
+  feedforward_dim: 3200
+  dropout: 0.1
+  latent_dim: 32
+  kl_weight: 10.0
+
+train:
+  steps: 100000
+  batch_size: 24
+  num_workers: 4
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  save_every_steps: 10000
+
+output:
+  run_dir: outputs/policy

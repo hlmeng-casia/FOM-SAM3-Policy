@@ -1,0 +1,48 @@
+seed: 7
+device: cuda
+
+sam3:
+  source: third_party/sam3
+  checkpoint: checkpoints/sam3.pt
+  model_resolution: 504
+  use_fa3: false
+  compile: false
+
+data:
+  root: data/registration/example_object
+  annotations: annotations.jsonl
+  prompt: example object
+
+method:
+  name: private_linear
+  token_lr: 0.001
+  affine_lr: 0.0001
+
+train:
+  epochs: 30
+  batch_size: 1
+  weight_decay: 0.1
+  warmup_steps: 20
+  gradient_clip_norm: 1.0
+  mixed_precision: bfloat16
+  save_every_epochs: 5
+  loss:
+    mask_dice: 0.8
+    mask_bce: 0.2
+    object: 1.0
+    box_l1: 0.1
+    box_giou: 0.1
+    presence_positive: 1.0
+    presence_negative: 0.1
+    focal_alpha: 0.25
+    presence_focal_alpha: 0.5
+    focal_gamma: 2.0
+    matching_object_cost: 2.0
+    matching_box_l1_cost: 5.0
+    matching_box_giou_cost: 2.0
+
+output:
+  run_dir: outputs/memory/example_object
+  checkpoint: checkpoints/last.pt
+  artifact_dir: artifacts/example_object
+  bank_dir: outputs/memory_bank

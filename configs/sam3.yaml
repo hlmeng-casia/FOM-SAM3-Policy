@@ -1,0 +1,28 @@
+device: cuda
+
+sam3:
+  source: third_party/sam3
+  checkpoint: checkpoints/sam3.pt
+  model_resolution: 504
+  policy_resolution: 336
+  fpn_level: 2
+  use_fa3: false
+  compile: false
+
+memory:
+  bank_index: outputs/memory_bank/index.json
+  target_prompt: example target
+  context_prompt: example context
+
+inference:
+  images:
+    - data/demo/wrist_left.jpg
+    - data/demo/wrist_right.jpg
+  score_threshold: 0.5
+  mask_threshold: 0.5
+  mask_nms_iou: 0.8
+  output_dir: outputs/demo
+
+policy:
+  config: configs/policy.yaml
+  checkpoint: outputs/policy/last.pt

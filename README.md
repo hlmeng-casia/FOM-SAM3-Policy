@@ -1,27 +1,11 @@
-# FOM-SAM3-Policy Project Page
+# FOM-SAM3 Policy
 
-Project Page for *Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning*.
+Code for **Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning**.
 
-## Submission status
+[Paper](https://arxiv.org/abs/2609.21621) · [Project page](https://hlmeng-casia.github.io/FOM-SAM3-Policy/)
 
-This branch contains the anonymous ICRA submission page. Author names, affiliations, citation metadata, paper links, arXiv links, code links, and identity-bearing external media are intentionally omitted during review.
+Includes FO Memory learning, frozen SAM3 inference, and FSAE conditioning for Diffusion Policy and ACT. Data, checkpoints, and robot deployment code are not included.
 
-## View the page
+Install with `pip install -r requirements.txt`, install [SAM3](https://github.com/facebookresearch/sam3) separately, and set your paths in `configs/`. Training and inference entry points are in `train/` and `inference/`.
 
-- Entry: [`index.html`](index.html)
-- Local preview: run `python -m http.server 8000` in the project root, then open `http://localhost:8000/`
-
-## Project navigation
-
-| Path | Purpose |
-|---|---|
-| [`index.html`](index.html) | Page structure and paper content |
-| [`styles.css`](styles.css) | Visual design and responsive layout |
-| [`project-data.js`](project-data.js) | Anonymous project metadata and media configuration |
-| [`script.js`](script.js) | Page rendering and interactions |
-| [`assets/images/`](assets/images/) | Paper figures and result images |
-| [`assets/videos/`](assets/videos/) | Robot demonstration videos |
-
-## Page sections
-
-Abstract · Method · Real-robot experiments · New-FO reuse · Analysis
+MIT license. See [third-party notices](THIRD_PARTY_NOTICES.md) for dependencies.
