@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260916-streaming" />
-    <script src="project-data.js?v=20260916-streaming" defer></script>
-    <script src="script.js?v=20260916-streaming" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260924-project-update" />
+    <script src="project-data.js?v=20260924-project-update" defer></script>
+    <script src="script.js?v=20260924-project-update" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -24,9 +24,24 @@
       <section class="hero" id="top">
         <div class="hero-copy">
           <h1 class="hero-title">
-            <span class="hero-paper-title" data-field="title">Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
+            <span class="hero-paper-title" ><span class="title-accent">Towards Fine-Grained Object Manipulation:</span> SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning</span>
           </h1>
-          <p class="venue" data-field="venue">ICRA 2027 Submission</p>
+          <!-- Public author information: omit this block from the anonymous release. -->
+          <div class="paper-identity">
+            <p class="authors"><span>Haolong Meng<sup>1,2</sup></span><span>Fangbo Qin<sup>1,2,4,*</sup></span><span>Mengchen Bai<sup>1</sup></span><span>Houwu Wang<sup>1</sup></span><span>Cirong Liu<sup>3,4</sup></span><span>Shan Yu<sup>1,2,4</sup></span></p>
+            <div class="affiliations">
+              <p><sup>1</sup> Institute of Automation, Chinese Academy of Sciences, Beijing, China</p>
+              <p><sup>2</sup> School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing, China</p>
+              <p><sup>3</sup> Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences, Shanghai, China</p>
+              <p><sup>4</sup> State Key Laboratory of Brain Cognition and Brain-Inspired Intelligence Technology, Shanghai, China</p>
+            </div>
+            <p class="corresponding-author">* Corresponding author: <a href="mailto:fangbo.qin@ia.ac.cn">Fangbo Qin</a></p>
+            <div class="institution-logos" aria-label="Author institutions">
+              <a href="https://english.ia.ac.cn/" aria-label="Institute of Automation, Chinese Academy of Sciences"><img class="institution-symbol" src="assets/images/casia_symbol.jpg" alt="CASIA" /><span>Institute of Automation<br />Chinese Academy of Sciences</span></a>
+              <a href="https://english.ucas.ac.cn/" aria-label="University of Chinese Academy of Sciences"><img class="ucas-logo" src="assets/images/ucas_logo.png" alt="University of Chinese Academy of Sciences" /></a>
+              <a href="https://www.cebsit.cas.cn/" aria-label="Center for Excellence in Brain Science and Intelligence Technology"><img class="institution-symbol cebsit-symbol" src="assets/images/cebsit_logo.png" alt="CEBSIT" /><span>Center for Excellence in Brain Science<br />and Intelligence Technology, CAS</span></a>
+            </div>
+          </div>
           <div class="resource-row" aria-label="Project resources">
             <a data-resource="paper">
               <svg class="resource-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm8 1.8V8h4.2L14 3.8ZM8 12v1.5h8V12H8Zm0 3.5V17h8v-1.5H8Zm0 3.5v1.5h5V19H8Z"/></svg>
@@ -47,20 +62,25 @@
           </div>
         </div>
 
-        <section class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations">
-          <div data-hero-videos></div>
-          <p class="video-speed-note"><strong>All videos on this page are shown at 3× speed.</strong></p>
-        </section>
+        <figure class="main-video" id="main-video">
+          <video class="hero-featured-player" controls playsinline preload="none" poster="assets/videos/main_overview.jpg" aria-label="FOM-SAM3 policy overview">
+            <source src="assets/videos/main_overview.mp4" type="video/mp4" />
+          </video>
+        </figure>
 
         <section class="hero-abstract" aria-labelledby="abstract-title">
           <div class="shell content-shell">
-            <h2 id="abstract-title">Abstract</h2>
             <figure class="paper-figure abstract-figure">
               <img src="assets/images/introduction.png" width="1439" height="649" alt="Comparison of scene-level visual conditioning, category-level conditioning, and fine-grained object-focused conditioning with FOM-SAM3 and FSAE." />
             </figure>
+            <h2 id="abstract-title">Abstract</h2>
             <div class="abstract-copy" data-abstract></div>
           </div>
         </section>
+        <section class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations">
+          <div data-hero-videos></div>
+        </section>
+
       </section>
 
       <section id="method">
@@ -68,20 +88,19 @@
           <div class="section-head">
             <div>
               <h2>Method</h2>
-              <p class="section-summary">FOM-SAM3 retrieves a persistent FO identity, and FSAE converts the selected objects into focused policy conditions.</p>
             </div>
           </div>
 
           <figure class="paper-figure method-figure">
-            <img src="assets/images/fo-memory-learning.png" width="2841" height="786" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
+            <img src="assets/images/fo-memory-learning.png" width="2864" height="773" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
             <figcaption><strong>Persistent FO Memory Learning</strong></figcaption>
           </figure>
 
           <aside class="contribution-bridge" aria-label="Method contributions">
             <span>Two contributions, one focused policy</span>
             <div>
-              <p><strong>Persistent FO Memory.</strong> A few registered views create reusable identity tokens while SAM3 remains fully frozen.</p>
-              <p><strong>Focused policy conditioning.</strong> FSAE preserves ordered target and manipulation-context appearance and geometry for either DP or ACT.</p>
+              <p><strong>Persistent FO Memory.</strong> A few registered views create reusable memory tokens while SAM3 remains fully frozen.</p>
+              <p><strong>Focused policy conditioning.</strong> FSAE converts each localized FO’s appearance and spatial state into compact policy-specific conditions for DP and ACT.</p>
             </div>
           </aside>
 
@@ -100,31 +119,27 @@
           <div class="main-experiment-head">
             <div>
               <h3 id="main-experiment-title">REAL-ROBOT MANIPULATION</h3>
-              <p class="teaser-flow" aria-label="DemoFO skill, similar-object distractors, switch FO memory, reuse the frozen policy"><span>DemoFO skill</span><i aria-hidden="true">→</i><span>SimilarFO distractors</span><i aria-hidden="true">→</i><span>Switch FO memory</span><i aria-hidden="true">→</i><span>Reuse frozen policy</span></p>
             </div>
           </div>
 
           <div class="table-section robot-section">
             <figure class="paper-figure experiment-result-figure">
               <img src="assets/images/main-experiment-results.png" alt="Complete real-robot manipulation results, including the overall and per-task success rates for Collect Can, Push Box, and Lid Cup." />
-              <figcaption><strong>Real-robot manipulation results.</strong> <span>Across Collect Can, Push Box, and Lid Cup, Ours-DP achieves 94.4% overall success and Ours-ACT achieves 87.8%.</span></figcaption>
+              <figcaption><strong>Real-robot manipulation results.</strong> </figcaption>
             </figure>
           </div>
 
+          <p class="video-speed-note"><strong>All videos in this main experiment section are shown at 3× speed.</strong></p>
           <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
         </section>
 
         <section class="supporting-experiment generalization-experiment" aria-labelledby="generalization-title">
           <div class="supporting-head">
-            <h3 id="generalization-title">Generalization</h3>
+            <h3 id="generalization-title">Manipulate SimilarFO with Shared Policy</h3>
           </div>
-          <p class="chart-note generalization-analysis"><strong>Frozen-policy reuse.</strong> The same frozen policy operates on different registered SimilarFOs without retraining; only the FO Memory Tokens are switched.</p>
-          <figure class="generalization-overview" data-generalization-overview aria-label="Generalization overview"></figure>
-          <div class="generalization-video-grid" data-generalization-videos aria-label="Within-type SimilarFO reuse demonstrations"></div>
-          <section class="scene-generalization" aria-labelledby="scene-generalization-title">
-            <h4 id="scene-generalization-title">Scene Robustness</h4>
-            <div class="scene-generalization-grid" data-scene-generalization-videos></div>
-          </section>
+          <p class="chart-note generalization-analysis">The frozen policy remains effective under background changes and cluttered scenes, and can be reused across different registered SimilarFOs without retraining by switching only the corresponding FO Memory Tokens.</p>
+          <figure class="generalization-overview" data-generalization-overview aria-label="Manipulate SimilarFO with Shared Policy"></figure>
+
         </section>
       </section>
 
@@ -139,8 +154,13 @@
       <section class="citation-section shell content-shell section-pad" id="citation" aria-labelledby="citation-title">
         <div class="section-head"><div><h2 id="citation-title">Citation</h2></div></div>
         <div class="citation-block">
-          <div><span>BibTeX</span><span class="citation-status">Coming soon</span></div>
-          <pre><code>Citation will be added after publication.</code></pre>
+          <div><span>BibTeX</span><span class="citation-status">arXiv 2026</span></div>
+          <pre><code>@article{meng2026finegrained,
+  title={Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning},
+  author={Meng, Haolong and Qin, Fangbo and Bai, Mengchen and Wang, Houwu and Liu, Cirong and Yu, Shan},
+  journal={arXiv preprint arXiv:2609.21621},
+  year={2026}
+}</code></pre>
         </div>
       </section>
 
@@ -148,7 +168,7 @@
 
     <footer class="site-footer">
       <div class="shell content-shell footer-grid">
-        <div><span>Project page</span><p>ICRA 2027 Submission · <span data-current-year>2026</span></p></div>
+        <div><span>Project page</span><p><span data-current-year>2026</span></p></div>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

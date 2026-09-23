@@ -4,7 +4,7 @@
   const videoVersion = "20260916-streaming";
   const all = (selector) => Array.from(document.querySelectorAll(selector));
 
-  ["title", "venue"].forEach((field) => {
+  ["title"].forEach((field) => {
     if (!data[field]) return;
     all(`[data-field="${field}"]`).forEach((node) => (node.textContent = data[field]));
   });
@@ -135,7 +135,7 @@
   };
 
   document.addEventListener("visibilitychange", () => {
-    all("video").forEach((video) => {
+    all("video[data-video-src]").forEach((video) => {
       if (!document.hidden && video.dataset.inViewport === "true") startVideo(video);
       else stopVideo(video);
     });
@@ -159,9 +159,7 @@
         autoplay: true,
         loop: true
       });
-      const caption = document.createElement("figcaption");
-      caption.textContent = item.title;
-      card.append(video, caption);
+      card.append(video);
       return card;
     });
 
@@ -278,18 +276,15 @@
     const conditions = [
       {
         key: "id",
-        label: "DemoFO Only",
-        description: "The scene contains only the DemoFO used in demonstrations. This setting measures the learned manipulation skill and basic policy capability."
+        label: "DemoFO"
       },
       {
         key: "ood_distractors",
-        label: "DemoFO + Distractors",
-        description: "Two objects from different coarse categories are added as distractors. This setting evaluates robustness to ordinary visual interference while keeping the target FO unchanged."
+        label: "DemoFO + Distractors"
       },
       {
         key: "ood_similar",
-        label: "DemoFO + SimilarFOs",
-        description: "Visually similar objects from the same coarse category are placed beside the DemoFO as confusing distractors. This setting evaluates whether the policy can correctly select the queried DemoFO and complete the manipulation task."
+        label: "DemoFO + SimilarFO"
       }
     ];
     const methods = [
@@ -308,9 +303,7 @@
       const conditionTitle = document.createElement("h4");
       conditionTitle.id = `condition-title-${conditionIndex}`;
       conditionTitle.textContent = condition.label;
-      const conditionDescription = document.createElement("p");
-      conditionDescription.textContent = condition.description;
-      conditionHead.append(conditionTitle, conditionDescription);
+      conditionHead.append(conditionTitle);
       block.appendChild(conditionHead);
       const conditionContent = document.createElement("div");
       conditionContent.className = "experiment-condition-content";
@@ -372,77 +365,10 @@
   const overview = document.querySelector("[data-generalization-overview]");
   const overviewVideo = createVideoPlayer({
     src: "assets/videos/generalization_overview.mp4",
-    title: "Generalization · Combined overview"
+    title: "Manipulate SimilarFO with Shared Policy"
   }, 0, "generalization-overview-player", { autoplay: true, controls: true });
   overview.append(overviewVideo);
   enableViewportPlayback([overviewVideo]);
-
-  const generalizationGrid = document.querySelector("[data-generalization-videos]");
-  if (generalizationGrid && Array.isArray(data.generalizationDemos)) {
-    const taskNames = [...new Set(data.generalizationDemos.map((demo) => demo.task))];
-    const taskGroups = taskNames.map((task) => {
-      const section = document.createElement("section");
-      section.className = "generalization-task";
-      const heading = document.createElement("h4");
-      heading.textContent = task;
-      const row = document.createElement("div");
-      row.className = "generalization-task-grid";
-      const taskDemos = data.generalizationDemos.filter((demo) => demo.task === task);
-      const cards = taskDemos.map((demo, index) => {
-        const item = {
-          src: demo.src,
-          poster: demo.poster,
-          title: `${demo.task} · ${demo.fo} · ${demo.method}`
-        };
-        const card = document.createElement("article");
-        card.className = "generalization-video-card";
-        const video = createVideoPlayer(
-          item,
-          index,
-          "generalization-video-player",
-          { autoplay: true, controls: true, loop: true }
-        );
-        const caption = document.createElement("div");
-        caption.className = "generalization-video-caption";
-        const group = document.createElement("small");
-        group.textContent = demo.method;
-        const title = document.createElement("strong");
-        title.textContent = demo.fo;
-        caption.append(group, title);
-        card.append(caption, video);
-        return card;
-      });
-      row.append(...cards);
-      section.append(heading, row);
-      return section;
-    });
-    generalizationGrid.replaceChildren(...taskGroups);
-    enableViewportPlayback(all(".generalization-video-player"));
-  }
-
-  const sceneGeneralizationGrid = document.querySelector("[data-scene-generalization-videos]");
-  if (sceneGeneralizationGrid && Array.isArray(data.sceneGeneralizationDemos)) {
-    const cards = data.sceneGeneralizationDemos.map((demo, index) => {
-      const item = { src: demo.src, title: `${demo.setting} · ${index + 1}` };
-      const card = document.createElement("article");
-      card.className = "generalization-video-card";
-      const video = createVideoPlayer(
-        item,
-        index,
-        "generalization-video-player",
-        { autoplay: true, controls: true, loop: true }
-      );
-      const caption = document.createElement("div");
-      caption.className = "generalization-video-caption";
-      const setting = document.createElement("small");
-      setting.textContent = demo.setting;
-      caption.append(setting);
-      card.append(caption, video);
-      return card;
-    });
-    sceneGeneralizationGrid.replaceChildren(...cards);
-    enableViewportPlayback(all(".scene-generalization-grid .generalization-video-player"));
-  }
 
   const currentYear = document.querySelector("[data-current-year]");
   if (currentYear) currentYear.textContent = new Date().getFullYear();
