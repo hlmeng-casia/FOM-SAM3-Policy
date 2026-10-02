@@ -55,6 +55,8 @@
     video.controls = options.controls ?? true;
     video.preload = "none";
     video.playsInline = true;
+    video.defaultPlaybackRate = 0.5; // # 以原文件一半速度播放，便于观察动作
+    video.playbackRate = 0.5;
     video.muted = true;
     video.defaultMuted = true;
     video.volume = 0;
@@ -315,7 +317,10 @@
         taskHead.className = "experiment-task-head";
         const taskTitle = document.createElement("h5");
         taskTitle.textContent = task.label;
-        taskHead.append(taskTitle);
+        const promptLine = document.createElement("p");
+        promptLine.className = "experiment-task-prompt";
+        promptLine.textContent = `“${data.taskPrompts[task.label]}”`;
+        taskHead.append(taskTitle, promptLine);
 
         const scroll = document.createElement("div");
         scroll.className = "experiment-task-scroll";
