@@ -22,9 +22,9 @@ window.PROJECT_DATA = {
     video: "#main-video",
   },
   demoVideos: [
-    { src: "assets/videos/1.mp4", title: "Collect Can · Continuous long-horizon rollout" },
-    { src: "assets/videos/2.mp4", title: "Push Box · Continuous long-horizon rollout" },
-    { src: "assets/videos/3.mp4", title: "Lid Cup · Continuous long-horizon rollout" },
+    { src: "assets/videos/1.mp4", title: "Collect Can" },
+    { src: "assets/videos/2.mp4", title: "Push Box" },
+    { src: "assets/videos/3.mp4", title: "Lid Cup" },
     { src: "assets/videos/4.mp4", title: "Collect Can · Cluttered scene" },
     { src: "assets/videos/5.mp4", title: "Collect Can · Background change" },
     { src: "assets/videos/fsae_1.mp4", title: "FSAE Visualization 1" },
@@ -32,9 +32,4 @@ window.PROJECT_DATA = {
     { src: "assets/videos/fsae_3.mp4", title: "FSAE Visualization 3" },
     { src: "assets/videos/fsae_4.mp4", title: "FSAE Visualization 4" },
   ],
-  taskPrompts: {
-    "Collect Can": "red CocaCola soda can",
-    "Push Box": "white pill box",
-    "Lid Cup": "cup lid with panda handle",
-  },
 };

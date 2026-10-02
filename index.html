@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20261003-final-paper" />
-    <script src="project-data.js?v=20261003-final-paper" defer></script>
-    <script src="script.js?v=20261003-final-paper" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261003-terminology-review" />
+    <script src="project-data.js?v=20261003-terminology-review" defer></script>
+    <script src="script.js?v=20261003-terminology-review" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -71,7 +71,7 @@
         <section class="hero-abstract" aria-labelledby="abstract-title">
           <div class="shell content-shell">
             <figure class="paper-figure abstract-figure">
-              <img src="assets/images/introduction.png" width="1439" height="649" alt="Comparison of scene-level visual conditioning, category-level conditioning, and fine-grained object-focused conditioning with FOM-SAM3 and FSAE." />
+              <img src="assets/images/introduction.png?v=20261003-final-figures" width="1079" height="486" alt="Comparison of scene-level visual conditioning, category-level conditioning, and fine-grained object-focused conditioning with FOM-SAM3 and FSAE." />
             </figure>
             <h2 id="abstract-title">Abstract</h2>
             <div class="abstract-copy" data-abstract></div>
@@ -92,12 +92,12 @@
           </div>
 
           <figure class="paper-figure method-figure">
-            <img src="assets/images/fo-memory-learning.png" width="2864" height="773" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
-            <figcaption><strong>Persistent FO Memory Learning</strong></figcaption>
+            <img src="assets/images/fo-memory-learning.png?v=20261003-final-figures" width="2148" height="579" alt="Persistent FO Memory Learning: concept-level prompt tokens are transformed into persistent FO memories using a one-vs-rest training loss with SAM3 frozen." />
+            <figcaption><strong>Persistent FO Memory Learning for SAM3</strong></figcaption>
           </figure>
 
           <figure class="paper-figure method-figure">
-            <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
+            <img src="assets/images/focused-spatial-appearance-encoding.png?v=20261003-final-figures" width="2144" height="587" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
             <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE)</strong></figcaption>
           </figure>
 
@@ -130,8 +130,8 @@
       <section class="analysis-section shell content-shell section-pad" id="viewpoint-analysis" aria-labelledby="viewpoint-analysis-title">
         <div class="section-head"><div><h2 id="viewpoint-analysis-title">Visual Analysis of FSAE Representations</h2></div></div>
         <figure class="paper-figure analysis-figure">
-          <img src="assets/images/fsae-representation.png" width="4434" height="1781" alt="FSAE representation visualization along six manipulation waypoints and t-SNE trajectories for FO1, FO1 with distractors, and a Similar FO." />
-          <figcaption><strong>FSAE representations across six manipulation waypoints (Fig. 7).</strong> <span>Boxes preserve spatial grounding; focused appearance features track task progress, remain stable with distractors, and distinguish SimilarFOs.</span></figcaption>
+          <img src="assets/images/fsae-representation.png?v=20261003-final-figures" width="3319" height="1344" alt="Visualization of FSAE representations in the left and right views: bounding boxes and masks from FOM-SAM3, in-FO appearance features after PCA, and t-SNE feature distributions across six robot waypoints." />
+          <figcaption><strong>Visualization of FSAE representations (Fig. 7).</strong> <span>Left and right views show bounding boxes and masks from FOM-SAM3, in-FO appearance features after PCA dimensionality reduction, and t-SNE feature distributions at waypoints P1–P6.</span></figcaption>
         </figure>
       </section>
 

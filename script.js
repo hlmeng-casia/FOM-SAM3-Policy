@@ -284,14 +284,14 @@
       },
       {
         key: "ood_similar",
-        label: "Manipulate DemoFO w/ SimilarFO"
+        label: "Manipulate DemoFO w/ SimilarFOs"
       }
     ];
     const methods = [
       { label: "Ours-DP", key: "ours_dp", ours: true },
-      { label: "RGB-DP", key: "rgb_dp", ours: false },
+      { label: "DP", key: "rgb_dp", ours: false },
       { label: "Ours-ACT", key: "ours_act", ours: true },
-      { label: "RGB-ACT", key: "rgb_act", ours: false }
+      { label: "ACT", key: "rgb_act", ours: false }
     ];
 
     const conditionBlocks = conditions.map((condition, conditionIndex) => {
@@ -315,12 +315,7 @@
         taskHead.className = "experiment-task-head";
         const taskTitle = document.createElement("h5");
         taskTitle.textContent = task.label;
-        const promptLine = document.createElement("p");
-        promptLine.className = "experiment-task-prompt";
-        const taskPrompt = data.taskPrompts?.[task.label];
-        promptLine.textContent = taskPrompt ? `“${taskPrompt}”` : "";
-        if (!taskPrompt) promptLine.setAttribute("aria-hidden", "true");
-        taskHead.append(taskTitle, promptLine);
+        taskHead.append(taskTitle);
 
         const scroll = document.createElement("div");
         scroll.className = "experiment-task-scroll";
