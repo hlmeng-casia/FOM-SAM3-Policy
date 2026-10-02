@@ -55,11 +55,6 @@
     video.controls = options.controls ?? true;
     video.preload = "none";
     video.playsInline = true;
-    video.defaultPlaybackRate = 0.25; // # 以四分之一速度播放，便于观察动作
-    video.playbackRate = 0.25;
-    video.addEventListener("loadedmetadata", () => {
-      video.playbackRate = 0.25; // # 加载素材后重新应用慢速，避免加载流程重置速度
-    });
     video.muted = true;
     video.defaultMuted = true;
     video.volume = 0;
@@ -374,6 +369,18 @@
   overview.append(overviewVideo);
   enableViewportPlayback([overviewVideo]);
 
-  const currentYear = document.querySelector("[data-current-year]");
-  if (currentYear) currentYear.textContent = new Date().getFullYear();
+  /**
+   * """统一所有视频（含顶部主视频）的慢速播放；输入播放器，返回无值。
+   * Apply slow playback to every player, including the featured video. Returns nothing."""
+   */
+  const applySlowPlayback = (video) => {
+    video.defaultPlaybackRate = 0.25;
+    video.playbackRate = 0.25;
+    ["loadedmetadata", "play"].forEach((event) => {
+      video.addEventListener(event, () => {
+        video.playbackRate = 0.25; // # 素材加载或手动播放后重新应用慢速
+      });
+    });
+  };
+  all("video").forEach(applySlowPlayback);
 })();
