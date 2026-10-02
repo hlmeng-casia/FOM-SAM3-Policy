@@ -276,15 +276,15 @@
     const conditions = [
       {
         key: "id",
-        label: "DemoFO"
+        label: "Manipulate DemoFO w/o Distractors and SimilarFO"
       },
       {
         key: "ood_distractors",
-        label: "DemoFO + Distractors"
+        label: "Manipulate DemoFO w/ Distractors"
       },
       {
         key: "ood_similar",
-        label: "DemoFO + SimilarFO"
+        label: "Manipulate DemoFO w/ SimilarFO"
       }
     ];
     const methods = [
@@ -365,7 +365,7 @@
   const overview = document.querySelector("[data-generalization-overview]");
   const overviewVideo = createVideoPlayer({
     src: "assets/videos/generalization_overview.mp4",
-    title: "Manipulate SimilarFO with Shared Policy"
+    title: "Manipulate NewFO with Shared Policy"
   }, 0, "generalization-overview-player", { autoplay: true, controls: true });
   overview.append(overviewVideo);
   enableViewportPlayback([overviewVideo]);

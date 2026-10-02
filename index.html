@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260924-project-update" />
-    <script src="project-data.js?v=20260924-project-update" defer></script>
-    <script src="script.js?v=20260924-project-update" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261003-final-paper" />
+    <script src="project-data.js?v=20261003-final-paper" defer></script>
+    <script src="script.js?v=20261003-final-paper" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -28,12 +28,12 @@
           </h1>
           <!-- Public author information: omit this block from the anonymous release. -->
           <div class="paper-identity">
-            <p class="authors"><span>Haolong Meng<sup>1,2</sup></span><span>Fangbo Qin<sup>1,2,4,*</sup></span><span>Mengchen Bai<sup>1</sup></span><span>Houwu Wang<sup>1</sup></span><span>Cirong Liu<sup>3,4</sup></span><span>Shan Yu<sup>1,2,4</sup></span></p>
+            <p class="authors"><span>Haolong Meng<sup>1,2</sup></span><span>Fangbo Qin<sup>1,2,4,*</sup></span><span>Mengchen Bai<sup>1</sup></span><span>Houwu Wang<sup>1</sup></span><span>Xiaolin Liu<sup>1</sup></span><span>Cirong Liu<sup>3,4</sup></span><span>Shan Yu<sup>1,2,4</sup></span></p>
             <div class="affiliations">
-              <p><sup>1</sup> Institute of Automation, Chinese Academy of Sciences, Beijing, China</p>
-              <p><sup>2</sup> School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing, China</p>
-              <p><sup>3</sup> Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences, Shanghai, China</p>
-              <p><sup>4</sup> State Key Laboratory of Brain Cognition and Brain-Inspired Intelligence Technology, Shanghai, China</p>
+              <p><sup>1</sup> Institute of Automation, Chinese Academy of Sciences, Beijing 100190, China</p>
+              <p><sup>2</sup> School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing 100049, China</p>
+              <p><sup>3</sup> Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences, Shanghai 200031, China</p>
+              <p><sup>4</sup> State Key Laboratory of Brain Cognition and Brain-Inspired Intelligence Technology, Shanghai 200031, China</p>
             </div>
             <p class="corresponding-author">* Corresponding author: <a href="mailto:fangbo.qin@ia.ac.cn">Fangbo Qin</a></p>
             <div class="institution-logos" aria-label="Author institutions">
@@ -63,8 +63,8 @@
         </div>
 
         <figure class="main-video" id="main-video">
-          <video class="hero-featured-player" controls playsinline preload="none" poster="assets/videos/main_overview.jpg" aria-label="FOM-SAM3 policy overview">
-            <source src="assets/videos/main_overview.mp4" type="video/mp4" />
+          <video class="hero-featured-player" controls playsinline preload="none" poster="assets/videos/main_overview.jpg?v=20261003" aria-label="FOM-SAM3 policy overview">
+            <source src="assets/videos/main_overview.mp4?v=20261003" type="video/mp4" />
           </video>
         </figure>
 
@@ -96,14 +96,6 @@
             <figcaption><strong>Persistent FO Memory Learning</strong></figcaption>
           </figure>
 
-          <aside class="contribution-bridge" aria-label="Method contributions">
-            <span>Two contributions, one focused policy</span>
-            <div>
-              <p><strong>Persistent FO Memory.</strong> A few registered views create reusable memory tokens while SAM3 remains fully frozen.</p>
-              <p><strong>Focused policy conditioning.</strong> FSAE converts each localized FO’s appearance and spatial state into compact policy-specific conditions for DP and ACT.</p>
-            </div>
-          </aside>
-
           <figure class="paper-figure method-figure">
             <img src="assets/images/focused-spatial-appearance-encoding.png" width="2859" height="783" alt="Focused Spatial-Appearance Encoding: retrieved FO memories prompt frozen SAM3 to extract boxes, masks, and FPN features, which form spatial and appearance conditions for DP and ACT." />
             <figcaption><strong>Focused Spatial-Appearance Encoding (FSAE)</strong></figcaption>
@@ -122,23 +114,15 @@
             </div>
           </div>
 
-          <div class="table-section robot-section">
-            <figure class="paper-figure experiment-result-figure">
-              <img src="assets/images/main-experiment-results.png" alt="Complete real-robot manipulation results, including the overall and per-task success rates for Collect Can, Push Box, and Lid Cup." />
-              <figcaption><strong>Real-robot manipulation results.</strong> </figcaption>
-            </figure>
-          </div>
-
-          <p class="video-speed-note"><strong>All videos in this main experiment section are shown at 3× speed.</strong></p>
+          <p class="video-speed-note"><strong>All videos in this main experiment section are shown at 12× speed.</strong></p>
           <div class="main-experiment-video-grid" data-main-experiment-videos aria-label="Real-robot rollout video comparisons"></div>
         </section>
 
         <section class="supporting-experiment generalization-experiment" aria-labelledby="generalization-title">
           <div class="supporting-head">
-            <h3 id="generalization-title">Manipulate SimilarFO with Shared Policy</h3>
+            <h3 id="generalization-title">Manipulate NewFO with Shared Policy</h3>
           </div>
-          <p class="chart-note generalization-analysis">The frozen policy remains effective under background changes and cluttered scenes, and can be reused across different registered SimilarFOs without retraining by switching only the corresponding FO Memory Tokens.</p>
-          <figure class="generalization-overview" data-generalization-overview aria-label="Manipulate SimilarFO with Shared Policy"></figure>
+          <figure class="generalization-overview" data-generalization-overview aria-label="Manipulate NewFO with Shared Policy"></figure>
 
         </section>
       </section>
@@ -157,7 +141,7 @@
           <div><span>BibTeX</span><span class="citation-status">arXiv 2026</span></div>
           <pre><code>@article{meng2026finegrained,
   title={Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning},
-  author={Meng, Haolong and Qin, Fangbo and Bai, Mengchen and Wang, Houwu and Liu, Cirong and Yu, Shan},
+  author={Meng, Haolong and Qin, Fangbo and Bai, Mengchen and Wang, Houwu and Liu, Xiaolin and Liu, Cirong and Yu, Shan},
   journal={arXiv preprint arXiv:2609.21621},
   year={2026}
 }</code></pre>

@@ -140,11 +140,6 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .method-figure figcaption { margin: 8px 0 0; color: #405b73; text-align: center; }
 .method-figure figcaption strong { color: var(--ink); }
 .method-figure figcaption i { color: var(--green); }
-.contribution-bridge { width: min(760px,100%); margin: 20px auto; padding: 16px 18px; border: 1px solid #b9cede; border-radius: 8px; background: rgba(231,240,248,.72); }
-.contribution-bridge > span { display: block; margin-bottom: 11px; color: #111; font-size: 1.2rem; font-weight: 800; letter-spacing: normal; text-align: center; }
-.contribution-bridge > div { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
-.contribution-bridge p { margin: 0; color: #405b73; font-size: .95rem; line-height: 1.62; }
-.contribution-bridge strong { color: var(--ink); }
 .main-experiment { margin-bottom: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .main-experiment-head { display: block; padding-bottom: 12px; border-bottom: 1px solid rgba(16,42,67,.22); text-align: left; }
 .main-experiment-head > div { max-width: none; }
@@ -174,9 +169,6 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .robot-results-figure .chart-scroll { overflow-x: auto; padding-bottom: 4px; }
 .robot-results-figure img { padding: 8px; }
 .robot-results-figure figcaption { margin-right: 4px; margin-left: 4px; }
-.experiment-result-figure { width: min(920px,100%); margin: 0 auto; }
-.experiment-result-figure img { display: block; width: 100%; padding: 0; border: 0; border-radius: 7px; box-shadow: none; }
-.experiment-result-figure figcaption { margin: 10px 2px 0; font-size: .82rem; }
 .table-section { margin-top: 24px; }
 .subsection-head { display: flex; margin-bottom: 16px; align-items: end; justify-content: space-between; }
 .subsection-head h3 { margin: 4px 0 0; font: 600 clamp(2rem,3.5vw,3.5rem)/1.08 var(--font-body); letter-spacing: -.035em; }
@@ -193,7 +185,6 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .supporting-head > p:last-child { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.65; }
 .generalization-experiment > .supporting-head { margin-bottom: 12px; padding-bottom: 0; border-bottom: 0; }
 .generalization-experiment > .supporting-head h3 { color: #111; font-size: var(--experiment-title-size); font-weight: 700; text-align: left; }
-.generalization-analysis { width: min(760px,100%); margin: 0 0 16px; text-align: left; }
 .generalization-overview { margin: 0 0 24px; }
 .generalization-overview-player { display: block; width: 100%; aspect-ratio: 2/1; object-fit: contain; border: 1px solid #b9cede; border-radius: 8px; background: #081a2a; }
 .analysis-figure { min-width: 0; margin: 0; }
@@ -215,7 +206,7 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .citation-note { font-family: var(--font-body); font-size: .92rem; line-height: 1.55; }
 :focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
 @media (max-width: 980px) { .hero-demo-track { grid-auto-columns: calc((100% - 12px)/2); } .footer-grid { grid-template-columns: 1fr 1fr; } .footer-grid > a { grid-column: 1/-1; } }
-@media (max-width: 680px) { .shell { width: min(var(--max),calc(100% - 32px)); } .hero { --hero-gutter: 32px; padding: 0 0 12px; gap: 28px; } .hero-copy { padding-top: 46px; } .hero-paper-title { font-size: clamp(1.35rem,6vw,1.72rem); } .hero-demo-viewport { padding: 0 18px; } .hero-demo-track { grid-auto-columns: 88%; } .hero-demo-arrow { width: 28px; height: 28px; top: 50%; } .hero-demo-arrow::before { width: 6px; height: 6px; border-width: 2px; } .hero-demo-arrow.previous { left: 4px; } .hero-demo-arrow.next { right: 4px; } .robot-results-figure img { min-width: 700px; } .experiment-condition-content { padding-right: 14px; padding-left: 14px; } .experiment-condition-tabs { grid-template-columns: 1fr; } .experiment-condition-tabs button { border-right: 0; border-bottom: 1px solid var(--line); } .experiment-condition-tabs button:last-child { border-bottom: 0; } .experiment-task-group { padding: 12px 0; } .paper-figure figcaption { flex-direction: column; gap: 4px; } .subsection-head { align-items: flex-start; flex-direction: column; gap: 10px; } .contribution-bridge > div { grid-template-columns: 1fr; gap: 10px; } .footer-grid { grid-template-columns: 1fr; } .footer-grid > a { grid-column: auto; } }
+@media (max-width: 680px) { .shell { width: min(var(--max),calc(100% - 32px)); } .hero { --hero-gutter: 32px; padding: 0 0 12px; gap: 28px; } .hero-copy { padding-top: 46px; } .hero-paper-title { font-size: clamp(1.35rem,6vw,1.72rem); } .hero-demo-viewport { padding: 0 18px; } .hero-demo-track { grid-auto-columns: 88%; } .hero-demo-arrow { width: 28px; height: 28px; top: 50%; } .hero-demo-arrow::before { width: 6px; height: 6px; border-width: 2px; } .hero-demo-arrow.previous { left: 4px; } .hero-demo-arrow.next { right: 4px; } .robot-results-figure img { min-width: 700px; } .experiment-condition-content { padding-right: 14px; padding-left: 14px; } .experiment-condition-tabs { grid-template-columns: 1fr; } .experiment-condition-tabs button { border-right: 0; border-bottom: 1px solid var(--line); } .experiment-condition-tabs button:last-child { border-bottom: 0; } .experiment-task-group { padding: 12px 0; } .paper-figure figcaption { flex-direction: column; gap: 4px; } .subsection-head { align-items: flex-start; flex-direction: column; gap: 10px; } .footer-grid { grid-template-columns: 1fr; } .footer-grid > a { grid-column: auto; } }
 @media (max-width: 440px) { .citation-block pre { padding: 20px 16px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -234,7 +225,6 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .ucas-logo { width: 206px; height: auto; }
 .resource-row { margin-top: 10px; }
 .main-experiment > .video-speed-note { margin: 20px 0 12px; text-align: left; }
-.generalization-analysis { width: 100%; color: #3f5b73; font-size: .95rem; line-height: 1.62; }
 @media (max-width: 680px) {
   .hero-copy { padding-top: 24px; }
   .authors { gap: 8px 16px; font-size: 1rem; }
