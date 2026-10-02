@@ -370,8 +370,8 @@
   enableViewportPlayback([overviewVideo]);
 
   /**
-   * """统一所有视频（含顶部主视频）的慢速播放；输入播放器，返回无值。
-   * Apply slow playback to every player, including the featured video. Returns nothing."""
+   * """统一轮播与实验视频的慢速播放；输入播放器，返回无值。
+   * Apply slow playback to carousel and experiment players. Returns nothing."""
    */
   const applySlowPlayback = (video) => {
     video.defaultPlaybackRate = 0.25;
@@ -382,5 +382,5 @@
       });
     });
   };
-  all("video").forEach(applySlowPlayback);
+  all(".hero-demo-player, .experiment-video-player, .generalization-overview-player").forEach(applySlowPlayback);
 })();
