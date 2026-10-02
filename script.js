@@ -55,8 +55,11 @@
     video.controls = options.controls ?? true;
     video.preload = "none";
     video.playsInline = true;
-    video.defaultPlaybackRate = 0.5; // # 以原文件一半速度播放，便于观察动作
-    video.playbackRate = 0.5;
+    video.defaultPlaybackRate = 0.25; // # 以四分之一速度播放，便于观察动作
+    video.playbackRate = 0.25;
+    video.addEventListener("loadedmetadata", () => {
+      video.playbackRate = 0.25; // # 加载素材后重新应用慢速，避免加载流程重置速度
+    });
     video.muted = true;
     video.defaultMuted = true;
     video.volume = 0;
@@ -96,6 +99,7 @@
    */
   const startVideo = (video) => {
     loadVideoSource(video);
+    video.playbackRate = 0.25; // # 自动播放前应用慢速
     video.play().catch((error) => {
       if (error.name !== "AbortError" && error.name !== "NotAllowedError") {
         console.warn("Video playback failed:", video.dataset.videoSrc, error);

@@ -74,9 +74,9 @@ h2 { font-weight: 700; }
 button,input,select,textarea { font-family: var(--font-body); }
 h1 { max-width: 900px; margin: 0 auto 26px; color: #111; font-weight: 700; letter-spacing: normal; line-height: 1.14; text-wrap: balance; }
 .hero-title { margin-bottom: 0; line-height: 1.22; }
-.title-accent { display: block; margin-bottom: 8px; color: #256da8; font-size: 1.12em; }
+.title-accent { display: block; margin-bottom: 8px; color: #00a3df; font-size: 1.12em; }
 .main-video { width: min(760px,calc(100% - var(--hero-gutter))); margin: 12px auto; }
-.hero-paper-title { display: block; color: #111111; text-align: left; font-size: clamp(1.55rem,2.6vw,2.25rem); text-shadow: none; }
+.hero-paper-title { display: block; color: #111111; text-align: center; font-size: clamp(1.55rem,2.6vw,2.25rem); text-shadow: none; }
 .hero-title ::selection { background: transparent; color: inherit; }
 .hero-title ::-moz-selection { background: transparent; color: inherit; }
 .resource-row { display: flex; gap: 7px; margin-top: 14px; justify-content: center; flex-wrap: wrap; }

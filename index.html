@@ -13,9 +13,9 @@
     <link rel="preload" href="assets/fonts/google-sans-bold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/google-sans-semibold.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20261003-title-alignment" />
-    <script src="project-data.js?v=20261003-title-alignment" defer></script>
-    <script src="script.js?v=20261003-title-alignment" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261003-slow-playback" />
+    <script src="project-data.js?v=20261003-slow-playback" defer></script>
+    <script src="script.js?v=20261003-slow-playback" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -78,6 +78,7 @@
           </div>
         </section>
         <section class="hero-video-showcase" id="demonstrations-title" role="region" aria-label="Robot demonstrations">
+          <p class="video-speed-note">Main experiment videos are played at 12× speed.</p>
           <div data-hero-videos></div>
         </section>
 
@@ -118,14 +119,6 @@
           <figure class="generalization-overview" data-generalization-overview aria-label="Manipulate NewFO with Shared Policy"></figure>
 
         </section>
-      </section>
-
-      <section class="analysis-section shell content-shell section-pad" id="viewpoint-analysis" aria-labelledby="viewpoint-analysis-title">
-        <div class="section-head"><div><h2 id="viewpoint-analysis-title">Visual Analysis of FSAE Representations</h2></div></div>
-        <figure class="paper-figure analysis-figure">
-          <img src="assets/images/fsae-representation.png?v=20261003-final-figures" width="3319" height="1344" alt="Visualization of FSAE representations in the left and right views: bounding boxes and masks from FOM-SAM3, in-FO appearance features after PCA, and t-SNE feature distributions across six robot waypoints." />
-          <figcaption><strong>Visualization of FSAE representations (Fig. 7).</strong> <span>Left and right views show bounding boxes and masks from FOM-SAM3, in-FO appearance features after PCA dimensionality reduction, and t-SNE feature distributions at waypoints P1–P6.</span></figcaption>
-        </figure>
       </section>
 
       <section class="citation-section shell content-shell section-pad" id="citation" aria-labelledby="citation-title">
