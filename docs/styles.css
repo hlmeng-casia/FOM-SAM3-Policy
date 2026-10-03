@@ -218,5 +218,6 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .demo-target-image img { width: auto; max-width: 100%; height: 72px; object-fit: contain; }
 .demo-targets figcaption { margin-top: 5px; font-size: .85rem; font-weight: 700; }
 @media (max-width: 680px) { .demo-targets { gap: 8px; padding: 10px; } .demo-target-label { font-size: .85rem; } .demo-target-image { height: 56px; } .demo-target-image img { height: 52px; } .demo-targets figcaption { font-size: .7rem; } }
-.generalization-overview { display: grid; max-width: 760px; gap: 20px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
+.generalization-overview { display: grid; max-width: 760px; gap: 20px; }
+.generalization-video-frame { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
 .generalization-overview-player { max-width: 680px; margin: 0 auto; }

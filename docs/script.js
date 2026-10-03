@@ -363,7 +363,13 @@
     src: `assets/videos/new_fo_shared_policy_${index}.mp4`,
     title: `Manipulate NewFO with Shared Policy ${index}`
   }, index - 1, "generalization-overview-player", { autoplay: true, controls: true }));
-  overview.replaceChildren(...overviewVideos);
+  const overviewFrames = overviewVideos.map((video) => {
+    const frame = document.createElement("div");
+    frame.className = "generalization-video-frame";
+    frame.append(video);
+    return frame;
+  });
+  overview.replaceChildren(...overviewFrames);
   enableViewportPlayback(overviewVideos);
 
   /**
