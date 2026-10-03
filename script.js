@@ -362,12 +362,12 @@
   }
 
   const overview = document.querySelector("[data-generalization-overview]");
-  const overviewVideo = createVideoPlayer({
-    src: "assets/videos/generalization_overview.mp4",
-    title: "Manipulate NewFO with Shared Policy"
-  }, 0, "generalization-overview-player", { autoplay: true, controls: true });
-  overview.append(overviewVideo);
-  enableViewportPlayback([overviewVideo]);
+  const overviewVideos = [1, 2].map((index) => createVideoPlayer({
+    src: `assets/videos/new_fo_shared_policy_${index}.mp4`,
+    title: `Manipulate NewFO with Shared Policy ${index}`
+  }, index - 1, "generalization-overview-player", { autoplay: true, controls: true }));
+  overview.replaceChildren(...overviewVideos);
+  enableViewportPlayback(overviewVideos);
 
   /**
    * """统一轮播与实验视频的慢速播放；输入播放器，返回无值。
