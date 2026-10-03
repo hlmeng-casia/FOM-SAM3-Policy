@@ -1,7 +1,7 @@
 (function () {
   "use strict";
   const data = window.PROJECT_DATA || {};
-  const videoVersion = "20260916-streaming";
+  const videoVersion = "20261003-video-exposure";
   const all = (selector) => Array.from(document.querySelectorAll(selector));
 
   ["title"].forEach((field) => {
