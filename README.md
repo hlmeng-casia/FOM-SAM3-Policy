@@ -19,4 +19,4 @@
 
 More real-robot videos are available on the [project page](https://hlmeng-casia.github.io/FOM-SAM3-Policy/).
 
-The FSAE module is available in [`models/fsae.py`](models/fsae.py). Full code release coming soon.
+Full code release coming soon.
