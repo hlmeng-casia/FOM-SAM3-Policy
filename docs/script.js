@@ -316,10 +316,7 @@
         taskHead.className = "experiment-task-head";
         const taskTitle = document.createElement("h5");
         taskTitle.textContent = task.label;
-        const promptLine = document.createElement("p");
-        promptLine.className = "experiment-task-prompt";
-        promptLine.textContent = `“${data.taskPrompts[task.label]}”`;
-        taskHead.append(taskTitle, promptLine);
+        taskHead.append(taskTitle);
 
         const scroll = document.createElement("div");
         scroll.className = "experiment-task-scroll";
