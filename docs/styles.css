@@ -221,3 +221,5 @@ video::-webkit-media-controls-volume-control-container { display: none !importan
 .generalization-overview { display: grid; max-width: 760px; gap: 20px; }
 .generalization-video-frame { padding: 16px; border: 2px solid #159de3; border-radius: 8px; background: var(--white); }
 .generalization-overview-player { max-width: 680px; margin: 0 auto; }
+
+.abstract-figure figcaption { max-width: 760px; margin: 10px auto 0; text-align: left; font-size: .9rem; line-height: 1.6; }
